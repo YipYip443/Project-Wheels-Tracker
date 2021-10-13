@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     
       },
       titles:{
-        marginTop: '30%',
+        marginTop: '20%',
         width:'100%',
         alignItems: 'center'
     
@@ -15,11 +15,13 @@ const styles = StyleSheet.create({
       title:{
         fontSize: 40,
         fontWeight:'500',
+        
     
       },
       subtitle:{
         fontSize:16,
-        color:'gray'
+        color:'gray',
+        fontWeight:'bold'
       },
       image:{
         width:'100%',

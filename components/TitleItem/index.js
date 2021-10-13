@@ -7,18 +7,18 @@ const TitleItem = (props) => {
     <View style={styles.titleContainer}>
 
 
-    //TODO: change background image
-    <ImageBackground 
-    source={require('../../assets/images/introbackground.jpg')}
-    style ={styles.image}
-    />
+      {/*TODO: change background image*/}
+      <ImageBackground 
+      source={require('../../assets/images/introbackground.jpg')}
+      style ={styles.image}
+      />
 
 
-    //Title message
-    <View style={styles.titles}>
-      <Text style={styles.title}> Welcome to Meals on Wheels </Text>
-      <Text style={styles.subtitle}> Login or Sign Up </Text>
-    </View>
+      {/*Title message*/}
+      <View style={styles.titles}>
+        <Text style={styles.title}> Welcome to Meals on Wheels </Text>
+        <Text style={styles.subtitle}> Login or Sign Up </Text>
+      </View>
 
 
   </View>
