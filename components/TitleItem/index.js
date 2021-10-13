@@ -1,5 +1,6 @@
 import React from 'react';
 import {ImageBackground, View, Text} from 'react-native';
+import StyledButton from '../StyledButton';
 import styles from './styles';
 
 const TitleItem = (props) => {
@@ -19,6 +20,8 @@ const TitleItem = (props) => {
         <Text style={styles.title}> Welcome to Meals on Wheels </Text>
         <Text style={styles.subtitle}> Login or Sign Up </Text>
       </View>
+
+      <StyledButton />
 
 
   </View>
