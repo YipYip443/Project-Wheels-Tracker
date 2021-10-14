@@ -8,9 +8,13 @@ import * as firebase from '@react-native-firebase/app'
 
 const credentials = {
   apiKey: "FIREBASE_API_KEY",
-  authDomain: "wheels-tracker.firebaseapp.com",
-  projectId: "wheels-tracker",
-  storageBucket: "wheels-tracker.appspot.com",
+
+  authDomain: "wheels-tracker-25085.firebaseapp.com",
+
+  projectId: "wheels-tracker-25085",
+
+  storageBucket: "wheels-tracker-25085.appspot.com",
+
 };
 
 await firebase.initializeApp(credentials);
