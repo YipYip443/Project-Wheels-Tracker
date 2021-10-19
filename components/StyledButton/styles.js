@@ -1,19 +1,18 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         width: '100%',
         padding: 10,
     },
-    button:{
-        backgroundColor:'white',
+    button: {
+        backgroundColor: 'white',
         height: 40,
         borderRadius: 20,
         justifyContent: 'center',
-        alignItems:'center'
-
+        alignItems: 'center'
     },
-    text:{
+    text: {
         fontSize: 13,
         fontWeight: '500',
         textTransform: 'uppercase',
