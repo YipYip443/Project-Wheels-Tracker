@@ -10,7 +10,7 @@ const TitleItem = (props) => {
 
             {/*TODO: change background image*/}
             <ImageBackground
-                source={require('../../assets/images/introbackground.jpg')}
+                source={require('../../../assets/images/introbackground.jpg')}
                 style={styles.image}
             />
 

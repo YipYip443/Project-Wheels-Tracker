@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, View, Platform } from 'react-native';
-import TitleItem from './components/TitleItem';
-import LoginScreen from "./components/LoginScreen";
+import TitleItem from './components/TitleComponents/TitleScreen';
+import LoginScreen from "./components/TitleComponents/LoginScreen";
 
 import * as firebase from '@react-native-firebase/app'
 
