@@ -17,12 +17,14 @@ const styles = StyleSheet.create({
         paddingTop: '15%',
         flex: 1,
     },
+    header: {
+        marginTop: '2.5%',
+    },
     textInput: {
         height: 40,
         borderWidth: 1,
         padding: 10,
         margin: '2.5%',
-        marginBottom: '5%',
     },
     textInputView: {
         //backgroundColor: 'green',
