@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     header: {
-        marginTop: '5%',
+        marginTop: '2.5%',
     },
     textInput: {
         height: 40,

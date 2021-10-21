@@ -10,21 +10,22 @@ const LoginScreen = (props) => {
     return (
         <ScrollView
             style={styles.container}
-            contentContainerStyle={styles.containerStyle}>
+            contentContainerStyle={styles.containerStyle}
+            keyboardShouldPersistTaps={'always'}>
             <Text style={styles.title}>Login</Text>
             <View style={styles.textInputView}>
                 <Text>Email Address</Text>
                 <TextInput
                     style={styles.textInput}
                     onChangeText={onChangeText}
-                    placeholder='Email Address'
+                    placeholder="Email Address"
                     textContentType={'emailAddress'}
                 />
                 <Text>Password</Text>
                 <TextInput
                     style={styles.textInput}
                     onChangeText={onChangeNumber}
-                    placeholder='Password'
+                    placeholder="Password"
                     textContentType={'password'}
                     secureTextEntry={true}
                 />
@@ -38,6 +39,6 @@ const LoginScreen = (props) => {
             </View>
         </ScrollView>
     );
-}
+};
 
 export default LoginScreen;
