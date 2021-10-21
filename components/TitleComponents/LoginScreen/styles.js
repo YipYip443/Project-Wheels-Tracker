@@ -1,36 +1,40 @@
-import {StyleSheet} from 'react-native'
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-    titleContainer: {
+    container: {
         width: '100%',
         height: '100%',
         padding: '5%',
-        backgroundColor: 'lightgreen'
+        backgroundColor: 'lightgreen',
     },
-    login: {
-        textAlign: "center",
+    containerStyle: {
+        flexGrow: 1,
+        justifyContent: 'space-between',
+    },
+    title: {
+        textAlign: 'center',
         fontSize: 32,
-        paddingTop: '20%'
+        paddingTop: '15%',
+        flex: 1,
     },
-    input: {
+    textInput: {
         height: 40,
-        margin: 12,
         borderWidth: 1,
         padding: 10,
+        margin: '2.5%',
+        marginBottom: '5%',
     },
     textInputView: {
-        justifyContent: 'flex-end',
-        //marginBottom: '-10%',
         //backgroundColor: 'green',
-        flex: 1
+        flex: 1,
     },
     buttonView: {
         //backgroundColor: 'pink',
         flex: 1,
         justifyContent: 'flex-end',
     },
-    signUpText: {
-        textAlign: 'center'
-    }
+    footer: {
+        textAlign: 'center',
+    },
 });
 export default styles;
