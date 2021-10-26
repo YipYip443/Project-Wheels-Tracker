@@ -1,16 +1,19 @@
 import React from 'react';
-import {ImageBackground, View, Text, TextInput} from 'react-native';
+import {ImageBackground, View, Text, TextInput, ScrollView} from 'react-native';
 import styles from './styles';
 import StyledButton from "../StyledButton";
 
-const LoginScreen = (props) => {
-    const [text, onChangeText] = React.useState('Useless Text');
-    const [number, onChangeNumber] = React.useState(null);
+const CreateProfileScreen = ({navigation}) => {
+    const [text, onChangeText] = React.useState();
+    const [number, onChangeNumber] = React.useState();
 
     return (
-        <View style={styles.titleContainer}>
+        <ScrollView
+            style={styles.container}
+            contentContainerStyle={styles.containerStyle}
+            keyboardShouldPersistTaps={'always'}>
 
-            <Text style={styles.userProfileTitle}>Create Profile</Text>
+            {/*<Text style={styles.userProfileTitle}>Create Profile</Text>*/}
             <View style={styles.textInputView}>
 
                 <Text> * Full Name</Text>
@@ -18,9 +21,9 @@ const LoginScreen = (props) => {
                     style={styles.input}
                     onChangeText={onChangeText}
                     placeholder='John Doe'
-                    textContentType={'fullName'}
+                    textContentType={'name'}
                 />
-                
+
                 <Text> * Address</Text>
                 <TextInput
                     style={styles.input}
@@ -34,13 +37,12 @@ const LoginScreen = (props) => {
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeNumber}
-                    value={number}
                     placeholder='(999)-999-9999'
                     textContentType={'telephoneNumber'}
-                    //keyboardType='numeric'
+                    keyboardType='phone-pad'
                 />
 
-                
+
 
                 <Text> * Date of Birth</Text>
                 <TextInput
@@ -48,6 +50,7 @@ const LoginScreen = (props) => {
                     onChangeText={onChangeText}
                     placeholder='01/23/1999'
                     textContentType={'none'}
+                    keyboardType='phone-pad'
                 />
 
                 <Text> * Emergency Contact (Please Provide Full Name)</Text>
@@ -70,11 +73,15 @@ const LoginScreen = (props) => {
 
             </View>
             <View style={styles.buttonView}>
-                <StyledButton style={styles.button} text={"Submit"}/>
+                <StyledButton
+                    style={styles.button}
+                    text={"Submit"}
+                    onPress={() => navigation.navigate('Login')}
+                />
                 <Text style={styles.signUpText}> * Indicates Required Field</Text>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
-export default LoginScreen;
+export default CreateProfileScreen;

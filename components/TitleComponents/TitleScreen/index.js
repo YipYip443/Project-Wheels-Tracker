@@ -3,7 +3,7 @@ import {ImageBackground, View, Text} from 'react-native';
 import StyledButton from '../StyledButton';
 import styles from './styles';
 
-const TitleItem = (props) => {
+const TitleScreen = ({navigation}) => {
     return (
         <View style={styles.titleContainer}>
 
@@ -22,13 +22,19 @@ const TitleItem = (props) => {
             </View>
 
             <View style={styles.buttonView}>
-                <StyledButton style={styles.button} text={"Sign Up"}/>
-                <StyledButton style={styles.button} text={"Login"}/>
+                <StyledButton
+                    style={styles.button}
+                    text={'Sign Up'}
+                    onPress={() => navigation.navigate('Sign Up')}
+                />
+                <StyledButton
+                    style={styles.button}
+                    text={'Login'}
+                    onPress={() => navigation.navigate('Login')}
+                />
             </View>
-
-
         </View>
     );
-}
+};
 
-export default TitleItem;
+export default TitleScreen;

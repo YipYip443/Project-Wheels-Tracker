@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, ScrollView, Text, TextInput} from 'react-native';
+import {View, ScrollView, Text, TextInput, Pressable} from 'react-native';
 import styles from './styles';
 import StyledButton from '../StyledButton';
 
-const LoginScreen = (props) => {
+const LoginScreen = ({navigation}) => {
     const [text, onChangeText] = React.useState();
     const [number, onChangeNumber] = React.useState();
 
@@ -12,7 +12,7 @@ const LoginScreen = (props) => {
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
-            <Text style={styles.title}>Login</Text>
+            {/*<Text style={styles.title}>Login</Text>*/}
             <View style={styles.textInputView}>
                 <Text>Email Address</Text>
                 <TextInput
@@ -35,7 +35,9 @@ const LoginScreen = (props) => {
                     style={styles.button}
                     text={'Login'}
                 />
-                <Text style={styles.footer}>Don't have an account? Sign up here</Text>
+                <Pressable onPress={() => navigation.navigate('Sign Up')}>
+                    <Text style={styles.footer}>Don't have an account? Sign up here</Text>
+                </Pressable>
             </View>
         </ScrollView>
     );

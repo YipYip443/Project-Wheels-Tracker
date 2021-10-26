@@ -1,21 +1,27 @@
 import React from 'react';
-import {View, ScrollView, Text, TextInput, Button} from 'react-native';
+import {View, ScrollView, Text, TextInput, Pressable} from 'react-native';
 import styles from './styles';
 import StyledButton from '../StyledButton';
 
-const SignUpScreen = (props) => {
+const SignUpScreen = ({navigation}) => {
     const [email, onChangeEmail] = React.useState();
     const [password, onChangePassword] = React.useState();
     const [confirmPassword, onChangeConfirmPassword] = React.useState();
     let warning;
 
     function verifyInput() {
+        let flag = true;
         if (!String(email).includes('@') || !String(email).includes('.')) {
             console.warn('Email invalid!');
+            flag = false;
         }
         if (password !== confirmPassword) {
             console.warn('Passwords don\'t match!');
             warning = 'Passwords must match';
+            flag = false;
+        }
+        if (flag) {
+            navigation.navigate('Create Profile');
         }
     }
 
@@ -50,7 +56,7 @@ const SignUpScreen = (props) => {
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
 
-            <Text style={styles.title}>Sign Up</Text>
+            {/*<Text style={styles.title}>Sign Up</Text>*/}
             <View style={styles.textInputView}>
                 <Text style={styles.header}>Email Address</Text>
                 <TextInput
@@ -58,6 +64,7 @@ const SignUpScreen = (props) => {
                     onChangeText={onChangeEmail}
                     placeholder="Email Address"
                     textContentType={'emailAddress'}
+                    keyboard-type='email-address'
                 />
                 <Text>{verifyEmail()}</Text>
                 <Text style={styles.header}>Create Password</Text>
@@ -85,7 +92,9 @@ const SignUpScreen = (props) => {
                     text={'Continue'}
                     onPress={verifyInput}
                 />
-                <Text style={styles.footer}>Already have an account? Login here</Text>
+                <Pressable onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.footer}>Already have an account? Login here</Text>
+                </Pressable>
             </View>
         </ScrollView>
     );

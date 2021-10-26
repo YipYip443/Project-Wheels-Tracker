@@ -1,26 +1,30 @@
 import {StyleSheet} from 'react-native'
-import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 
 const styles = StyleSheet.create({
-    titleContainer: {
+    container: {
         width: '100%',
         height: '100%',
         padding: '5%',
-        backgroundColor: 'lightgreen'
+        //backgroundColor: 'lightgreen',
+    },
+    containerStyle: {
+        flexGrow: 1,
+        justifyContent: 'space-between',
     },
     userProfileTitle: {
         textAlign: "center",
         fontSize: 30,
-        paddingTop: '10%'
+        paddingTop: '10%',
+        flex: 1
     },
     input: {
         height: 40,
-        margin: 12,
+        margin: '2.5%',
         borderWidth: 1,
         borderRadius: 20,
         borderColor: 'black',
         padding: 10,
-        flex: 0.5
+        //flex: 0.5
     },
     textInputView: {
         justifyContent: 'flex-end',
@@ -37,4 +41,5 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 });
+
 export default styles;
