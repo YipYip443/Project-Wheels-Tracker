@@ -2,11 +2,12 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ImageBackground, StyleSheet, Text, View, Platform } from 'react-native';
+
 import TitleScreen from './components/TitleComponents/TitleScreen';
 import ScheduleItem from './components/ScheduleScreen';
 import LoginScreen from "./components/TitleComponents/LoginScreen";
 
-import * as firebase from '@react-native-firebase/app'
+//import * as firebase from '@react-native-firebase/app'
 //import Firebase from "firebase/compat";
 
 import SignUpScreen from "./components/TitleComponents/SignUpScreen";
@@ -16,18 +17,20 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ScheduleScreen from './components/ScheduleScreen';
 
 
- const credentials = {
-    apiKey: "FIREBASE_API_KEY",
 
-    authDomain: "wheels-tracker-25085.firebaseapp.com",
+//  const credentials = {
+//     apiKey: "FIREBASE_API_KEY",
 
-    projectId: "wheels-tracker-25085",
+//     authDomain: "wheels-tracker-25085.firebaseapp.com",
 
-    storageBucket: "wheels-tracker-25085.appspot.com",
+//     projectId: "wheels-tracker-25085",
 
- };
+//     storageBucket: "wheels-tracker-25085.appspot.com",
 
-//Firebase.initializeApp(credentials);
+//  };
+
+
+// await Firebase.initializeApp(credentials);
 
 
 
