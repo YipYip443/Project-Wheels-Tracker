@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         padding: '5%',
-        backgroundColor: 'lightgreen',
+        //backgroundColor: 'lightgreen',
     },
     containerStyle: {
         flexGrow: 1,
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     },
     textInputView: {
         //backgroundColor: 'green',
-        flex: 1,
+        justifyContent: 'center',
+        flex: 9,
     },
     buttonView: {
         //backgroundColor: 'pink',

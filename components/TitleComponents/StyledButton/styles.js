@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     button: {
-        backgroundColor: 'white',
+        backgroundColor: 'lightgreen',
         height: 40,
         borderRadius: 20,
         justifyContent: 'center',

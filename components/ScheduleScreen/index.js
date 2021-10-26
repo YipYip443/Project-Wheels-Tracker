@@ -7,7 +7,7 @@ const timeToString = (time) => {
     return date.toISOString().split('T')[0];
   }
 
-const ScheduleItem = () => {
+const ScheduleScreen = () => {
      const [items, setItems] = useState({});
 
      const loadItems = (day) => {
@@ -45,17 +45,17 @@ const ScheduleItem = () => {
             </TouchableOpacity>
             );
     };
-    
+
     return (
         <View style={{flex: 1}}>
             <Agenda
                 items={items}
                 loadItemsForMonth={loadItems}
-                selected={'2021-10-20'} 
+                selected={'2021-10-20'}
                 renderItem={renderItem}
                 />
         </View>
         );
 };
 
-export default ScheduleItem;
+export default ScheduleScreen;
