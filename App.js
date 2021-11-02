@@ -2,19 +2,18 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ImageBackground, StyleSheet, Text, View, Platform } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import TitleScreen from './components/TitleComponents/TitleScreen';
-import ScheduleItem from './components/ScheduleScreen';
 import LoginScreen from "./components/TitleComponents/LoginScreen";
+import SignUpScreen from "./components/TitleComponents/SignUpScreen";
+import CreateProfileScreen from "./components/TitleComponents/CreateProfileScreen";
+import SMDashboardScreen from "./components/SMDashboardComponenents/SMDashboardScreen";
 
 //import * as firebase from '@react-native-firebase/app'
 //import Firebase from "firebase/compat";
 
-import SignUpScreen from "./components/TitleComponents/SignUpScreen";
-import CreateProfileScreen from "./components/TitleComponents/CreateProfileScreen";
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import ScheduleScreen from './components/ScheduleScreen';
 
 
 
@@ -44,11 +43,13 @@ function App() {
                 <Stack.Screen name="Login" component={LoginScreen}/>
                 <Stack.Screen name="Sign Up" component={SignUpScreen}/>
                 <Stack.Screen name="Create Profile" component={CreateProfileScreen}/>
-                <Stack.Screen name="Schedule" component={ScheduleScreen}/>
+                <Stack.Screen name="SM Dashboard" component={SMDashboardScreen}/>
             </Stack.Navigator>
+
 
             {/*<StatusBar style="auto"/>*/}
         </NavigationContainer>
+
     );
 }
 
