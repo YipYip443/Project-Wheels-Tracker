@@ -34,6 +34,10 @@ const LoginScreen = ({navigation}) => {
                 <StyledButton
                     style={styles.button}
                     text={'Login'}
+                    onPress={function () {
+                        navigation.goBack();
+                        navigation.replace('SM Dashboard');
+                    }}
                 />
                 <Pressable onPress={() => navigation.navigate('Sign Up')}>
                     <Text style={styles.footer}>Don't have an account? Sign up here</Text>

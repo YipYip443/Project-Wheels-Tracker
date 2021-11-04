@@ -76,7 +76,11 @@ const CreateProfileScreen = ({navigation}) => {
                 <StyledButton
                     style={styles.button}
                     text={"Submit"}
-                    onPress={() => navigation.navigate('Login')}
+                    onPress={function () {
+                        navigation.goBack();
+                        navigation.goBack();
+                        navigation.replace('SM Dashboard');
+                    }}
                 />
                 <Text style={styles.signUpText}> * Indicates Required Field</Text>
             </View>
