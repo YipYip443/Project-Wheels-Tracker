@@ -24,6 +24,19 @@ const styles = StyleSheet.create({
     inputAndroid: {
         color: 'black',
     },
+    image:{
+        resizeMode: 'center',
+        flex: 1/2,
+    },
+    modal: {
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: 'white',
+        paddingTop: 10,
+        borderColor: 'grey',
+    },
 });
 
 export default styles;
