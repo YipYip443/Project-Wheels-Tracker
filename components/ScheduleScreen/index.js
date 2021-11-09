@@ -7,6 +7,11 @@ const timeToString = (time) => {
     return date.toISOString().split('T')[0];
   }
 
+const getTodaysDate =() => {
+  let today = new Date().toISOString().slice(0,10);
+  return today;
+}
+
 const ScheduleScreen = () => {
      const [items, setItems] = useState({});
 
@@ -35,7 +40,6 @@ const ScheduleScreen = () => {
       };
 
       const renderItem = (item) => {
-
         return (
             <TouchableOpacity style={{marginRight: 10, marginTop: 17, backgroundColor: 'white', flex: 1,
             borderRadius: 5, padding: 10,}}>
@@ -51,7 +55,7 @@ const ScheduleScreen = () => {
             <Agenda
                 items={items}
                 loadItemsForMonth={loadItems}
-                selected={'2021-10-20'}
+                selected={getTodaysDate}
                 renderItem={renderItem}
                 />
         </View>
