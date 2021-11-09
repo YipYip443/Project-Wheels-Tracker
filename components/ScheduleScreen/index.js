@@ -3,11 +3,6 @@ import {TouchableOpacity, View, Text} from "react-native";
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import styles from "./style";
 
-const getTodaysDate =() => {
-  let today = new Date().toISOString().slice(0,10);
-  return today;
-}
-
 const ScheduleScreen = () => {
     const [items, setItems] = useState({});
 
@@ -24,7 +19,6 @@ const ScheduleScreen = () => {
             name: 'Tyler Thorin',
             content: 'Content'
         });
-
 
         let date = '2021-11-10';
         items[date] = [];
@@ -54,7 +48,6 @@ const ScheduleScreen = () => {
             <Agenda
                 items={items}
                 loadItemsForMonth={loadItems}
-                selected={getTodaysDate}
                 renderItem={renderItem}
                 style={styles}
                 //selected={'2021-10-20'}

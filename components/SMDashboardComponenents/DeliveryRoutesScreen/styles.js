@@ -31,8 +31,7 @@ const styles = StyleSheet.create({
 
     buttonView: {
         paddingBottom: '5%',
-    }
-
+    },
     image:{
         resizeMode: 'center',
         flex: 1/2,
@@ -46,7 +45,6 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         borderColor: 'grey',
     },
-
 });
 
 export default styles;
