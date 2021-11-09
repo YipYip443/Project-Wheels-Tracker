@@ -11,12 +11,6 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'space-between',
     },
-    userProfileTitle: {
-        textAlign: "center",
-        fontSize: 30,
-        paddingTop: '10%',
-        flex: 1
-    },
     input: {
         height: 40,
         margin: '2.5%',

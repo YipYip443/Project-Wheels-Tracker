@@ -5,6 +5,7 @@ import RNPickerSelect from "react-native-picker-select";
 import styles from "../DeliveryRoutesScreen/styles";
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import StyledButton from "../../TitleComponents/StyledButton";
 
 const DeliveryRoutesScreen = ({navigation}) => {
     const [selectedLanguage, setSelectedLanguage] = useState();
@@ -34,7 +35,7 @@ const DeliveryRoutesScreen = ({navigation}) => {
     generateRouteItems();
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             {/*<DropDownPicker
                 open={open}
                 value={value}
@@ -54,43 +55,64 @@ const DeliveryRoutesScreen = ({navigation}) => {
                 <Picker.Item label="Java" value="java"/>
                 <Picker.Item label="JavaScript" value="js"/>
             </Picker>*/}
-            <Text>Route Number:</Text>
-            <RNPickerSelect
-                style={styles}
-                onValueChange={(value) => setSelectedLanguage(value)}
-                selectedValue={selectedLanguage}
-                items={routeItems}
-                placeholder={{label: 'Select a route...', value: null}}
-            />
-            <Text>Day Open:</Text>
-            <Button
-                onPress={() => setDatePickerVisibility(true)}
-                title={date.toDateString()}>
-            </Button>
-            <DateTimePickerModal
-                mode="date"
-                isVisible={isDatePickerVisible}
-                onConfirm={handleConfirm}
-                onCancel={() => setDatePickerVisibility(false)}
-            />
-            <Text>Positions Open:</Text>
-            <RNPickerSelect
-                style={styles}
-                onValueChange={(value) => setSelectedLanguage(value)}
-                selectedValue={selectedLanguage}
-                items={[
-                    {label: 'Driver', value: 'driver'},
-                    {label: 'Friendly Visitor', value: 'friendlyVisitor'},
-                    {label: 'Both', value: 'both'},
-                ]}
-            />
-            <Text>Approximate Stops:</Text>
-            <TextInput
-                style={styles.textInput}
-                onChangeText={onChangeText}
-                placeholder="Approximate Stops">
-            </TextInput>
-        </View>
+            <View style={styles.unit}>
+                <Text>Route Number:</Text>
+                <RNPickerSelect
+                    style={styles}
+                    onValueChange={(value) => setSelectedLanguage(value)}
+                    selectedValue={selectedLanguage}
+                    items={routeItems}
+                    placeholder={{label: 'Select a route...', value: null}}
+                />
+            </View>
+
+            <View style={styles.unit}>
+                <Text>Day Open:</Text>
+                <Button
+                    onPress={() => setDatePickerVisibility(true)}
+                    title={date.toDateString()}>
+                </Button>
+                <DateTimePickerModal
+                    mode="date"
+                    isVisible={isDatePickerVisible}
+                    onConfirm={handleConfirm}
+                    onCancel={() => setDatePickerVisibility(false)}
+                />
+            </View>
+
+            <View style={styles.unit}>
+                <Text>Positions Open:</Text>
+                <RNPickerSelect
+                    style={styles}
+                    onValueChange={(value) => setSelectedLanguage(value)}
+                    selectedValue={selectedLanguage}
+                    items={[
+                        {label: 'Driver', value: 'driver'},
+                        {label: 'Friendly Visitor', value: 'friendlyVisitor'},
+                        {label: 'Both', value: 'both'},
+                    ]}
+                />
+            </View>
+
+            <View style={styles.unit}>
+                <Text>Approximate Stops:</Text>
+                <TextInput
+                    style={styles.textInput}
+                    onChangeText={onChangeText}
+                    keyboardType={'numeric'}
+                    placeholder="Approximate Stops">
+                </TextInput>
+            </View>
+
+            <View style={styles.buttonView}>
+                <StyledButton
+                    style={styles.button}
+                    text={'Post'}
+                    //onPress={() => navigation.navigate('Sign Up')}
+                />
+            </View>
+        </ScrollView>
+
     );
 }
 

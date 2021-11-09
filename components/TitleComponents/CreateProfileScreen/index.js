@@ -4,7 +4,10 @@ import styles from './styles';
 import StyledButton from "../StyledButton";
 
 const CreateProfileScreen = ({navigation}) => {
-    const [text, onChangeText] = React.useState();
+    const [name, onChangeName] = React.useState();
+    const [address, onChangeAddress] = React.useState();
+    const [birthday, onChangeBirthday] = React.useState();
+    const [contact, onChangeContact] = React.useState();
     const [number, onChangeNumber] = React.useState();
 
     return (
@@ -13,13 +16,12 @@ const CreateProfileScreen = ({navigation}) => {
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
 
-            {/*<Text style={styles.userProfileTitle}>Create Profile</Text>*/}
             <View style={styles.textInputView}>
 
                 <Text> * Full Name</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeText}
+                    onChangeText={onChangeName}
                     placeholder='John Doe'
                     textContentType={'name'}
                 />
@@ -27,7 +29,7 @@ const CreateProfileScreen = ({navigation}) => {
                 <Text> * Address</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeText}
+                    onChangeText={onChangeAddress}
                     placeholder='123 Spooner St, Long Beach, CA 90803'
                     textContentType={'fullStreetAddress'}
                 />
@@ -43,11 +45,10 @@ const CreateProfileScreen = ({navigation}) => {
                 />
 
 
-
                 <Text> * Date of Birth</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeText}
+                    onChangeText={onChangeBirthday}
                     placeholder='01/23/1999'
                     textContentType={'none'}
                     keyboardType='phone-pad'
@@ -56,22 +57,22 @@ const CreateProfileScreen = ({navigation}) => {
                 <Text> * Emergency Contact (Please Provide Full Name)</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeText}
+                    onChangeText={onChangeBirthday}
                     placeholder='Parent/Guardian, Friend, Boss, etc.'
                     textContentType={'none'}
                 />
 
-                <Text>  Occupation </Text>
+                <Text> Occupation </Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeText}
+                    onChangeText={onChangeBirthday}
                     placeholder='Optional'
                     textContentType={'jobTitle'}
-                    //keyboardType='numeric'
                 />
-
-
             </View>
+
+            <Text style={styles.signUpText}> * Indicates Required Field</Text>
+
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
@@ -82,7 +83,6 @@ const CreateProfileScreen = ({navigation}) => {
                         navigation.replace('SM Dashboard');
                     }}
                 />
-                <Text style={styles.signUpText}> * Indicates Required Field</Text>
             </View>
         </ScrollView>
     );
