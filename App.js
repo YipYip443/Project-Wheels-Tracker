@@ -14,6 +14,7 @@ import CreateProfileScreen from "./components/TitleComponents/CreateProfileScree
 import ScheduleScreen from "./components/ScheduleScreen";
 import MessagesScreen from "./components/SMDashboardComponenents/MessagesScreen";
 import DeliveryRoutesScreen from "./components/SMDashboardComponenents/DeliveryRoutesScreen";
+import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";
 
 //import * as firebase from '@react-native-firebase/app'
 //import Firebase from "firebase/compat";
@@ -46,6 +47,7 @@ function SMDashboardTabs() {
             <Tab.Screen name="Schedule" component={ScheduleScreen}/>
             <Tab.Screen name="Messages" component={MessagesScreen}/>
             <Tab.Screen name="Delivery Routes" component={DeliveryRoutesScreen}/>
+            <Tab.Screen name="Profile" component={ProfileScreen}/>
         </Tab.Navigator>
     );
 }
@@ -54,7 +56,7 @@ function App() {
     return (
         <NavigationContainer style={styles.container}>
             <Stack.Navigator initialRouteName={'Title'}>
-                <Stack.Screen name="Title" component={TitleScreen} options={{headerTitleAlign: 'center'}}/>
+                <Stack.Screen name="Title" component={TitleScreen} options={{headerShown: false}}/>
                 <Stack.Screen name="Login" component={LoginScreen}/>
                 <Stack.Screen name="Sign Up" component={SignUpScreen}/>
                 <Stack.Screen name="Create Profile" component={CreateProfileScreen}/>

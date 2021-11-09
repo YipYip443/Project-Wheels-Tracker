@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
         padding: '5%',
         //backgroundColor: 'lightgreen',
     },
+    unit: {
+      paddingBottom: '5%'
+    },
     textInput: {
         height: 40,
         borderWidth: 1,
@@ -20,10 +23,16 @@ const styles = StyleSheet.create({
     },
     inputIOS: {
         color: 'black',
+        padding: 10
     },
     inputAndroid: {
         color: 'black',
     },
+
+    buttonView: {
+        paddingBottom: '5%',
+    }
+
     image:{
         resizeMode: 'center',
         flex: 1/2,
@@ -37,6 +46,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         borderColor: 'grey',
     },
+
 });
 
 export default styles;
