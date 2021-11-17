@@ -17,6 +17,8 @@ const DeliveryRoutesScreen = ({navigation}) => {
     const [date, setDate] = React.useState(new Date());
     const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
 
+    const [show, setShow] = React.useState(false);
+
     const [open, setOpen] = React.useState(false);
     const [value, setValue] = React.useState(null);
     const [items, setItems] = React.useState(routeItems)
@@ -69,6 +71,28 @@ const DeliveryRoutesScreen = ({navigation}) => {
                     items={routeItems}
                     placeholder={{label: 'Select a route...', value: null}}
                 />
+            </View>
+
+            {/* View Map Button */}
+            <View>
+                <Button
+                    onPress={()=>{setShow(true)}}
+                    title="View Map"/>
+                <View>
+                    <Modal
+                        transparent = {true}
+                        visible={show}>
+                        <View >
+                            <View style={styles.modal}>
+                                <Text>Route Map goes here</Text>
+                                <Image style={styles.image} source={require('../../../assets/images/introbackground.jpg')}/>
+                                <Button
+                                    title="Close Map"
+                                    onPress={()=>{setShow(false)}}/>
+                            </View>
+                        </View>
+                    </Modal>
+                </View>
             </View>
 
             <View style={styles.unit}>
