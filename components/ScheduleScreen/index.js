@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import {TouchableOpacity, View, Text} from "react-native";
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {Agenda} from 'react-native-calendars';
 import styles from "./style";
 
 const ScheduleScreen = () => {
-    const [items, setItems] = useState({});
+    const [items, setItems] = React.useState({});
 
     const loadItems = (day) => {
         let today = new Date().toISOString().slice(0, 10);
@@ -32,7 +32,7 @@ const ScheduleScreen = () => {
 
     const renderItem = (item) => {
         return (
-            <TouchableOpacity style={{marginRight: '5%', marginTop: '5%', backgroundColor: 'white', flex: 1, borderRadius: '10%', padding: '5%'}}>
+            <TouchableOpacity style={{marginRight: '5%', marginTop: '5%', backgroundColor: 'white', flex: 1, borderRadius: 5, padding: '5%'}}>
                 {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>*/}
                 <View>
                     <Text style={styles.time}>{item.time}</Text>
