@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         //backgroundColor: 'lightgreen',
     },
     unit: {
-      paddingBottom: '5%'
+        paddingBottom: '5%'
     },
     textInput: {
         height: 40,
@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
     buttonView: {
         paddingBottom: '5%',
     },
-    image:{
+    image: {
         resizeMode: 'center',
-        flex: 1/2,
+        flex: 1 / 2,
     },
     modal: {
         width: "100%",

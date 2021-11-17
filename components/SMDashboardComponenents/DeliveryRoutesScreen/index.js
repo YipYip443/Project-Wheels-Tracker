@@ -1,6 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, Image, View} from "react-native";
-//import {Picker} from '@react-native-picker/picker';
 import RNPickerSelect from "react-native-picker-select";
 import styles from "../DeliveryRoutesScreen/styles";
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -8,19 +7,19 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import StyledButton from "../../TitleComponents/StyledButton";
 
 const DeliveryRoutesScreen = ({navigation}) => {
-    const [selectedLanguage, setSelectedLanguage] = useState();
-    const [text, onChangeText] = React.useState();
+    const [selectedRoute, setSelectedRoute] = React.useState();
+    const [selectedPosition, setSelectedPosition] = React.useState();
     const routes = ['01', '02', '03', '04', '5A', '5B', '06', '7A', '7B', '8A', '8B', '09', '10', '11', '12', '13', '14A', '14B', '15A', '16', '17A', '17B', '18A', '19A', '20', '21A', '22A', '22B', '23', '24', '25', '26'];
     const routeItems = [];
-    const [state, setState] = useState(false);
-    const [show, setShow] = useState(false);
 
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [date, setDate] = useState(new Date());
+    const [stops, setStops] = React.useState(false);
 
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
-    const [items, setItems] = useState(routeItems)
+    const [date, setDate] = React.useState(new Date());
+    const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
+
+    const [open, setOpen] = React.useState(false);
+    const [value, setValue] = React.useState(null);
+    const [items, setItems] = React.useState(routeItems)
 
     const handleConfirm = (date) => {
         console.log(date.toDateString());
@@ -38,12 +37,19 @@ const DeliveryRoutesScreen = ({navigation}) => {
         selectedValue
     }
 
+    function post() {
+        console.log(selectedRoute);
+        console.log(date);
+        console.log(selectedPosition);
+        console.log(stops);
+    }
+
     generateRouteItems();
 
     return (
         <ScrollView style={styles.container}>
             {/*<DropDownPicker
-                open={opsen}
+                open={open}
                 value={value}
                 items={items}
                 setOpen={setOpen}
@@ -53,21 +59,13 @@ const DeliveryRoutesScreen = ({navigation}) => {
                     backgroundColor: "#dfdfdf"
                 }}
             />*/}
-            {/*<Picker
-                selectedValue={selectedLanguage}
-                onValueChange={(itemValue, itemIndex) =>
-                    setSelectedLanguage(itemValue)
-                }>
-                <Picker.Item label="Java" value="java"/>
-                <Picker.Item label="JavaScript" value="js"/>
-            </Picker>*/}
 
             <View style={styles.unit}>
                 <Text>Route Number:</Text>
                 <RNPickerSelect
                     style={styles}
-                    onValueChange={(value) => setSelectedLanguage(value)}
-                    selectedValue={selectedLanguage}
+                    onValueChange={(value) => setSelectedRoute(value)}
+                    selectedValue={selectedRoute}
                     items={routeItems}
                     placeholder={{label: 'Select a route...', value: null}}
                 />
@@ -91,8 +89,8 @@ const DeliveryRoutesScreen = ({navigation}) => {
                 <Text>Positions Open:</Text>
                 <RNPickerSelect
                     style={styles}
-                    onValueChange={(value) => setSelectedLanguage(value)}
-                    selectedValue={selectedLanguage}
+                    onValueChange={(value) => setSelectedPosition(value)}
+                    selectedValue={selectedPosition}
                     items={[
                         {label: 'Driver', value: 'driver'},
                         {label: 'Friendly Visitor', value: 'friendlyVisitor'},
@@ -105,7 +103,7 @@ const DeliveryRoutesScreen = ({navigation}) => {
                 <Text>Approximate Stops:</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={onChangeText}
+                    onChangeText={setStops}
                     keyboardType={'numeric'}
                     placeholder="Approximate Stops">
                 </TextInput>
@@ -115,12 +113,10 @@ const DeliveryRoutesScreen = ({navigation}) => {
                 <StyledButton
                     style={styles.button}
                     text={'Post'}
-                    //onPress={() => navigation.navigate('Sign Up')}
+                    onPress={post}
                 />
             </View>
         </ScrollView>
-
-
     );
 }
 
