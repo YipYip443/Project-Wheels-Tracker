@@ -2,6 +2,7 @@ import React from 'react';
 import {View, ScrollView, Text, TextInput, Pressable} from 'react-native';
 import styles from './styles';
 import StyledButton from '../StyledButton';
+import { auth } from '../../../db/firestore';
 
 const SignUpScreen = ({navigation}) => {
     const [email, onChangeEmail] = React.useState();
@@ -49,6 +50,14 @@ const SignUpScreen = ({navigation}) => {
             return 'Passwords must match.';
         }
     }
+
+    auth.createUserWithEmailAndPassword(!String(email), !String(password))
+    .then((result) => {
+        console.log(result)
+    })
+    .catch((error) => {
+      console.log(error)  
+    });
 
     return (
         <ScrollView
