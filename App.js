@@ -16,27 +16,6 @@ import MessagesScreen from "./components/SMDashboardComponenents/MessagesScreen"
 import DeliveryRoutesScreen from "./components/SMDashboardComponenents/DeliveryRoutesScreen";
 import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";
 
-//import * as firebase from '@react-native-firebase/app'
-//import Firebase from "firebase/compat";
-
-
-
-
-//  const credentials = {
-//     apiKey: "FIREBASE_API_KEY",
-
-//     authDomain: "wheels-tracker-25085.firebaseapp.com",
-
-//     projectId: "wheels-tracker-25085",
-
-//     storageBucket: "wheels-tracker-25085.appspot.com",
-
-//  };
-
-
-// await Firebase.initializeApp(credentials);
-
-
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -63,7 +42,6 @@ function App() {
                 <Stack.Screen name="SM Dashboard" component={SMDashboardTabs} options={{headerShown: false}}/>
             </Stack.Navigator>
 
-
             {/*<StatusBar style="auto"/>*/}
         </NavigationContainer>
 
@@ -76,5 +54,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
-
-export default App;
+    export default App;
