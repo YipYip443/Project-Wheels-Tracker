@@ -52,6 +52,16 @@ function SMDashboardTabs() {
     );
 }
 
+function VolunteerTabs() {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Schedule" component={ScheduleScreen}/>
+            <Tab.Screen name="Messages" component={MessagesScreen}/>
+            <Tab.Screen name="Profile" component={ProfileScreen}/>
+        </Tab.Navigator>
+    );
+}
+
 function App() {
     return (
         <NavigationContainer style={styles.container}>
@@ -61,6 +71,7 @@ function App() {
                 <Stack.Screen name="Sign Up" component={SignUpScreen}/>
                 <Stack.Screen name="Create Profile" component={CreateProfileScreen}/>
                 <Stack.Screen name="SM Dashboard" component={SMDashboardTabs} options={{headerShown: false}}/>
+                <Stack.Screen name="Volunteer Dashboard" component={VolunteerTabs} options={{headerShown: false}}/>
             </Stack.Navigator>
 
 
