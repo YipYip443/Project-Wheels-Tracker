@@ -1,66 +1,87 @@
-import React from 'react';
-import {View, ScrollView, Text, TextInput, Pressable} from 'react-native';
+import React, { Component } from 'react';
 import styles from './styles';
 import StyledButton from '../StyledButton';
+import {View, ScrollView, Text, TextInput, Pressable} from 'react-native';
 import { auth } from '../../../db/firestore';
 
-const SignUpScreen = ({navigation}) => {
-    const [email, onChangeEmail] = React.useState();
-    const [password, onChangePassword] = React.useState();
-    const [confirmPassword, onChangeConfirmPassword] = React.useState();
-    let warning;
+export default class Auth extends Component{
 
-    function verifyInput() {
+    constructor(){
+        super();
+        this.state = {
+            email: '',
+            password: '',
+            confirmPassword: '',
+        }
+    }
+
+    updateInputVal = (val, prop) =>{
+        const state = this.state;
+        state[prop] = val;
+        this.setState(state);
+    }
+
+    verifyInput() {
         let flag = true;
-        if (!String(email).includes('@') || !String(email).includes('.')) {
+        if (this.state.email.includes('@') || this.state.email.includes('.')) {
             console.warn('Email invalid!');
             flag = false;
         }
-        if (password !== confirmPassword) {
+        if (this.state.password !== this.state.confirmPassword) {
             console.warn('Passwords don\'t match!');
             warning = 'Passwords must match';
             flag = false;
         }
-        if (flag) {
-            navigation.navigate('Create Profile');
-        }
+        // if (flag) {
+        // }
     }
 
-    function verifyEmail() {
-        if (email === '' || email === undefined) {
+    verifyEmail() {
+        if (this.state.email === '' || this.state.email === undefined) {
             return;
-        } else if (!String(email).includes('@') || !String(email).includes('.')) {
+        } else if (this.state.email.includes('@') || this.state.email.includes('.')) {
             return 'Please input a valid email address.';
         }
     }
 
-    function verifyPassword() {
-        if (password === '' || password === undefined) {
+    verifyPassword() {
+        if (this.state.password === '' || this.state.password === undefined) {
             return;
-        } else if (String(password).length < 8) {
+        } else if (this.state.password.length < 8) {
             return 'Must be at least 8 characters.';
         }
     }
 
-    function verifyConfirmPassword() {
-        if (confirmPassword === '' || confirmPassword === undefined) {
+    verifyConfirmPassword() {
+        if (this.state.confirmPassword === '' || this.state.confirmPassword === undefined) {
             return;
         }
-        if (password !== confirmPassword) {
+        if (this.state.password !== this.state.confirmPassword) {
             return 'Passwords must match.';
         }
     }
 
-    auth.createUserWithEmailAndPassword(!String(email), !String(password))
-    .then((result) => {
-        console.log(result)
-    })
-    .catch((error) => {
-      console.log(error)  
-    });
+    registerUser = () => {
+        auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then((result) => {
+            console.log(result)
+            console.log('User signed up successfully')
+            })
+            .catch((error) => {
+           console.log(error)  
+            });
 
-    return (
-        <ScrollView
+        this.setState({
+            email: '',
+            password: ''
+        })
+
+        this.props.navigation.navigate("Create Profile")
+
+    }
+
+    render(){
+        return(<ScrollView
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
@@ -70,36 +91,36 @@ const SignUpScreen = ({navigation}) => {
                 <Text style={styles.header}>Email Address</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={onChangeEmail}
+                    onChangeText={(val) => this.updateInputVal(val,'email')}
                     placeholder="Email Address"
                     textContentType={'emailAddress'}
                     keyboard-type='email-address'
                 />
-                <Text>{verifyEmail()}</Text>
+                <Text>{this.verifyEmail}</Text>
                 <Text style={styles.header}>Create Password</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={onChangePassword}
+                    onChangeText={(val) => this.updateInputVal(val,'password')}
                     placeholder="Password"
                     textContentType={'password'}
                     secureTextEntry={true}
                 />
-                <Text>{verifyPassword()}</Text>
+                <Text>{this.verifyPassword}</Text>
                 <Text style={styles.header}>Confirm Password</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={onChangeConfirmPassword}
+                    onChangeText={(val) => this.updateInputVal(val,'confirmPassword')}
                     placeholder="Confirm Password"
                     textContentType={'password'}
                     secureTextEntry={true}
                 />
-                <Text>{verifyConfirmPassword()}</Text>
+                <Text>{this.verifyConfirmPassword}</Text>
             </View>
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
                     text={'Continue'}
-                    onPress={verifyInput}
+                    onPress={this.verifyInput, console.log(typeof(email)), this.registerUser}
                 />
                 <Pressable onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.footer}>Already have an account? Login here</Text>
@@ -107,7 +128,7 @@ const SignUpScreen = ({navigation}) => {
             </View>
         </ScrollView>
     );
-};
+    }
+    
 
-
-export default SignUpScreen;
+}
