@@ -4,7 +4,7 @@ import StyledButton from '../StyledButton';
 import {View, ScrollView, Text, TextInput, Pressable} from 'react-native';
 import { auth } from '../../../db/firestore';
 
-export default class Auth extends Component{
+export default class Auth extends Component {
 
     constructor(){
         super();
@@ -62,6 +62,9 @@ export default class Auth extends Component{
     }
 
     registerUser = () => {
+        this.verifyEmail()
+        console.log(typeof (email))
+
         auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then((result) => {
             console.log(result)
@@ -76,8 +79,8 @@ export default class Auth extends Component{
             password: ''
         })
 
-        this.props.navigation.navigate("Create Profile")
-
+        //this.props.navigation.goBack()
+        this.props.navigation.replace("Create Profile")
     }
 
     render(){
@@ -120,7 +123,7 @@ export default class Auth extends Component{
                 <StyledButton
                     style={styles.button}
                     text={'Continue'}
-                    onPress={this.verifyInput, console.log(typeof(email)), this.registerUser}
+                    onPress={this.registerUser}
                 />
                 <Pressable onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.footer}>Already have an account? Login here</Text>
