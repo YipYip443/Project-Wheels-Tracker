@@ -5,12 +5,15 @@ import styles from "../DeliveryRoutesScreen/styles";
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import StyledButton from "../../TitleComponents/StyledButton";
+import { db } from "../../../firestore";
 
 const DeliveryRoutesScreen = ({navigation}) => {
-    const [selectedRoute, setSelectedRoute] = React.useState();
+    const [selectedRoute, setSelectedRoute] = React.useState("01");
     const [selectedPosition, setSelectedPosition] = React.useState();
     const routes = ['01', '02', '03', '04', '5A', '5B', '06', '7A', '7B', '8A', '8B', '09', '10', '11', '12', '13', '14A', '14B', '15A', '16', '17A', '17B', '18A', '19A', '20', '21A', '22A', '22B', '23', '24', '25', '26'];
     const routeItems = [];
+
+    const [photoUrlRoute, setPhotoUrlRoute] = React.useState({});
 
     const [stops, setStops] = React.useState(false);
 
@@ -21,7 +24,7 @@ const DeliveryRoutesScreen = ({navigation}) => {
 
     const [open, setOpen] = React.useState(false);
     const [value, setValue] = React.useState(null);
-    const [items, setItems] = React.useState(routeItems)
+    const [items, setItems] = React.useState(routeItems);
 
     const handleConfirm = (date) => {
         console.log(date.toDateString());
@@ -35,10 +38,13 @@ const DeliveryRoutesScreen = ({navigation}) => {
         }
     }
 
-    function getRouteMap() {
-        selectedValue
+    function getRouteMap() {   
+        db.doc(`routes/${selectedRoute}`).get().then((doc) => {
+            setPhotoUrlRoute(doc.data().PhotoURI);
+            } 
+        )
     }
-
+    
     function post() {
         console.log(selectedRoute);
         console.log(date);
@@ -47,21 +53,12 @@ const DeliveryRoutesScreen = ({navigation}) => {
     }
 
     generateRouteItems();
+    getRouteMap();
+    let obj = {};
+    obj.uri = photoUrlRoute;
 
     return (
         <ScrollView style={styles.container}>
-            {/*<DropDownPicker
-                open={open}
-                value={value}
-                items={items}
-                setOpen={setOpen}
-                setValue={setValue}
-                setItems={setItems}
-                dropDownContainerStyle={{
-                    backgroundColor: "#dfdfdf"
-                }}
-            />*/}
-
             <View style={styles.unit}>
                 <Text>Route Number:</Text>
                 <RNPickerSelect
@@ -84,8 +81,7 @@ const DeliveryRoutesScreen = ({navigation}) => {
                         visible={show}>
                         <View >
                             <View style={styles.modal}>
-                                <Text>Route Map goes here</Text>
-                                <Image style={styles.image} source={require('../../../assets/images/introbackground.jpg')}/>
+                                <Image source = {obj} style = {{ width: 300, height: 300 }}/>
                                 <Button
                                     title="Close Map"
                                     onPress={()=>{setShow(false)}}/>
