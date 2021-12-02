@@ -14,17 +14,18 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 40,
-        fontWeight: '500',
+        fontWeight: 'bold',
         color: 'white',
         textAlign: 'center',
         textAlignVertical: 'center',
-        //backgroundColor: 'red',
+        //backgroundColor: '#a81d20',
         flex: 19
     },
     subtitle: {
-        fontSize: 16,
+        fontSize: 20,
         color: 'white',
         fontWeight: 'bold',
+        fontStyle: "italic",
         //backgroundColor: 'blue',
         flex: 1,
     },
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
     },
     buttonView: {
-        paddingBottom: '5%',
+        paddingBottom: '10%',
     }
 });
 
