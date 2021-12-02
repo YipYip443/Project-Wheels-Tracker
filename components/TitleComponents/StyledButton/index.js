@@ -8,6 +8,7 @@ const StyledButton = (props) => {
             <Pressable
                 style={styles.button}
                 onPress={props.onPress}
+                disabled={props.disabled}
             >
                 <Text style={styles.text}>{props.text}</Text>
             </Pressable>

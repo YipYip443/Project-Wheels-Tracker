@@ -5,17 +5,18 @@ import styles from "../DeliveryRoutesScreen/styles";
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import StyledButton from "../../TitleComponents/StyledButton";
-import { db } from "../../../firestore";
+import {db} from "../../../firestore";
 
 const DeliveryRoutesScreen = ({navigation}) => {
-    const [selectedRoute, setSelectedRoute] = React.useState("01");
+    const [selectedRoute, setSelectedRoute] = React.useState();
     const [selectedPosition, setSelectedPosition] = React.useState();
     const routes = ['01', '02', '03', '04', '5A', '5B', '06', '7A', '7B', '8A', '8B', '09', '10', '11', '12', '13', '14A', '14B', '15A', '16', '17A', '17B', '18A', '19A', '20', '21A', '22A', '22B', '23', '24', '25', '26'];
     const routeItems = [];
 
-    const [photoUrlRoute, setPhotoUrlRoute] = React.useState({});
+    const [disabled, setDisabled] = React.useState(true);
 
-    const [stops, setStops] = React.useState(false);
+    const [photoUrlRoute, setPhotoUrlRoute] = React.useState();
+    const [dimensions, setDimensions] = React.useState([300, 300]);
 
     const [date, setDate] = React.useState(new Date());
     const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
@@ -38,24 +39,24 @@ const DeliveryRoutesScreen = ({navigation}) => {
         }
     }
 
-    function getRouteMap() {   
+    function getRouteMap(selectedRoute) {
         db.doc(`routes/${selectedRoute}`).get().then((doc) => {
-            setPhotoUrlRoute(doc.data().PhotoURI);
-            } 
+                let newPhotoURL = doc.data().photoURL;
+                Image.getSize(newPhotoURL, (width, height) => {
+                    setDimensions([width, height])
+                });
+                setPhotoUrlRoute(newPhotoURL);
+            }
         )
     }
-    
+
     function post() {
         console.log(selectedRoute);
         console.log(date);
         console.log(selectedPosition);
-        console.log(stops);
     }
 
     generateRouteItems();
-    getRouteMap();
-    let obj = {};
-    obj.uri = photoUrlRoute;
 
     return (
         <ScrollView style={styles.container}>
@@ -63,7 +64,15 @@ const DeliveryRoutesScreen = ({navigation}) => {
                 <Text>Route Number:</Text>
                 <RNPickerSelect
                     style={styles}
-                    onValueChange={(value) => setSelectedRoute(value)}
+                    onValueChange={function (value) {
+                        setSelectedRoute(value);
+                        if (value !== null) {
+                            setDisabled(false);
+                            getRouteMap(value);
+                        } else {
+                            setDisabled(true);
+                        }
+                    }}
                     selectedValue={selectedRoute}
                     items={routeItems}
                     placeholder={{label: 'Select a route...', value: null}}
@@ -77,14 +86,15 @@ const DeliveryRoutesScreen = ({navigation}) => {
                     onPress={() => {
                         setShow(true)
                     }}
-                    text="View Map"/>
+                    text="View Map"
+                    disabled={disabled}/>
                 <View>
                     <Modal
                         transparent={true}
                         visible={show}>
                         <View>
                             <View style={styles.modal}>
-                                <Image source = {obj} style = {{ width: 300, height: 300 }}/>
+                                <Image source={{uri: photoUrlRoute}} style={{width: '100%', height: '90%', resizeMode: 'contain'}}/>
                                 <Button
                                     title="Close Map"
                                     onPress={() => {

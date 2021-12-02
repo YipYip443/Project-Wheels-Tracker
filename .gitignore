@@ -11,7 +11,7 @@ web-build/
 package-lock.json
 package.json
 .idea
-db/firestore.ts
+firestore.ts
 
 
 # macOS

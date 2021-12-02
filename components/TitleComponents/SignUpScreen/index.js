@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './styles';
 import StyledButton from '../StyledButton';
 import {View, ScrollView, Text, TextInput, Pressable} from 'react-native';
-import { auth } from '../../../db/firestore';
+import { auth } from '../../../firestore';
 
 export default class Auth extends Component {
 
