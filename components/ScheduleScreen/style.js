@@ -12,6 +12,16 @@ const styles = StyleSheet.create({
     },
     content: {
         color: 'grey'
+    },
+    buttonView: {
+        width: '100%',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        paddingTop: '5%',
+    },
+    acceptButton: {
+        paddingRight: '5%'
     }
 });
 
