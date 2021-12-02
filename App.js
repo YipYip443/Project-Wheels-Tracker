@@ -26,7 +26,7 @@ function SMDashboardTabs() {
             <Tab.Screen name="Schedule" component={ScheduleScreen}/>
             <Tab.Screen name="Volunteers" component={VolunteersScreen}/>
             <Tab.Screen name="Delivery Routes" component={DeliveryRoutesScreen}/>
-            <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false}}/> 
+            <Tab.Screen name="Profile Screen" component={ProfileStack} options={{headerShown: false}}/> 
         </Tab.Navigator>
     );
 }
@@ -36,7 +36,7 @@ function VolunteerTabs() {
         <Tab.Navigator>
             <Tab.Screen name="Schedule" component={ScheduleScreen}/>
             <Tab.Screen name="Volunteers" component={VolunteersScreen}/>
-            <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false}}/>
+            <Tab.Screen name="Profile Screen" component={ProfileStack} options={{headerShown: false}}/>
         </Tab.Navigator>
     );
 }
