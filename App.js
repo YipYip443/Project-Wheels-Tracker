@@ -15,7 +15,7 @@ import ScheduleScreen from "./components/ScheduleScreen";
 import VolunteersScreen from "./components/SMDashboardComponenents/VolunteersScreen";
 import DeliveryRoutesScreen from "./components/SMDashboardComponenents/DeliveryRoutesScreen";
 import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";
-
+import EditProfileScreen from './components/SMDashboardComponenents/EditProfileScreen'; 
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,7 +26,7 @@ function SMDashboardTabs() {
             <Tab.Screen name="Schedule" component={ScheduleScreen}/>
             <Tab.Screen name="Volunteers" component={VolunteersScreen}/>
             <Tab.Screen name="Delivery Routes" component={DeliveryRoutesScreen}/>
-            <Tab.Screen name="Profile" component={ProfileScreen}/>
+            <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false}}/> 
         </Tab.Navigator>
     );
 }
@@ -36,8 +36,17 @@ function VolunteerTabs() {
         <Tab.Navigator>
             <Tab.Screen name="Schedule" component={ScheduleScreen}/>
             <Tab.Screen name="Volunteers" component={VolunteersScreen}/>
-            <Tab.Screen name="Profile" component={ProfileScreen}/>
+            <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false}}/>
         </Tab.Navigator>
+    );
+}
+
+function ProfileStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name ="Profile" component={ProfileScreen}/>
+            <Stack.Screen name ="Edit Profile" component={EditProfileScreen}/>
+        </Stack.Navigator>
     );
 }
 
