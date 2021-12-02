@@ -12,7 +12,7 @@ import LoginScreen from "./components/TitleComponents/LoginScreen";
 import SignUpScreen from "./components/TitleComponents/SignUpScreen";
 import CreateProfileScreen from "./components/TitleComponents/CreateProfileScreen";
 import ScheduleScreen from "./components/ScheduleScreen";
-import MessagesScreen from "./components/SMDashboardComponenents/MessagesScreen";
+import VolunteersScreen from "./components/SMDashboardComponenents/VolunteersScreen";
 import DeliveryRoutesScreen from "./components/SMDashboardComponenents/DeliveryRoutesScreen";
 import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";
 
@@ -24,7 +24,7 @@ function SMDashboardTabs() {
     return (
         <Tab.Navigator>
             <Tab.Screen name="Schedule" component={ScheduleScreen}/>
-            <Tab.Screen name="Messages" component={MessagesScreen}/>
+            <Tab.Screen name="Volunteers" component={VolunteersScreen}/>
             <Tab.Screen name="Delivery Routes" component={DeliveryRoutesScreen}/>
             <Tab.Screen name="Profile" component={ProfileScreen}/>
         </Tab.Navigator>
@@ -35,7 +35,7 @@ function VolunteerTabs() {
     return (
         <Tab.Navigator>
             <Tab.Screen name="Schedule" component={ScheduleScreen}/>
-            <Tab.Screen name="Messages" component={MessagesScreen}/>
+            <Tab.Screen name="Volunteers" component={VolunteersScreen}/>
             <Tab.Screen name="Profile" component={ProfileScreen}/>
         </Tab.Navigator>
     );
