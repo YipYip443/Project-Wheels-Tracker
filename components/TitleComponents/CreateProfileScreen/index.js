@@ -52,6 +52,7 @@ export default class SignUp extends Component{
             occupation: '',
             phone: '',
         })
+        this.props.navigation.replace("SM Dashboard");
     }
 
 render(){
