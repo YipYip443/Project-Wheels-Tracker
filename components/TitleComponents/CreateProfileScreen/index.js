@@ -1,15 +1,60 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {ImageBackground, View, Text, TextInput, ScrollView} from 'react-native';
 import styles from './styles';
 import StyledButton from "../StyledButton";
+import { db } from '../../../db/firestore';
 
-const CreateProfileScreen = ({navigation}) => {
-    const [name, onChangeName] = React.useState();
-    const [address, onChangeAddress] = React.useState();
-    const [birthday, onChangeBirthday] = React.useState();
-    const [contact, onChangeContact] = React.useState();
-    const [number, onChangeNumber] = React.useState();
+export default class SignUp extends Component{
+    constructor(){
+        super();
+        this.state = {
+            name: '',
+            address: '',
+            dob: '',
+            emergContact: '',
+            emergContactNum: '',
+            occupation: '',
+            phone: '',
+        }
+    }
 
+    updateInputVal = (val, prop) =>{
+        const state = this.state;
+        state[prop] = val;
+        this.setState(state);
+    }
+
+    pushUserToDatabase = () => {
+        const docRef = db.collection('users');
+
+        docRef.add({
+            name: this.state.name,
+            address: this.state.address,
+            dob: this.state.dob,
+            emergContact: this.state.emergContact,
+            emergContactNum: this.state.emergContactNum,
+            occupation: this.state.occupation,
+            phone: this.state.phone,
+        })
+        .then((result) => {
+            console.log(result)
+            console.log('User signed up successfully')
+            })
+            .catch((error) => {
+           console.log(error)  
+            });
+        this.setState({
+            name: '',
+            address: '',
+            dob: '',
+            emergContact: '',
+            emergContactNum: '',
+            occupation: '',
+            phone: '',
+        })
+    }
+
+render(){
     return (
         <ScrollView
             style={styles.container}
@@ -20,8 +65,8 @@ const CreateProfileScreen = ({navigation}) => {
 
                 <Text> * Full Name</Text>
                 <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeName}
+                    style={styles.textInput}
+                    onChangeText={(val) => this.updateInputVal(val,'name')}
                     placeholder='John Doe'
                     textContentType={'name'}
                 />
@@ -29,16 +74,16 @@ const CreateProfileScreen = ({navigation}) => {
                 <Text> * Address</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeAddress}
+                    onChangeText={(val) => this.updateInputVal(val,'address')}
                     placeholder='123 Spooner St, Long Beach, CA 90803'
                     textContentType={'fullStreetAddress'}
                 />
 
 
-                <Text> * Phone</Text>
+                <Text> * Phone Number</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeNumber}
+                    onChangeText={(val) => this.updateInputVal(val,'phone')}
                     placeholder='(999)-999-9999'
                     textContentType={'telephoneNumber'}
                     keyboardType='phone-pad'
@@ -48,7 +93,7 @@ const CreateProfileScreen = ({navigation}) => {
                 <Text> * Date of Birth</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeBirthday}
+                    onChangeText={(val) => this.updateInputVal(val,'dob')}
                     placeholder='01/23/1999'
                     textContentType={'none'}
                     keyboardType='phone-pad'
@@ -57,15 +102,24 @@ const CreateProfileScreen = ({navigation}) => {
                 <Text> * Emergency Contact (Please Provide Full Name)</Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeBirthday}
+                    onChangeText={(val) => this.updateInputVal(val,'emergContact')}
                     placeholder='Parent/Guardian, Friend, Boss, etc.'
                     textContentType={'none'}
+                />
+
+                <Text> * Emergency Contact Phone Number</Text>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(val) => this.updateInputVal(val,'emergContactNum')}
+                    placeholder='(999)-999-9999'
+                    textContentType={'telephoneNumber'}
+                    keyboardType='phone-pad'
                 />
 
                 <Text> Occupation </Text>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeBirthday}
+                    onChangeText={(val) => this.updateInputVal(val,'occupation')}
                     placeholder='Optional'
                     textContentType={'jobTitle'}
                 />
@@ -76,16 +130,11 @@ const CreateProfileScreen = ({navigation}) => {
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
-                    text={"Submit"}
-                    onPress={function () {
-                        navigation.goBack();
-                        navigation.goBack();
-                        navigation.replace('SM Dashboard');
-                    }}
+                    text={'Submit'}
+                    onPress={this.pushUserToDatabase}
                 />
             </View>
         </ScrollView>
     );
+    }
 }
-
-export default CreateProfileScreen;
