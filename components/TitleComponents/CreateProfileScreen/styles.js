@@ -14,25 +14,45 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         margin: '2.5%',
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 20,
-        borderColor: 'black',
+        borderColor: '#302f90',
+        backgroundColor: '#ffffff',
+        color: '#a81d20',
         padding: 10,
-        //flex: 0.5
+        //flex: .5
     },
     textInputView: {
         justifyContent: 'flex-end',
+        margin: '2.5%',
+        borderWidth: 4,
+        borderRadius: 20,
+        borderColor: '#302f90',
+        height: 40, 
+        padding: 10,
         //marginBottom: '-10%',
-        //backgroundColor: 'lightgreen',
-        flex: 1
+        flex: 10.5
     },
     buttonView: {
         //backgroundColor: 'pink',
         flex: 1,
+        height: 25,
         justifyContent: 'flex-end',
     },
+    title: {
+        textAlign: 'center',
+        fontSize: 30,
+        color: '#a81d20',
+        fontWeight: 'bold',
+        fontStyle: 'italic',
+        paddingTop: '15%',
+        flex: 1,
+    },
     signUpText: {
+        height: 20,
         textAlign: 'center'
+        
+        
     }
 });
 
