@@ -70,21 +70,26 @@ const DeliveryRoutesScreen = ({navigation}) => {
                 />
             </View>
 
+            <Text>Route Map:</Text>
             {/* View Map Button */}
-            <View>
-                <Button
-                    onPress={()=>{setShow(true)}}
-                    title="View Map"/>
+            <View style={styles.unit}>
+                <StyledButton
+                    onPress={() => {
+                        setShow(true)
+                    }}
+                    text="View Map"/>
                 <View>
                     <Modal
-                        transparent = {true}
+                        transparent={true}
                         visible={show}>
-                        <View >
+                        <View>
                             <View style={styles.modal}>
                                 <Image source = {obj} style = {{ width: 300, height: 300 }}/>
                                 <Button
                                     title="Close Map"
-                                    onPress={()=>{setShow(false)}}/>
+                                    onPress={() => {
+                                        setShow(false)
+                                    }}/>
                             </View>
                         </View>
                     </Modal>
@@ -93,10 +98,10 @@ const DeliveryRoutesScreen = ({navigation}) => {
 
             <View style={styles.unit}>
                 <Text>Day Open:</Text>
-                <Button
+                <StyledButton
                     onPress={() => setDatePickerVisibility(true)}
-                    title={date.toDateString()}>
-                </Button>
+                    text={date.toDateString()}>
+                </StyledButton>
                 <DateTimePickerModal
                     mode="date"
                     isVisible={isDatePickerVisible}
@@ -117,16 +122,6 @@ const DeliveryRoutesScreen = ({navigation}) => {
                         {label: 'Both', value: 'both'},
                     ]}
                 />
-            </View>
-
-            <View style={styles.unit}>
-                <Text>Approximate Stops:</Text>
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={setStops}
-                    keyboardType={'numeric'}
-                    placeholder="Approximate Stops">
-                </TextInput>
             </View>
 
             <View style={styles.buttonView}>
