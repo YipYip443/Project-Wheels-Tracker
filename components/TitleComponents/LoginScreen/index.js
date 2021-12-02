@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ScrollView, Text, TextInput, Pressable} from 'react-native';
+import {ImageBackground, View, ScrollView, Text, TextInput, Pressable} from 'react-native';
 import styles from './styles';
 import StyledButton from '../StyledButton';
 
@@ -8,11 +8,19 @@ const LoginScreen = ({navigation}) => {
     const [number, onChangeNumber] = React.useState();
 
     return (
+        
         <ScrollView
-            style={styles.container}
+            style={styles.titlecontainer}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
-            {/*<Text style={styles.title}>Login</Text>*/}
+                {/*TODO: change background image*/}
+            <ImageBackground
+                source={require('../../../assets/images/50years.png')}
+                style={styles.image}
+            />
+            {/*<Text style={styles.title}>We Nourish - We Comfort - We Protect</Text>*/}
+            
+            
             <View style={styles.textInputView}>
                 <Text>Email Address</Text>
                 <TextInput

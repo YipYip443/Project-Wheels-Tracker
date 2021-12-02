@@ -10,7 +10,7 @@ const TitleScreen = ({navigation}) => {
 
             {/*TODO: change background image*/}
             <ImageBackground
-                source={require('../../../assets/images/introbackground.jpg')}
+                source={require('../../../assets/images/PackersHotFood.jpg')}
                 style={styles.image}
             />
 
