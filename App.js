@@ -65,9 +65,9 @@ function App() {
         <NavigationContainer style={styles.container}>
             <Stack.Navigator initialRouteName={'Title'}>
                 <Stack.Screen name="Title" component={TitleScreen} options={{headerShown: false}}/>
-                <Stack.Screen name="Login" component={LoginScreen}/>
-                <Stack.Screen name="Sign Up" component={SignUpScreen}/>
-                <Stack.Screen name="Create Profile" component={CreateProfileScreen}/>
+                <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="Sign Up" component={SignUpScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="Create Profile" component={CreateProfileScreen} options={{headerShown: true}}/>
                 <Stack.Screen name="SM Dashboard" component={SMDashboardTabs} options={{headerShown: false}}/>
                 <Stack.Screen name="Volunteer Dashboard" component={VolunteerTabs} options={{headerShown: false}}/>
             </Stack.Navigator>

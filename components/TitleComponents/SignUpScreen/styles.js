@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     },
     title: {
         textAlign: 'center',
+        top: 30,
         fontSize: 30,
         fontWeight: 'bold',
         fontStyle: 'italic',
@@ -37,12 +38,13 @@ const styles = StyleSheet.create({
         //backgroundColor: 'green',
         justifyContent: 'flex-end',
         padding: 5,
+        bottom: 55,
         flex: 10,
     },
     image: {
         width: '100%',
-        height: '99%',
-        top: 15,
+        height: '100%',
+        top: 30,
         right: 40,
         left: 0,
         bottom: 40,
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         resizeMode: 'stretch',
         position: 'relative',
-        flex: 69.7
+        flex: 19.7,
     },
     buttonView: {
         //backgroundColor: 'pink',
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     footer: {
-        height: 50,
+        height: 30,
         textAlign: 'center',
     },
 });
