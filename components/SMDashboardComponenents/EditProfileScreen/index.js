@@ -1,7 +1,7 @@
 import React, {useEffect, useContext, useState} from 'react';
 import styles from './styles';
 import StyledButton from '../../TitleComponents/StyledButton';
-import {db} from "../../../firestore";
+import {db} from "../../../db/firestore";
 
 import {View, TextInput, Alert, ScrollView} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';

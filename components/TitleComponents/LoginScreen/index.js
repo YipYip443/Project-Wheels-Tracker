@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ImageBackground, View, ScrollView, Text, TextInput, Pressable} from 'react-native';
+import {ImageBackground, View, ScrollView, Text, TextInput, Pressable, Alert} from 'react-native';
 import styles from './styles';
 import StyledButton from '../StyledButton';
 import { auth } from '../../../db/firestore';
