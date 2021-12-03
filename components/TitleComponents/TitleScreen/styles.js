@@ -13,13 +13,12 @@ const styles = StyleSheet.create({
         //backgroundColor: 'green'
     },
     title: {
-        fontSize: 35,
-        top: 5,
+        fontSize: 52,
+        marginTop: '2.5%',
         fontWeight: 'bold',
         fontStyle: 'italic',
         color: 'white',
         textAlign: 'center',
-        textAlignVertical: 'center',
         //backgroundColor: '#a81d20',
         flex: 19
     },

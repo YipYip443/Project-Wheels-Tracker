@@ -13,13 +13,11 @@ const styles = StyleSheet.create({
     },
     title: {
         textAlign: 'center',
-        fontSize: 30,
+        fontSize: 24,
         color: '#a81d20',
         fontWeight: 'bold',
         fontStyle: 'italic',
-        paddingTop: '15%',
-        top: 420,
-        flex: 1,
+        paddingTop: '5%',
     },
     textInput: {
         height: 50,
@@ -41,7 +39,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         resizeMode: 'contain',
-        flex: 5,
+        flex: 10,
+        marginTop: '5%',
     },
     buttonView: {
         //backgroundColor: 'pink',
