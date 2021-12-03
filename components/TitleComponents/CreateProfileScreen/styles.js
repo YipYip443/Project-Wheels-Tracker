@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         color: '#a81d20',
         padding: 10,
-        //flex: .5
+        flex: .5
     },
     textInputView: {
         justifyContent: 'flex-end',
@@ -28,10 +28,11 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         borderRadius: 20,
         borderColor: '#302f90',
+        top: 25,
         height: 40, 
         padding: 10,
         //marginBottom: '-10%',
-        flex: 10.5
+        flex: 5.5
     },
     buttonView: {
         //backgroundColor: 'pink',
@@ -47,12 +48,14 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         paddingTop: '15%',
         flex: 1,
+        bottom: 23,
     },
     unit: {
         paddingBottom: '5%'
     },
     signUpText: {
         height: 20,
+        top: 20,
         textAlign: 'center'
         
         
