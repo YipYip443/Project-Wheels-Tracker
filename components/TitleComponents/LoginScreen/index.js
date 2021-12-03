@@ -36,8 +36,7 @@ const LoginScreen = ({navigation}) => {
                 source={require('../../../assets/images/50years.png')}
                 style={styles.image}
             />
-
-            {/*<Text style={styles.title}>We Nourish - We Comfort - We Protect</Text>*/}
+            <Text style={styles.title}>Login to your MOW Account</Text>
 
             <View style={styles.textInputView}>
                 <Text>Email Address</Text>
