@@ -5,7 +5,7 @@ import styles from "../DeliveryRoutesScreen/styles";
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import StyledButton from "../../TitleComponents/StyledButton";
-import {db} from "../../../firestore";
+import { db } from "../../../db/firestore";
 
 const DeliveryRoutesScreen = ({navigation}) => {
     const [selectedRoute, setSelectedRoute] = React.useState();
