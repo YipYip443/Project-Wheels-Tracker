@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
     },
     acceptButton: {
         paddingRight: '5%'
+    },
+    container: {
+        padding: '10%'
     }
 });
 

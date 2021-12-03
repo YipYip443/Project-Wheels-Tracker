@@ -5,9 +5,8 @@ import styles from "../DeliveryRoutesScreen/styles";
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import StyledButton from "../../TitleComponents/StyledButton";
-
-import { db } from "../../../db/firestore";
-
+import {db} from "../../../db/firestore";
+import Gallery from "react-native-image-gallery";
 
 const DeliveryRoutesScreen = ({navigation}) => {
     const [selectedRoute, setSelectedRoute] = React.useState();
@@ -90,22 +89,21 @@ const DeliveryRoutesScreen = ({navigation}) => {
                     }}
                     text="View Map"
                     disabled={disabled}/>
-                <View>
-                    <Modal
-                        transparent={true}
-                        visible={show}>
-                        <View>
-                            <View style={styles.modal}>
-                                <Image source={{uri: photoUrlRoute}} style={{width: '100%', height: '90%', resizeMode: 'contain'}}/>
-                                <Button
-                                    title="Close Map"
-                                    onPress={() => {
-                                        setShow(false)
-                                    }}/>
-                            </View>
+                <Modal
+                    transparent={true}
+                    visible={show}>
+                    <View style={styles.modal}>
+                        <View style={{height: '90%'}}>
+                            <Gallery
+                                images={[{source: {uri: photoUrlRoute}}]}/>
                         </View>
-                    </Modal>
-                </View>
+                        <StyledButton
+                            text="Close Map"
+                            onPress={() => {
+                                setShow(false)
+                            }}/>
+                    </View>
+                </Modal>
             </View>
 
             <View style={styles.unit}>

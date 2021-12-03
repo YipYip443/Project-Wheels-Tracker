@@ -60,6 +60,7 @@ function ProfileStack() {
 }
 
 function App() {
+    console.disableYellowBox = true;
     return (
         <NavigationContainer style={styles.container}>
             <Stack.Navigator initialRouteName={'Title'}>
