@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {ImageBackground, View, Text, TextInput, ScrollView} from 'react-native';
 import styles from './styles';
 import StyledButton from "../StyledButton";
-import { db } from '../../../firestore';
+import { db } from '../../../db/firestore';
 
 export default class SignUp extends Component{
     constructor(){
@@ -61,12 +61,13 @@ render(){
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
-
+                
             <View style={styles.textInputView}>
-
+            <Text style={styles.title}>Tell us about yourself!</Text>
                 <Text> * Full Name</Text>
                 <TextInput
                     style={styles.textInput}
+                    style={styles.input}
                     onChangeText={(val) => this.updateInputVal(val,'name')}
                     placeholder='John Doe'
                     textContentType={'name'}

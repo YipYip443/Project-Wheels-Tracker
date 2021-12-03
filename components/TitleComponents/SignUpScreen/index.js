@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import styles from './styles';
 import StyledButton from '../StyledButton';
-import {View, ScrollView, Text, TextInput, Pressable} from 'react-native';
-import { auth } from '../../../firestore';
+
+import {ImageBackground, View, ScrollView, Text, TextInput, Pressable} from 'react-native';
+import { auth } from '../../../db/firestore';
+
+//TODO: Dropdown menu for occupation: friendly visitor, driver, both
+
 
 export default class Auth extends Component {
 
@@ -88,8 +92,12 @@ export default class Auth extends Component {
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
-
-            {/*<Text style={styles.title}>Sign Up</Text>*/}
+            
+            <ImageBackground
+                source={require('../../../assets/images/mowBanner.png')}
+                style={styles.image}
+            />
+            <Text style={styles.title}>Create your MOW Account</Text>
             <View style={styles.textInputView}>
                 <Text style={styles.header}>Email Address</Text>
                 <TextInput

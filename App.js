@@ -5,6 +5,8 @@ import { ImageBackground, StyleSheet, Text, View, Platform } from 'react-native'
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 
 
 import TitleScreen from './components/TitleComponents/TitleScreen';
@@ -23,10 +25,14 @@ const Tab = createBottomTabNavigator();
 function SMDashboardTabs() {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="Schedule" component={ScheduleScreen}/>
-            <Tab.Screen name="Volunteers" component={VolunteersScreen}/>
-            <Tab.Screen name="Delivery Routes" component={DeliveryRoutesScreen}/>
-            <Tab.Screen name="Profile Screen" component={ProfileStack} options={{headerShown: false}}/> 
+            <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
+                <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
+            <Tab.Screen name="Volunteers" component={VolunteersScreen} options={{ tabBarIcon: () => (
+                <FontAwesome name="users" color="#333333" size={25}/>),}}/>
+            <Tab.Screen name="Delivery Routes" component={DeliveryRoutesScreen} options={{ tabBarIcon: () => (
+                <FontAwesome name="truck" color="#333333" size={25}/>),}}/>
+            <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false, tabBarIcon: () => (
+                <FontAwesome name="user" color="#333333" size={25}/>),}}/>
         </Tab.Navigator>
     );
 }
@@ -34,9 +40,12 @@ function SMDashboardTabs() {
 function VolunteerTabs() {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="Schedule" component={ScheduleScreen}/>
-            <Tab.Screen name="Volunteers" component={VolunteersScreen}/>
-            <Tab.Screen name="Profile Screen" component={ProfileStack} options={{headerShown: false}}/>
+            <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
+                <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
+            <Tab.Screen name="Volunteers" component={VolunteersScreen} options={{ tabBarIcon: () => (
+                <FontAwesome name="users" color="#333333" size={25}/>),}}/>
+            <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false, tabBarIcon: () => (
+                <FontAwesome name="user" color="#333333" size={25}/>),}}/>
         </Tab.Navigator>
     );
 }
@@ -44,7 +53,7 @@ function VolunteerTabs() {
 function ProfileStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name ="Profile" component={ProfileScreen}/>
+            <Stack.Screen name ="Profile Screen" component={ProfileScreen}/>
             <Stack.Screen name ="Edit Profile" component={EditProfileScreen}/>
         </Stack.Navigator>
     );
