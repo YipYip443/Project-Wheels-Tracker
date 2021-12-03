@@ -13,12 +13,12 @@ const styles = StyleSheet.create({
     },
     title: {
         textAlign: 'center',
-        fontSize: 30,
+        fontSize: 26,
         fontWeight: 'bold',
         fontStyle: 'italic',
         color: '#a81d20',
-        paddingTop: '15%',
-        flex: 4,
+        paddingTop: '5%',
+        flex: 1,
     },
     header: {
         marginTop: '2.5%',
@@ -35,32 +35,27 @@ const styles = StyleSheet.create({
     },
     textInputView: {
         //backgroundColor: 'green',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         padding: 5,
-        flex: 10,
+        flex: 1,
+    },
+    errorText: {
+        color: '#A22629',
     },
     image: {
         width: '100%',
-        height: '99%',
-        top: 15,
-        right: 40,
-        left: 0,
-        bottom: 40,
-        padding: 1,
-        borderWidth: 0,
-        borderRadius: 0,
-        resizeMode: 'stretch',
-        position: 'relative',
-        flex: 69.7
+        height: '100%',
+        resizeMode: 'contain',
+        flex: 10,
     },
     buttonView: {
         //backgroundColor: 'pink',
-        flex: 4,
+        flex: 1,
         justifyContent: 'flex-end',
     },
     footer: {
-        height: 50,
         textAlign: 'center',
     },
 });
+
 export default styles;
