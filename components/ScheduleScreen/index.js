@@ -10,7 +10,7 @@ const ScheduleScreen = () => {
     let items = {};
     let markedItems = {};
 
-    const loadItems = () => {
+    function loadItems() {
         items[today] = [];
         items[today].push({
             time: '10:00 AM - 12:00 PM',
@@ -37,9 +37,9 @@ const ScheduleScreen = () => {
         for (const key of Object.keys(items)) {
             markedItems[key] = items[key][0];
         }
-    };
+    }
 
-    const renderItem = (item) => {
+    function renderItem(item) {
         return (
             <View style={{
                 marginRight: '5%',
@@ -63,7 +63,7 @@ const ScheduleScreen = () => {
                 </View>
             </View>
         );
-    };
+    }
 
     loadItems();
 

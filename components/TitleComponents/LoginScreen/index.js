@@ -1,66 +1,56 @@
-import React, { Component } from 'react';
-import {ImageBackground, View, ScrollView, Text, TextInput, Pressable, Alert} from 'react-native';
+import React from 'react';
 import styles from './styles';
+import {Image, View, ScrollView, Text, TextInput, Pressable, Alert} from 'react-native';
 import StyledButton from '../StyledButton';
-import { auth } from '../../../db/firestore';
+import {auth} from '../../../db/firestore';
 
-export default class LoginScreen extends Component {
-    constructor(){
-        super();
-        this.state = {
-            email: '',
-            password: '',
-        }
-    }
+const LoginScreen = ({navigation}) => {
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
 
-    updateInputVal = (val, prop) => {
-        const state = this.state;
-        state[prop] = val;
-        this.setState(state);
-    }
-
-    userLogin = () => {
-        if(this.state.email === '' && this.state.password === ''){
-            Alert.alert('Enter details to sign in')
-        }
-        auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then((res) => {
-            console.log(res)
-            console.log('User signed in successfully!')
-            this.setState({
-                email: '',
-                password: ''
+    function userLogin() {
+        auth.signInWithEmailAndPassword(email, password)
+            .then((res) => {
+                console.log(res);
+                console.log('User signed in successfully!');
+                navigation.goBack();
+                navigation.replace('SM Dashboard');
             })
-            this.props.navigation.navigate('SM Dashboard');
-        })
-        .catch(err => this.setState({error: err.message}))
+            .catch(error => {
+                if (error.code === 'auth/invalid-email') {
+                    Alert.alert('Invalid Email!', 'Email address is invalid!');
+                } else if (error.code === 'auth/user-not-found') {
+                    Alert.alert('User not found!', 'User not found!');
+                } else if (error.code === 'auth/wrong-password') {
+                    Alert.alert('Incorrect password!', 'Password is incorrect!');
+                }
+            })
     }
-render(){
+
     return (
-        
         <ScrollView
-            style={styles.titlecontainer}
+            style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
-            <ImageBackground
+            <Image
                 source={require('../../../assets/images/50years.png')}
                 style={styles.image}
             />
+
             {/*<Text style={styles.title}>We Nourish - We Comfort - We Protect</Text>*/}
-            
-            
+
             <View style={styles.textInputView}>
                 <Text>Email Address</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={(val) => this.updateInputVal(val, 'email')}
+                    onChangeText={setEmail}
                     placeholder="Email Address"
                     textContentType={'emailAddress'}
                 />
                 <Text>Password</Text>
                 <TextInput
                     style={styles.textInput}
-                    onChangeText={(val) => this.updateInputVal(val, 'password')}
+                    onChangeText={setPassword}
                     placeholder="Password"
                     textContentType={'password'}
                     secureTextEntry={true}
@@ -70,14 +60,14 @@ render(){
                 <StyledButton
                     style={styles.button}
                     text={'Login'}
-                    onPress={() => this.userLogin()
-                    }
+                    onPress={userLogin}
                 />
-                <Pressable onPress={() => navigation.navigate('Sign Up')}>
+                <Pressable onPress={() => navigation.replace('Sign Up')}>
                     <Text style={styles.footer}>Don't have an account? Sign up here</Text>
                 </Pressable>
             </View>
         </ScrollView>
     );
-    };
 };
+
+export default LoginScreen;
