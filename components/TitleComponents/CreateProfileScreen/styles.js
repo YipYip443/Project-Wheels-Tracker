@@ -48,6 +48,9 @@ const styles = StyleSheet.create({
         paddingTop: '15%',
         flex: 1,
     },
+    unit: {
+        paddingBottom: '5%'
+    },
     signUpText: {
         height: 20,
         textAlign: 'center'

@@ -118,11 +118,11 @@ render(){
                     keyboardType='phone-pad'
                 />
 
-                <Text> Occupation </Text>
+                <Text> Role </Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(val) => this.updateInputVal(val,'occupation')}
-                    placeholder='Optional'
+                    placeholder='Site Manager, Driver, Friendly Visitor, or Both'
                     textContentType={'jobTitle'}
                 />
             </View>
