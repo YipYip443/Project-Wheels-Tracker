@@ -61,12 +61,13 @@ render(){
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
-
+                
             <View style={styles.textInputView}>
-
+            <Text style={styles.title}>Tell us about yourself!</Text>
                 <Text> * Full Name</Text>
                 <TextInput
                     style={styles.textInput}
+                    style={styles.input}
                     onChangeText={(val) => this.updateInputVal(val,'name')}
                     placeholder='John Doe'
                     textContentType={'name'}

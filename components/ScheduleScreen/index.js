@@ -3,6 +3,8 @@ import {TouchableOpacity, View, Text, Button} from "react-native";
 import {Agenda} from 'react-native-calendars';
 import styles from "./style";
 
+
+//TODO: Add view map above accept/reject buttons
 const ScheduleScreen = () => {
     const [items, setItems] = React.useState({});
     let today = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString().slice(0, 10);
