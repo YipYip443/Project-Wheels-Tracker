@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styles from './styles';
 import StyledButton from '../StyledButton';
+
 import {ImageBackground, View, ScrollView, Text, TextInput, Pressable} from 'react-native';
 import { auth } from '../../../db/firestore';
 
 //TODO: Dropdown menu for occupation: friendly visitor, driver, both
+
 
 export default class Auth extends Component {
 
