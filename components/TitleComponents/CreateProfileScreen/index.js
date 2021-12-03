@@ -15,6 +15,7 @@ export default class SignUp extends Component{
             emergContactNum: '',
             occupation: '',
             phone: '',
+            isAdmin: false,
         }
     }
 
@@ -35,6 +36,7 @@ export default class SignUp extends Component{
             emergContactNum: this.state.emergContactNum,
             occupation: this.state.occupation,
             phone: this.state.phone,
+            isAdmin: false,
         })
         .then((result) => {
             console.log(result)
@@ -51,6 +53,7 @@ export default class SignUp extends Component{
             emergContactNum: '',
             occupation: '',
             phone: '',
+            isAdmin: false,
         })
         this.props.navigation.replace("SM Dashboard");
     }
