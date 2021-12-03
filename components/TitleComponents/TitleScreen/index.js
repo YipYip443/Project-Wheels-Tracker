@@ -17,7 +17,7 @@ const TitleScreen = ({navigation}) => {
 
             {/*Title message*/}
             <View style={styles.titleView}>
-                <Text style={styles.title}> Welcome to Meals on Wheels! </Text>
+                <Text style={styles.title}> MOW LB Route Wrangler </Text>
                 <Text style={styles.subtitle}> Login or Sign Up </Text>
             </View>
 
