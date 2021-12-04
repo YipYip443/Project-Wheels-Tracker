@@ -5,10 +5,11 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         padding: '5%',
-        //backgroundColor: 'lightgreen',
+        //backgroundColor: '#fafafa',
     },
     unit: {
-        paddingBottom: '5%'
+        paddingBottom: '5%',
+        //backgroundColor: 'green'
     },
     textInput: {
         height: 40,
@@ -17,9 +18,14 @@ const styles = StyleSheet.create({
         //margin: '2.5%',
     },
     viewContainer: {
-        borderWidth: 1,
+        borderWidth: 2,
+        borderColor: '#302f90' ,
         height: 40,
+        top: 5,
         justifyContent: 'center',
+        backgroundColor: '#ffffff',
+        margin: '2.5%',
+        marginBottom: '5%',
     },
     inputIOS: {
         color: 'black',
