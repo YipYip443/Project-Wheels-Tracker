@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 
 function SMDashboardTabs() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator tabBarOptions={{activeTintColor: '#302f90', labelStyle: {fontSize: 11, fontWeight: 'bold'}}}>
             <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Volunteers" component={VolunteersScreen} options={{ tabBarIcon: () => (
@@ -39,7 +39,7 @@ function SMDashboardTabs() {
 
 function VolunteerTabs() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator tabBarOptions={{activeTintColor: '#302f90', labelStyle: {fontSize: 11, fontWeight: 'bold'}}}>
             <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Volunteers" component={VolunteersScreen} options={{ tabBarIcon: () => (
