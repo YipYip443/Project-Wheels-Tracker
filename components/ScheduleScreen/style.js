@@ -17,11 +17,8 @@ const styles = StyleSheet.create({
         width: '100%',
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         paddingTop: '5%',
-    },
-    acceptButton: {
-        paddingRight: '5%'
     },
     container: {
         padding: '10%'

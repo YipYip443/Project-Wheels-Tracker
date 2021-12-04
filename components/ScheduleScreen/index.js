@@ -55,10 +55,9 @@ const ScheduleScreen = () => {
                     <Text style={styles.name}>{item.name}</Text>
                     <Text style={styles.content}>{item.content}</Text>
                     <View style={styles.buttonView}>
-                        <View style={styles.acceptButton}>
-                            <Button title={'Accept'} color={'#302f90'}/>
-                        </View>
-                        <Button title={'Reject'} color={'#A22629'}/>
+                            <Button title={'More Info'} color={'#302f90'}/>
+                            <Button title={'Accept'} color={'#018704'}/>
+                        <Button title={'Reject'} color={'#a22629'}/>
                     </View>
                 </View>
             </View>
