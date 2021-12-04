@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 
 function SMDashboardTabs() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator tabBarOptions={{activeTintColor: '#302f90', labelStyle: {fontSize: 11, fontWeight: 'bold'}}}>
             <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Volunteers" component={VolunteersScreen} options={{ tabBarIcon: () => (
@@ -39,7 +39,7 @@ function SMDashboardTabs() {
 
 function VolunteerTabs() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator tabBarOptions={{activeTintColor: '#302f90', labelStyle: {fontSize: 11, fontWeight: 'bold'}}}>
             <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Volunteers" component={VolunteersScreen} options={{ tabBarIcon: () => (
@@ -65,9 +65,9 @@ function App() {
         <NavigationContainer style={styles.container}>
             <Stack.Navigator initialRouteName={'Title'}>
                 <Stack.Screen name="Title" component={TitleScreen} options={{headerShown: false}}/>
-                <Stack.Screen name="Login" component={LoginScreen}/>
-                <Stack.Screen name="Sign Up" component={SignUpScreen}/>
-                <Stack.Screen name="Create Profile" component={CreateProfileScreen}/>
+                <Stack.Screen name="Sign Up" component={SignUpScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="Create Profile" component={CreateProfileScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}}/>
                 <Stack.Screen name="SM Dashboard" component={SMDashboardTabs} options={{headerShown: false}}/>
                 <Stack.Screen name="Volunteer Dashboard" component={VolunteerTabs} options={{headerShown: false}}/>
             </Stack.Navigator>

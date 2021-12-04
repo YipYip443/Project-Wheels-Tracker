@@ -2,10 +2,10 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
+        //backgroundColor: 'lightgreen',
         width: '100%',
         height: '100%',
         padding: '5%',
-        //backgroundColor: 'lightgreen',
     },
     containerStyle: {
         flexGrow: 1,
@@ -13,12 +13,11 @@ const styles = StyleSheet.create({
     },
     title: {
         textAlign: 'center',
-        fontSize: 10,
+        fontSize: 24,
         color: '#a81d20',
         fontWeight: 'bold',
         fontStyle: 'italic',
-        paddingTop: '15%',
-        flex: 1,
+        paddingTop: '5%',
     },
     textInput: {
         height: 50,
@@ -32,30 +31,25 @@ const styles = StyleSheet.create({
     },
     textInputView: {
         //backgroundColor: 'green',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         padding: 5,
         flex: 2.5,
     },
     image: {
         width: '100%',
-        height: '71%',
-        top: 0,
-        padding: 1,
-        borderWidth: 0,
-        borderRadius: 2,
-        resizeMode: 'cover',
-        position: 'absolute',
-        flex: 1
+        height: '100%',
+        resizeMode: 'contain',
+        flex: 10,
+        marginTop: '5%',
     },
     buttonView: {
         //backgroundColor: 'pink',
         flex: 1,
-        height: 20,
         justifyContent: 'flex-end',
     },
     footer: {
-        height:50,
         textAlign: 'center',
     },
 });
+
 export default styles;
