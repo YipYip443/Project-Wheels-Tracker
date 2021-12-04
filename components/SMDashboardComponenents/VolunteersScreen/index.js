@@ -44,7 +44,7 @@ const VolunteersScreen = () => {
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
         <View>
-            <Text> {showUserInformation()} </Text>
+            <Text style={styles.volunteerInfo}> {showUserInformation()} </Text>
         </View>
         </ScrollView>
     );
