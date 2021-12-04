@@ -70,8 +70,9 @@ render(){
                 <StyledButton
                     style={styles.button}
                     text={'Login'}
-                    onPress={() => this.userLogin()
-                    }
+                    //onPress={() => this.userLogin()
+                    onPress={() => this.props.navigation.navigate('SM Dashboard')
+                }    
                 />
                 <Pressable onPress={() => navigation.navigate('Sign Up')}>
                     <Text style={styles.footer}>Don't have an account? Sign up here</Text>
