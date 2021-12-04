@@ -6,7 +6,6 @@ import {db} from "../../../db/firestore";
 const VolunteersScreen = () => {
     const [userList, setUserList] = useState([]);
 
-    //TODO: fix infinite loop (it prints user's name & phone inifintely on the screen)
     //TODO: styling is left for Cam
     function getUser() {
         db.collection('users').where('isAdmin', '==', false).get().then(snapshot => {
@@ -15,10 +14,7 @@ const VolunteersScreen = () => {
                 return;
             }
             snapshot.forEach(doc => {
-                console.log(doc.id, '=>', doc.data().name);
-                // var key = doc.id;
-                // var uName = key.data().name;
-                // usersList.push()
+                // console.log(doc.id, '=>', doc.data().name);
                 setUserList(usersList => [...usersList, doc.data()])
             });
         })
@@ -27,8 +23,6 @@ const VolunteersScreen = () => {
         });
     }
     
-    getUser();
-
     const showUserInformation = () => {
         let usersInformation = userList.map((user) => (
           <View>
