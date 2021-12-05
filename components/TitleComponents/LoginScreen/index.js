@@ -14,7 +14,7 @@ const LoginScreen = ({navigation}) => {
                 console.log(res);
                 console.log('User signed in successfully!');
                 navigation.goBack();
-                navigation.replace('SM Dashboard');
+                navigation.navigate('SM Dashboard');
             })
             .catch(error => {
                 if (error.code === 'auth/invalid-email') {
