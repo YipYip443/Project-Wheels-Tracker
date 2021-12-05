@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import styles from "../../TitleComponents/LoginScreen/styles";
+import styles from './styles';
 import {ScrollView, View, Text} from "react-native";
 import {db} from "../../../db/firestore";
 
@@ -43,7 +43,7 @@ const VolunteersScreen = () => {
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
-        <View>
+        <View style= {styles.volunteerView}>
             <Text style={styles.volunteerInfo}> {showUserInformation()} </Text>
         </View>
         </ScrollView>
