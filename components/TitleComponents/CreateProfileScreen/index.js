@@ -7,14 +7,16 @@ import RNPickerSelect from "react-native-picker-select";
 
 
 export default class SignUp extends Component{
-    user = auth.currentUser;
+    userID = auth.currentUser.uid;
+    userEmail = auth.currentUser.email;
+    // userID = user.uid;
     
     constructor(){
         super();
         this.state = {
             name: '',
             address: '',
-            email: this.user.email,
+            email: this.userEmail,
             dob: '',
             emergContact: '',
             emergContactNum: '',
@@ -49,7 +51,7 @@ export default class SignUp extends Component{
             phone: this.state.phone,
             isAdmin: false,
         }
-        const docRef = db.collection('users').doc(`${user.uid}`).set(data);
+        const docRef = db.collection('users').doc(this.userID).set(data);
         console.log('User signed up successfully')
         // console.log(docRef)
 
