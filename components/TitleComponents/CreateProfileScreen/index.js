@@ -35,11 +35,10 @@ export default class SignUp extends Component{
         state[prop] = val;
         this.setState(state);
     }
-
+   
     pushUserToDatabase = () => {
-        const docRef = db.collection('users');
-        console.log(this.state.email)
-        docRef.add({
+        // console.log(user.uid);
+        const data = {
             name: this.state.name,
             address: this.state.address,
             email: this.state.email,
@@ -49,14 +48,19 @@ export default class SignUp extends Component{
             occupation: this.state.occupation,
             phone: this.state.phone,
             isAdmin: false,
-        })
-        .then((result) => {
-            console.log(result)
-            console.log('User signed up successfully')
-            })
-            .catch((error) => {
-           console.log(error)  
-            });
+        }
+        const docRef = db.collection('users').doc(`${user.uid}`).set(data);
+        console.log('User signed up successfully')
+        // console.log(docRef)
+
+        // console.log(docRef)
+        // .then((result) => {
+        //     console.log(result)
+        //     console.log('User signed up successfully')
+        //     })
+        //     .catch((error) => {
+        //    console.log(error)  
+        //     });
         this.setState({
             name: '',
             address: '',
