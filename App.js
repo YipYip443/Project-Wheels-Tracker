@@ -22,8 +22,8 @@ import EditProfileScreen from './components/SMDashboardComponenents/EditProfileS
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const userList = db.collection('users');
-const currentUser = userList.where('email', '==', auth.currentUser.email).get();
+// const userList = db.collection('users');
+// const currentUser = userList.where('email', '==', auth.currentUser.email).get();
 
 function SMDashboardTabs() {
     return (
