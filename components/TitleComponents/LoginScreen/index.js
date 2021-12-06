@@ -59,8 +59,8 @@ const LoginScreen = ({navigation}) => {
                 <StyledButton
                     style={styles.button}
                     text={'Login'}
-                    //onPress={() => this.userLogin()
-                    onPress={() => navigation.navigate('SM Dashboard')
+                    onPress={() => this.userLogin()
+                    //onPress={() => navigation.navigate('SM Dashboard')
                 }    
 
                 />
