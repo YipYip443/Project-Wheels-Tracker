@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {ImageBackground, View, Text, TextInput, ScrollView} from 'react-native';
 import styles from './styles';
 import StyledButton from "../StyledButton";
-import { db } from '../../../db/firestore';
+import { db, auth } from '../../../db/firestore';
 import RNPickerSelect from "react-native-picker-select";
 
 export default class SignUp extends Component{

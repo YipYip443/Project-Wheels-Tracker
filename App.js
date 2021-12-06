@@ -6,7 +6,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import { db, auth } from './db/firestore';
 
 
 import TitleScreen from './components/TitleComponents/TitleScreen';
@@ -21,6 +21,9 @@ import EditProfileScreen from './components/SMDashboardComponenents/EditProfileS
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const userList = db.collection('users');
+const currentUser = userList.where('email', '==', auth.currentUser.email).get();
 
 function SMDashboardTabs() {
     return (
@@ -84,4 +87,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
-    export default App;
+export default App;
