@@ -36,7 +36,7 @@ const LoginScreen = ({navigation}) => {
                 source={require('../../../assets/images/50years.png')}
                 style={styles.image}
             />
-            <Text style={styles.title}>Login to your MOW Account</Text>
+            <Text style={styles.title}>Login to your Route Wrangler Account</Text>
 
             <View style={styles.textInputView}>
                 <Text>Email Address</Text>
@@ -64,6 +64,9 @@ const LoginScreen = ({navigation}) => {
                 }    
 
                 />
+                <Pressable onPress={() => navigation.replace('Forgot Password')}>
+                    <Text style={styles.footer}>Forgot your password? Reset here</Text>
+                </Pressable>
                 <Pressable onPress={() => navigation.replace('Sign Up')}>
                     <Text style={styles.footer}>Don't have an account? Sign up here</Text>
                 </Pressable>
