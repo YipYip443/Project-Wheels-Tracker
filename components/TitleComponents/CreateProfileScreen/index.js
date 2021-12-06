@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import {ImageBackground, View, Text, TextInput, ScrollView} from 'react-native';
 import styles from './styles';
 import StyledButton from "../StyledButton";
-import { db } from '../../../db/firestore';
+import { db, auth } from '../../../db/firestore';
 
 export default class SignUp extends Component{
+
+    user = auth.currentUser;
+
     constructor(){
         super();
         this.state = {
             name: '',
             address: '',
+            email: this.user.email,
             dob: '',
             emergContact: '',
             emergContactNum: '',
@@ -27,10 +31,11 @@ export default class SignUp extends Component{
 
     pushUserToDatabase = () => {
         const docRef = db.collection('users');
-
+        console.log(this.state.email)
         docRef.add({
             name: this.state.name,
             address: this.state.address,
+            email: this.state.email,
             dob: this.state.dob,
             emergContact: this.state.emergContact,
             emergContactNum: this.state.emergContactNum,
@@ -48,6 +53,7 @@ export default class SignUp extends Component{
         this.setState({
             name: '',
             address: '',
+            email: '',
             dob: '',
             emergContact: '',
             emergContactNum: '',
