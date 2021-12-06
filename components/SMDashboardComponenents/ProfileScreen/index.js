@@ -2,10 +2,18 @@ import React from "react";
 import styles from "../../SMDashboardComponenents/EditProfileScreen/styles";
 import {View, ScrollView, Pressable, Text} from "react-native";
 import StyledButton from "../../TitleComponents/StyledButton";
-
 import { auth } from "../../../db/firestore";
 
 const ProfileScreen = ({navigation}) => {
+    user = auth.currentUser;
+
+    function getUser() {
+        console.log(user)
+        console.log(user.email)
+    }
+
+    getUser();
+
     function logout() {
         auth.signOut()
             .then((result) => {
