@@ -5,22 +5,20 @@ import StyledButton from "../../TitleComponents/StyledButton";
 
 import { auth } from "../../../db/firestore";
 
-
-function logout() {
-    navigation = useNavigation()
-    auth.signOut()
-        .then((result) => {
-            console.log(result)
-            console.log('User signed out sucecssfully')
-        })
-        .catch((error) => {
-            console.log(error)
-        });
-    //TODO: Fix navigation bug
-    navigation.navigate('Title')
-}
-
 const ProfileScreen = ({navigation}) => {
+    function logout() {
+        auth.signOut()
+            .then((result) => {
+                console.log(result)
+                console.log('User signed out sucecssfully')
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+
+        navigation.navigate('Title')
+    }
+
     return (
         <ScrollView
             style={styles.container}
