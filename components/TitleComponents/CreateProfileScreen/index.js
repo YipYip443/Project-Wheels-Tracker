@@ -3,6 +3,7 @@ import {ImageBackground, View, Text, TextInput, ScrollView} from 'react-native';
 import styles from './styles';
 import StyledButton from "../StyledButton";
 import { db } from '../../../db/firestore';
+import RNPickerSelect from "react-native-picker-select";
 
 export default class SignUp extends Component{
     constructor(){
@@ -122,11 +123,15 @@ render(){
                 />
 
                 <Text> Role </Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(val) => this.updateInputVal(val,'occupation')}
-                    placeholder='Site Manager, Driver, Friendly Visitor, or Both'
-                    textContentType={'jobTitle'}
+                <RNPickerSelect
+                    style={styles}
+                    onValueChange={(value) => setSelectedPosition(value)}
+                    selectedValue={selectedPosition}
+                    items={[
+                        {label: 'Driver', value: 'driver'},
+                        {label: 'Friendly Visitor', value: 'friendlyVisitor'},
+                        {label: 'Both', value: 'both'},
+                    ]}
                 />
             </View>
 
