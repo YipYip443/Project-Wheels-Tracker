@@ -12,7 +12,8 @@ package-lock.json
 package.json
 .idea
 firestore.ts
-
+yarn.lock
 
 # macOS
 .DS_Store
+
