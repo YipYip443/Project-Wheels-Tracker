@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         paddingTop: '15%',
         flex: 1,
-        bottom: 23,
+        bottom: 15,
     },
     unit: {
         paddingBottom: '5%'
