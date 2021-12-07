@@ -45,6 +45,7 @@ const LoginScreen = ({navigation}) => {
                     onChangeText={setEmail}
                     placeholder="Email Address"
                     textContentType={'emailAddress'}
+                    autoCapitalize={'none'}
                 />
                 <Text>Password</Text>
                 <TextInput
