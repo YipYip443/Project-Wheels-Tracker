@@ -1,5 +1,6 @@
 import React, {useEffect, useContext, useState} from 'react';
 import styles from './styles';
+import { Text } from 'react-native';
 import StyledButton from '../../TitleComponents/StyledButton';
 import RNPickerSelect from "react-native-picker-select";
 import {db} from "../../../db/firestore";
@@ -79,10 +80,10 @@ const EditProfileScreen = ({navigation}) => {
         <ScrollView
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
-            keyboardShouldPersistTaps={'always'}>   
-            
+            keyboardShouldPersistTaps={'always'}>      
         <View style={styles.action}>
-          <FontAwesome name="user-o" color="#333333" size={20} />
+          <Text style={styles.title4}> Full Name</Text>
+          <FontAwesome name="user-o" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}} />
           <TextInput
             value={userName}
             placeholderTextColor="#666666"
@@ -92,7 +93,8 @@ const EditProfileScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="envelope" color="#333333" size={20} />
+          <Text style={styles.title5}> Email Address</Text>
+          <FontAwesome name="envelope" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}} />
           <TextInput
             value={userEmail}
             placeholderTextColor="#666666"
@@ -102,7 +104,8 @@ const EditProfileScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="address-card" color="#333333" size={20} />
+          <Text style={styles.title5}>Address</Text>
+          <FontAwesome name="address-card" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}} />
           <TextInput
             value={userAddress}
             placeholderTextColor="#666666"
@@ -112,7 +115,8 @@ const EditProfileScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="phone" color="#333333" size={20} />
+        <Text style={styles.title5}>Phone Number</Text>
+          <FontAwesome name="phone" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}} />
           <TextInput
             value={userPhone}
             placeholderTextColor="#666666"
@@ -123,7 +127,8 @@ const EditProfileScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="birthday-cake" color="#333333" size={20} />
+          <Text style={styles.title5}>Birthday</Text>
+          <FontAwesome name="birthday-cake" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}  />
           <TextInput
             value={userDOB}
             placeholderTextColor="#666666"
@@ -133,7 +138,8 @@ const EditProfileScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="user-o" color="#333333" size={20} />
+          <Text style={styles.title5}>Emergency Contact</Text>
+          <FontAwesome name="user-o" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}} />
           <TextInput
             value={userEmergContact}
             placeholderTextColor="#666666"
@@ -143,7 +149,8 @@ const EditProfileScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="phone" color="#333333" size={20} />
+        <Text style={styles.title5}>Emergency Phone #</Text>
+          <FontAwesome name="phone" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
           <TextInput
             value={userEmergContactNum}
             placeholderTextColor="#666666"
@@ -154,7 +161,8 @@ const EditProfileScreen = ({navigation}) => {
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="briefcase" color="#333333" size={20} />
+        <Text style={styles.title5}>Prefered Role</Text>
+          <FontAwesome name="briefcase" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
           <RNPickerSelect 
             style={styles}
             onValueChange={(value) => setUserOccupation(value)}
