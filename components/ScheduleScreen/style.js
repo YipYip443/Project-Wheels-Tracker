@@ -3,25 +3,52 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     time: {
-        fontSize: 18,
-        paddingBottom: '5%',
-    },
-    name: {
         fontSize: 16,
         paddingBottom: '5%',
     },
-    content: {
+    route: {
+        fontSize: 18,
+        paddingBottom: '5%',
+    },
+    positionStyle: {
         color: 'grey'
     },
     buttonView: {
         width: '100%',
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         paddingTop: '5%',
     },
-    acceptButton: {
-        paddingRight: '5%'
+    buttonView2: {
+        height: '5%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    shiftButton: {
+        flex: 1,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    selectedShiftButton: {
+        flex: 1,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#302f90',
+    },
+    text: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        color: '#302f90',
+    },
+    selectedText: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        color: 'white',
     },
     container: {
         padding: '10%'
