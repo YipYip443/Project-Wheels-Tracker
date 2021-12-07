@@ -13,6 +13,7 @@ import TitleScreen from './components/TitleComponents/TitleScreen';
 import LoginScreen from "./components/TitleComponents/LoginScreen";
 import SignUpScreen from "./components/TitleComponents/SignUpScreen";
 import CreateProfileScreen from "./components/TitleComponents/CreateProfileScreen";
+import ForgotPasswordScreen from './components/TitleComponents/ForgotPasswordScreen'
 import ScheduleScreen from "./components/ScheduleScreen";
 import VolunteersScreen from "./components/SMDashboardComponenents/VolunteersScreen";
 import DeliveryRoutesScreen from "./components/SMDashboardComponenents/DeliveryRoutesScreen";
@@ -61,6 +62,8 @@ function ProfileStack() {
         </Stack.Navigator>
     );
 }
+
+//TODO: Add reset password navigation to the stack
 
 function App() {
     console.disableYellowBox = true;
