@@ -5,16 +5,18 @@ import StyledButton from "../StyledButton";
 import { db, auth } from '../../../db/firestore';
 import RNPickerSelect from "react-native-picker-select";
 
+
 export default class SignUp extends Component{
-
-    user = auth.currentUser;
-
+    userID = auth.currentUser.uid;
+    userEmail = auth.currentUser.email;
+    // userID = user.uid;
+    
     constructor(){
         super();
         this.state = {
             name: '',
             address: '',
-            email: this.user.email,
+            email: this.userEmail,
             dob: '',
             emergContact: '',
             emergContactNum: '',
@@ -24,16 +26,21 @@ export default class SignUp extends Component{
         }
     }
 
-    updateInputVal = (val, prop) =>{
+    updateInputVal = (val, prop) => {
         const state = this.state;
         state[prop] = val;
         this.setState(state);
     }
 
+    setSelectedPosition = (val, prop) => { 
+        const state = this.state;
+        state[prop] = val;
+        this.setState(state);
+    }
+   
     pushUserToDatabase = () => {
-        const docRef = db.collection('users');
-        console.log(this.state.email)
-        docRef.add({
+        // console.log(user.uid);
+        const data = {
             name: this.state.name,
             address: this.state.address,
             email: this.state.email,
@@ -43,14 +50,19 @@ export default class SignUp extends Component{
             occupation: this.state.occupation,
             phone: this.state.phone,
             isAdmin: false,
-        })
-        .then((result) => {
-            console.log(result)
-            console.log('User signed up successfully')
-            })
-            .catch((error) => {
-           console.log(error)  
-            });
+        }
+        const docRef = db.collection('users').doc(this.userID).set(data);
+        console.log('User signed up successfully')
+        // console.log(docRef)
+
+        // console.log(docRef)
+        // .then((result) => {
+        //     console.log(result)
+        //     console.log('User signed up successfully')
+        //     })
+        //     .catch((error) => {
+        //    console.log(error)  
+        //     });
         this.setState({
             name: '',
             address: '',
@@ -130,13 +142,12 @@ render(){
 
                 <Text> Role </Text>
                 <RNPickerSelect
-                    style={styles}
-                    onValueChange={(value) => setSelectedPosition(value)}
-                    selectedValue={selectedPosition}
+                    style={styles.unit}
+                    onValueChange={(value) => this.setSelectedPosition(value, 'occupation')}
                     items={[
-                        {label: 'Driver', value: 'driver'},
-                        {label: 'Friendly Visitor', value: 'friendlyVisitor'},
-                        {label: 'Both', value: 'both'},
+                        {label: 'Driver', value: 'Driver'},
+                        {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
+                        {label: 'Both', value: 'Both'},
                     ]}
                 />
             </View>

@@ -1,18 +1,30 @@
-import React from "react";
+import React, {useEffect, useContext, useState} from 'react';
 import styles from "../../SMDashboardComponenents/EditProfileScreen/styles";
-import {View, ScrollView, Pressable, Text} from "react-native";
+import {View, ScrollView, Pressable, Text, Title} from "react-native";
 import StyledButton from "../../TitleComponents/StyledButton";
 import { auth } from "../../../db/firestore";
+import { db } from '../../../db/firestore';
 
 const ProfileScreen = ({navigation}) => {
-    user = auth.currentUser;
+    const userID = auth.currentUser.uid;
+    const [userName, setUserName] = useState();
+    const [userEmail, setUserEmail] = useState(null);
+    const [userOccupation, setUserOccupation] = useState(null);
 
-    function getUser() {
-        console.log(user)
-        console.log(user.email)
+    async function getUserData() {
+        const docRef = db.collection('users').doc(userID)
+        const userData = await docRef.get();
+        let userName = userData.data().name;
+        setUserName(userName);
+        let userEmail = userData.data().email;
+        setUserEmail(userEmail);    
+        let userOccupation = userData.data().occupation;
+        setUserOccupation(userOccupation);
     }
 
-    getUser();
+    useEffect(() => {
+        getUserData();
+      }, []);
 
     function logout() {
         auth.signOut()
@@ -32,6 +44,10 @@ const ProfileScreen = ({navigation}) => {
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
+            <View>
+                <Text style={styles.title}>{userName}</Text>
+                <Text>{userEmail}</Text>
+            </View>
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
