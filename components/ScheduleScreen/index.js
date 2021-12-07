@@ -63,6 +63,7 @@ const ScheduleScreen = () => {
                 backgroundColor: 'white',
                 flex: 1,
                 borderRadius: 5,
+                borderWidth: 2,
                 padding: '5%'
             }}>
                 {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>*/}

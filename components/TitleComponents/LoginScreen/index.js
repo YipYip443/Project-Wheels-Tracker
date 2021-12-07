@@ -73,7 +73,6 @@ const LoginScreen = ({navigation}) => {
                     style={styles.button}
                     text={'Login'}
                     onPress={() => userLogin()
-                    //onPress={() => navigation.navigate('SM Dashboard')
                 }    
 
                 />
