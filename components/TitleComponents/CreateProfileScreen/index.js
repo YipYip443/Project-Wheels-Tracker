@@ -108,7 +108,7 @@ render(){
                 <TextInput
                     style={styles.input}
                     onChangeText={(val) => this.updateInputVal(val,'phone')}
-                    placeholder='(999)-999-9999'
+                    placeholder='(999) 999-9999'
                     textContentType={'telephoneNumber'}
                     keyboardType='phone-pad'
                 />
@@ -135,7 +135,7 @@ render(){
                 <TextInput
                     style={styles.input}
                     onChangeText={(val) => this.updateInputVal(val,'emergContactNum')}
-                    placeholder='(999)-999-9999'
+                    placeholder='(999) 999-9999'
                     textContentType={'telephoneNumber'}
                     keyboardType='phone-pad'
                 />

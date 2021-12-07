@@ -55,6 +55,9 @@ const LoginScreen = ({navigation}) => {
                     textContentType={'password'}
                     secureTextEntry={true}
                 />
+                <Pressable onPress={() => navigation.navigate('Forgot Password')}>
+                    <Text style={styles.footer}>Forgot your password? Reset here</Text>
+                </Pressable>
             </View>
             <View style={styles.buttonView}>
                 <StyledButton
@@ -65,9 +68,7 @@ const LoginScreen = ({navigation}) => {
                 }    
 
                 />
-                <Pressable onPress={() => navigation.replace('Forgot Password')}>
-                    <Text style={styles.footer}>Forgot your password? Reset here</Text>
-                </Pressable>
+
                 <Pressable onPress={() => navigation.replace('Sign Up')}>
                     <Text style={styles.footer}>Don't have an account? Sign up here</Text>
                 </Pressable>
