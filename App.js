@@ -7,7 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { db, auth } from './db/firestore';
-
+import getIsAdmin from './components/Admin/getIsAdmin';
 
 import TitleScreen from './components/TitleComponents/TitleScreen';
 import LoginScreen from "./components/TitleComponents/LoginScreen";
@@ -21,9 +21,6 @@ import EditProfileScreen from './components/SMDashboardComponenents/EditProfileS
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
-// const userList = db.collection('users');
-// const currentUser = userList.where('email', '==', auth.currentUser.email).get();
 
 function SMDashboardTabs() {
     return (
