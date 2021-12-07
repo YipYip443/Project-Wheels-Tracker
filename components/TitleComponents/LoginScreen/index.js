@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './styles';
-import {Image, View, ScrollView, Text, TextInput, Pressable, Alert} from 'react-native';
+import {Image, View, ScrollView, Text, TextInput, Pressable, Alert, KeyboardAvoidingView} from 'react-native';
 import StyledButton from '../StyledButton';
 import {auth} from '../../../db/firestore';
 import getIsAdmin from "../../Admin/getIsAdmin";
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = React.useState('');
@@ -37,15 +38,17 @@ const LoginScreen = ({navigation}) => {
     }
 
     return (
-        <ScrollView
+        <KeyboardAwareScrollView
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
-            <Image
-                source={require('../../../assets/images/50years.png')}
-                style={styles.image}
-            />
-            <Text style={styles.title}>Login to your Route Wrangler Account</Text>
+            <View style={styles.imageView}>
+                <Image
+                    source={require('../../../assets/images/50years.png')}
+                    style={styles.image}
+                />
+            </View>
+            <Text style={styles.title}>Login to your MOWLB account</Text>
 
             <View style={styles.textInputView}>
                 <Text>Email Address</Text>
@@ -64,25 +67,24 @@ const LoginScreen = ({navigation}) => {
                     textContentType={'password'}
                     secureTextEntry={true}
                 />
-                <Pressable onPress={() => navigation.navigate('Forgot Password')}>
-                    <Text style={styles.footer}>Forgot your password? Reset here</Text>
+                <Pressable style={styles.forgotPassword} onPress={() => navigation.navigate('Forgot Password')}>
+                    <Text>Forgot your password? Reset here</Text>
                 </Pressable>
             </View>
-            <View style={styles.buttonView}>
+            <View style={styles.footerView}>
                 <StyledButton
                     style={styles.button}
                     text={'Login'}
                     onPress={() => userLogin()
-                    //onPress={() => navigation.navigate('SM Dashboard')
-                }    
-
+                        //onPress={() => navigation.navigate('SM Dashboard')
+                    }
                 />
 
                 <Pressable onPress={() => navigation.replace('Sign Up')}>
-                    <Text style={styles.footer}>Don't have an account? Sign up here</Text>
+                    <Text>Don't have an account? Sign up here</Text>
                 </Pressable>
             </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
     );
 };
 
