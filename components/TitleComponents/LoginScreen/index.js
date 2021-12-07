@@ -3,6 +3,7 @@ import styles from './styles';
 import {Image, View, ScrollView, Text, TextInput, Pressable, Alert} from 'react-native';
 import StyledButton from '../StyledButton';
 import {auth} from '../../../db/firestore';
+import getIsAdmin from "../../Admin/getIsAdmin";
 
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = React.useState('');
@@ -10,11 +11,19 @@ const LoginScreen = ({navigation}) => {
 
     function userLogin() {
         auth.signInWithEmailAndPassword(email, password)
-            .then((res) => {
-                console.log(res);
+            .then(async () => {
                 console.log('User signed in successfully!');
+
+                const isAdmin = await getIsAdmin();
+
                 navigation.goBack();
-                navigation.replace('SM Dashboard');
+
+                if (!isAdmin)
+                    navigation.navigate('Volunteer Dashboard');
+                else
+                    navigation.navigate('SM Dashboard');
+
+
             })
             .catch(error => {
                 if (error.code === 'auth/invalid-email') {
@@ -36,7 +45,7 @@ const LoginScreen = ({navigation}) => {
                 source={require('../../../assets/images/50years.png')}
                 style={styles.image}
             />
-            <Text style={styles.title}>Login to your MOW Account</Text>
+            <Text style={styles.title}>Login to your Route Wrangler Account</Text>
 
             <View style={styles.textInputView}>
                 <Text>Email Address</Text>
@@ -45,6 +54,7 @@ const LoginScreen = ({navigation}) => {
                     onChangeText={setEmail}
                     placeholder="Email Address"
                     textContentType={'emailAddress'}
+                    autoCapitalize={'none'}
                 />
                 <Text>Password</Text>
                 <TextInput
@@ -54,16 +64,19 @@ const LoginScreen = ({navigation}) => {
                     textContentType={'password'}
                     secureTextEntry={true}
                 />
+                <Pressable onPress={() => navigation.navigate('Forgot Password')}>
+                    <Text style={styles.footer}>Forgot your password? Reset here</Text>
+                </Pressable>
             </View>
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
                     text={'Login'}
-                    //onPress={() => this.userLogin()
-                    onPress={() => navigation.navigate('SM Dashboard')
+                    onPress={() => userLogin()
                 }    
 
                 />
+
                 <Pressable onPress={() => navigation.replace('Sign Up')}>
                     <Text style={styles.footer}>Don't have an account? Sign up here</Text>
                 </Pressable>

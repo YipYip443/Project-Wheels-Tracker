@@ -91,6 +91,7 @@ const SignUpScreen = ({navigation}) => {
                     placeholder="Email Address"
                     textContentType={'emailAddress'}
                     keyboard-type='email-address'
+                    autoCapitalize={'none'}
                 />
                 <Text style={styles.errorText}>{verifyEmail()}</Text>
                 <Text style={styles.header}>Create Password</Text>

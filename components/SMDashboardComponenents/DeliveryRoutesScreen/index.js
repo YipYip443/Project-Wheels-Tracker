@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, Image, View} from "react-native";
+import {Button, Modal, Pressable, ScrollView, Text, Alert, View} from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import styles from "../DeliveryRoutesScreen/styles";
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -45,6 +45,13 @@ const DeliveryRoutesScreen = ({navigation}) => {
             routes.push(key);
         }
 
+        /*let lowRoutes = [];
+        for (const route of routes) {
+            if (route.charAt(0) === '0' || (route.length === 2 && isNaN(route))) {
+                lowRoutes.push(route);
+            }
+        }*/
+
         routes.sort();
 
         let newRouteItems = [];
@@ -55,23 +62,17 @@ const DeliveryRoutesScreen = ({navigation}) => {
         setRouteItems(newRouteItems);
     }
 
-    function getRouteMap(selectedRoute) {
-        db.doc(`routes/${selectedRoute}`).get().then((doc) => {
-                let newPhotoURL = doc.data().photoURL;
-                setRoutePhotoURL(newPhotoURL);
-            }
-        )
-    }
-
     function setRouteProperties(route) {
-        getRouteMap(route);
-
-        setRouteDescription(routesCollection[route]['desc']);
-        setRouteTime(routesCollection[route]['time']);
-        console.log("ROUTE TIME:");
-        console.log(routeTime);
-        console.log("ROUTE DESCRIPTION:")
-        console.log(routeDescription);
+        if (routesCollection[route] !== undefined) {
+            console.log(routesCollection[route]['photoURL']);
+            setRoutePhotoURL(routesCollection[route]['photoURL']);
+            setRouteDescription(routesCollection[route]['desc']);
+            setRouteTime(routesCollection[route]['time']);
+            console.log("ROUTE TIME:");
+            console.log(routeTime);
+            console.log("ROUTE DESCRIPTION:")
+            console.log(routeDescription);
+        }
     }
 
     function handleConfirm(date) {
@@ -84,6 +85,13 @@ const DeliveryRoutesScreen = ({navigation}) => {
         console.log(selectedRoute);
         console.log(date);
         console.log(selectedPosition);
+        if (selectedRoute === undefined && selectedPosition === undefined) {
+            Alert.alert('Missing information!');
+        } else {
+            let dateFormat = date.toISOString().slice(0, 10);
+            db.collection('posts').add({date: dateFormat, position: selectedPosition, route: selectedRoute, time: routeTime});
+            Alert.alert('Post created!');
+        }
     }
 
     if (routeItems.length === 0)
@@ -170,7 +178,7 @@ const DeliveryRoutesScreen = ({navigation}) => {
                     items={[
                         {label: 'Driver', value: 'driver'},
                         {label: 'Friendly Visitor', value: 'friendlyVisitor'},
-                        {label: 'Both', value: 'both'},
+                        {label: 'Driver & Friendly Visitor', value: 'both'},
                     ]}
                 />
             </View>

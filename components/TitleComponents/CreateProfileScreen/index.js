@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import {ImageBackground, View, Text, TextInput, ScrollView} from 'react-native';
 import styles from './styles';
 import StyledButton from "../StyledButton";
-import { db } from '../../../db/firestore';
+import { db, auth } from '../../../db/firestore';
+import RNPickerSelect from "react-native-picker-select";
+
 
 export default class SignUp extends Component{
+    userID = auth.currentUser.uid;
+    userEmail = auth.currentUser.email;
+    // userID = user.uid;
+    
     constructor(){
         super();
         this.state = {
             name: '',
             address: '',
+            email: this.userEmail,
             dob: '',
             emergContact: '',
             emergContactNum: '',
@@ -19,35 +26,47 @@ export default class SignUp extends Component{
         }
     }
 
-    updateInputVal = (val, prop) =>{
+    updateInputVal = (val, prop) => {
         const state = this.state;
         state[prop] = val;
         this.setState(state);
     }
 
+    setSelectedPosition = (val, prop) => { 
+        const state = this.state;
+        state[prop] = val;
+        this.setState(state);
+    }
+   
     pushUserToDatabase = () => {
-        const docRef = db.collection('users');
-
-        docRef.add({
+        // console.log(user.uid);
+        const data = {
             name: this.state.name,
             address: this.state.address,
+            email: this.state.email,
             dob: this.state.dob,
             emergContact: this.state.emergContact,
             emergContactNum: this.state.emergContactNum,
             occupation: this.state.occupation,
             phone: this.state.phone,
             isAdmin: false,
-        })
-        .then((result) => {
-            console.log(result)
-            console.log('User signed up successfully')
-            })
-            .catch((error) => {
-           console.log(error)  
-            });
+        }
+        const docRef = db.collection('users').doc(this.userID).set(data);
+        console.log('User signed up successfully')
+        // console.log(docRef)
+
+        // console.log(docRef)
+        // .then((result) => {
+        //     console.log(result)
+        //     console.log('User signed up successfully')
+        //     })
+        //     .catch((error) => {
+        //    console.log(error)  
+        //     });
         this.setState({
             name: '',
             address: '',
+            email: '',
             dob: '',
             emergContact: '',
             emergContactNum: '',
@@ -89,7 +108,7 @@ render(){
                 <TextInput
                     style={styles.input}
                     onChangeText={(val) => this.updateInputVal(val,'phone')}
-                    placeholder='(999)-999-9999'
+                    placeholder='(999) 999-9999'
                     textContentType={'telephoneNumber'}
                     keyboardType='phone-pad'
                 />
@@ -116,17 +135,20 @@ render(){
                 <TextInput
                     style={styles.input}
                     onChangeText={(val) => this.updateInputVal(val,'emergContactNum')}
-                    placeholder='(999)-999-9999'
+                    placeholder='(999) 999-9999'
                     textContentType={'telephoneNumber'}
                     keyboardType='phone-pad'
                 />
 
                 <Text> Role </Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={(val) => this.updateInputVal(val,'occupation')}
-                    placeholder='Site Manager, Driver, Friendly Visitor, or Both'
-                    textContentType={'jobTitle'}
+                <RNPickerSelect
+                    style={styles.unit}
+                    onValueChange={(value) => this.setSelectedPosition(value, 'occupation')}
+                    items={[
+                        {label: 'Driver', value: 'Driver'},
+                        {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
+                        {label: 'Both', value: 'Both'},
+                    ]}
                 />
             </View>
 

@@ -7,12 +7,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-
-
 import TitleScreen from './components/TitleComponents/TitleScreen';
 import LoginScreen from "./components/TitleComponents/LoginScreen";
 import SignUpScreen from "./components/TitleComponents/SignUpScreen";
 import CreateProfileScreen from "./components/TitleComponents/CreateProfileScreen";
+import ForgotPasswordScreen from './components/TitleComponents/ForgotPasswordScreen'
 import ScheduleScreen from "./components/ScheduleScreen";
 import VolunteersScreen from "./components/SMDashboardComponenents/VolunteersScreen";
 import DeliveryRoutesScreen from "./components/SMDashboardComponenents/DeliveryRoutesScreen";
@@ -59,15 +58,18 @@ function ProfileStack() {
     );
 }
 
+//TODO: Add reset password navigation to the stack
+
 function App() {
     console.disableYellowBox = true;
     return (
         <NavigationContainer style={styles.container}>
             <Stack.Navigator initialRouteName={'Title'}>
                 <Stack.Screen name="Title" component={TitleScreen} options={{headerShown: false}}/>
-                <Stack.Screen name="Sign Up" component={SignUpScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="Sign Up" component={SignUpScreen}/>
                 <Stack.Screen name="Create Profile" component={CreateProfileScreen} options={{headerShown: false}}/>
-                <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="Login" component={LoginScreen}/>
+                <Stack.Screen name="Forgot Password" component={ForgotPasswordScreen}/>
                 <Stack.Screen name="SM Dashboard" component={SMDashboardTabs} options={{headerShown: false}}/>
                 <Stack.Screen name="Volunteer Dashboard" component={VolunteerTabs} options={{headerShown: false}}/>
             </Stack.Navigator>
@@ -84,4 +86,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
-    export default App;
+export default App;

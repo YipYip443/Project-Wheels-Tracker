@@ -5,8 +5,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         padding: '5%',
-        borderWidth: 2,
-        borderRadius: 10,
     },
     containerStyle: {
         flexGrow: 1,
@@ -23,7 +21,7 @@ const styles = StyleSheet.create({
     textInput: {
         flex: 1,
         marginTop: Platform.OS === 'ios' ? 0 : -12,
-        paddingLeft: 15,
+        paddingLeft: 10,
         color: '#333333',
     },
     button: {
@@ -36,16 +34,6 @@ const styles = StyleSheet.create({
     buttonView: {
         flex: 1,
         justifyContent: 'flex-end',
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginTop:15,
-        marginBottom: 5,
-    },
-    unit: {
-        paddingBottom: '5%',
-        paddingLeft: 20,
     },
 });
 

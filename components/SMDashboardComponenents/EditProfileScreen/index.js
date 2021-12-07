@@ -1,25 +1,54 @@
 import React, {useEffect, useContext, useState} from 'react';
 import styles from './styles';
 import StyledButton from '../../TitleComponents/StyledButton';
+import RNPickerSelect from "react-native-picker-select";
 import {db} from "../../../db/firestore";
+import { auth } from '../../../db/firestore';
 
 import {View, TextInput, Alert, ScrollView} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const EditProfileScreen = ({navigation}) => {
+    const userID = auth.currentUser.uid;
+    const [userName, setUserName] = useState();
+    const [userPhone, setUserPhone] = useState();
+    const [userDOB, setUserDOB] = useState();
+    const [userAddress, setUserAddress] = useState();
+    const [userEmail, setUserEmail] = useState();
+    const [userEmergContact, setUserEmergContact] = useState();
+    const [userEmergContactNum, setUserEmergContactNum] = useState();
+    const [userOccupation, setUserOccupation] = useState();
+
+    
+    async function getUserData() {
+      const docRef = db.collection('users').doc(userID)
+      const userData = await docRef.get();
+      let userName = userData.data().name;
+      setUserName(userName);
+      let userPhone = userData.data().phone;
+      setUserPhone(userPhone);
+      let userDOB = userData.data().dob;
+      setUserDOB(userDOB);
+      let userAddress = userData.data().address;
+      setUserAddress(userAddress);
+      let userEmail = userData.data().email;
+      setUserEmail(userEmail);
+      let userEmergContact = userData.data().emergContact;
+      setUserEmergContact(userEmergContact);
+      let userEmergContactNum = userData.data().emergContactNum;
+      setUserEmergContactNum(userEmergContactNum);
+      let userOccupation = userData.data().occupation;
+      setUserOccupation(userOccupation);
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+    
     const [image, setImage] = useState(null);
     const [uploading, setUploading] = useState(false);
     const [transferred, setTransferred] = useState(0);
-    const [userData, setUserData] = useState(null);
-
-    const getUser = async() => {
-        db.doc('users').get().then((doc) => {
-          if( doc.exists) {
-            console.log('User Data', doc.data());
-            setUserData(doc.data());
-          }
-        })
-      }
     
     const handleUpdate = async() => {
         // let imgUrl = await uploadImage();
@@ -27,16 +56,15 @@ const EditProfileScreen = ({navigation}) => {
         // if( imgUrl == null && userData.userImg ) {
         //   imgUrl = userData.userImg;
         // }
-        db.doc('users').update({
-          fname: userData.name,
-        //   lname: userData.lname,
-          dob: userData.dob,
-          address: userData.address,
-        //   about: userData.about,
-          phone: userData.phone,
-        //   country: userData.country,
-        //   city: userData.city,
-        //   userImg: imgUrl,
+        db.collection('users').doc(userID).update({
+          'name': userName,
+          'email': userEmail,
+          'dob': userDOB,
+          'address': userAddress,
+          'phone': userPhone,
+          'emergContact': userEmergContact,
+          'emergContactNum': userEmergContactNum,
+          'occupation': userOccupation,
         })
         .then(() => {
           console.log('User Updated!');
@@ -47,10 +75,6 @@ const EditProfileScreen = ({navigation}) => {
         })
       }
 
-    useEffect(() => {
-        getUser();
-      }, []);
-
     return (
         <ScrollView
             style={styles.container}
@@ -60,87 +84,95 @@ const EditProfileScreen = ({navigation}) => {
         <View style={styles.action}>
           <FontAwesome name="user-o" color="#333333" size={20} />
           <TextInput
-            placeholder="Full Name"
+            value={userName}
             placeholderTextColor="#666666"
             autoCorrect={false}
-            value={userData ? userData.fname : ''}
-            onChangeText={(txt) => setUserData({...userData, fname: txt})}
+            onChangeText={(txt) => setUserName(txt)}
+            style={styles.textInput}
+          />
+        </View>
+        <View style={styles.action}>
+          <FontAwesome name="envelope" color="#333333" size={20} />
+          <TextInput
+            value={userEmail}
+            placeholderTextColor="#666666"
+            autoCorrect={false}
+            onChangeText={(txt) => setUserEmail(txt)}
             style={styles.textInput}
           />
         </View>
         <View style={styles.action}>
           <FontAwesome name="address-card" color="#333333" size={20} />
           <TextInput
-            placeholder="Address"
+            value={userAddress}
             placeholderTextColor="#666666"
             autoCorrect={false}
-            value={userData ? userData.address : ''}
-            onChangeText={(txt) => setUserData({...userData, address: txt})}
+            onChangeText={(txt) => setUserAddress(txt)}
             style={styles.textInput}
           />
         </View>
         <View style={styles.action}>
           <FontAwesome name="phone" color="#333333" size={20} />
           <TextInput
-            placeholder="Phone"
+            value={userPhone}
             placeholderTextColor="#666666"
             keyboardType="number-pad"
             autoCorrect={false}
-            value={userData ? userData.phone : ''}
-            onChangeText={(txt) => setUserData({...userData, phone: txt})}
+            onChangeText={(txt) => setUserPhone(txt)}
             style={styles.textInput}
           />
         </View>
         <View style={styles.action}>
           <FontAwesome name="birthday-cake" color="#333333" size={20} />
           <TextInput
-            placeholder="Date of Birth"
+            value={userDOB}
             placeholderTextColor="#666666"
             autoCorrect={false}
-            value={userData ? userData.dob : ''}
-            onChangeText={(txt) => setUserData({...userData, dob: txt})}
+            onChangeText={(txt) => setUserDOB(txt)}
             style={styles.textInput}
           />
         </View>
         <View style={styles.action}>
           <FontAwesome name="user-o" color="#333333" size={20} />
           <TextInput
-            placeholder="Emergency Contact"
+            value={userEmergContact}
             placeholderTextColor="#666666"
             autoCorrect={false}
-            value={userData ? userData.emergContact : ''}
-            onChangeText={(txt) => setUserData({...userData, emergContact: txt})}
+            onChangeText={(txt) => setUserEmergContact(txt)}
             style={styles.textInput}
           />
         </View>
         <View style={styles.action}>
           <FontAwesome name="phone" color="#333333" size={20} />
           <TextInput
-            placeholder="Emergency Contact Phone"
+            value={userEmergContactNum}
             placeholderTextColor="#666666"
             keyboardType="number-pad"
             autoCorrect={false}
-            value={userData ? userData.emergContactNum : ''}
-            onChangeText={(txt) => setUserData({...userData, emergContactNum: txt})}
+            onChangeText={(txt) => setUserEmergContactNum(txt)}
             style={styles.textInput}
           />
         </View>
         <View style={styles.action}>
           <FontAwesome name="briefcase" color="#333333" size={20} />
-          <TextInput
-            placeholder="Occupation"
-            placeholderTextColor="#666666"
-            autoCorrect={false}
-            value={userData ? userData.occupation : ''}
-            onChangeText={(txt) => setUserData({...userData, occupation: txt})}
-            style={styles.textInput}
+          <RNPickerSelect 
+            style={styles}
+            onValueChange={(value) => setUserOccupation(value)}
+            selectedValue={userOccupation}
+            items={[
+              {label: 'Driver', value: 'Driver'},
+              {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
+              {label: 'Both', value: 'Both'},
+            ]}
+            placeholder={{}}
+            value={userOccupation}
           />
         </View>
         <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
                     text={'Update'}
-                    // onPress={handleUpdate}
+                    onPress={handleUpdate}
                 />
         </View>
         </ScrollView>
