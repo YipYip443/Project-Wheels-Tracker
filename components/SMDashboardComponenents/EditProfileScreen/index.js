@@ -11,12 +11,12 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const EditProfileScreen = ({navigation}) => {
     const userID = auth.currentUser.uid;
     const [userName, setUserName] = useState();
-    const [userPhone, setUserPhone] = useState(null);
-    const [userDOB, setUserDOB] = useState(null);
-    const [userAddress, setUserAddress] = useState(null);
-    const [userEmail, setUserEmail] = useState(null);
-    const [userEmergContact, setUserEmergContact] = useState(null);
-    const [userEmergContactNum, setUserEmergContactNum] = useState(null);
+    const [userPhone, setUserPhone] = useState();
+    const [userDOB, setUserDOB] = useState();
+    const [userAddress, setUserAddress] = useState();
+    const [userEmail, setUserEmail] = useState();
+    const [userEmergContact, setUserEmergContact] = useState();
+    const [userEmergContactNum, setUserEmergContactNum] = useState();
     const [userOccupation, setUserOccupation] = useState();
 
     
@@ -84,7 +84,7 @@ const EditProfileScreen = ({navigation}) => {
         <View style={styles.action}>
           <FontAwesome name="user-o" color="#333333" size={20} />
           <TextInput
-            placeholder={userName} 
+            value={userName}
             placeholderTextColor="#666666"
             autoCorrect={false}
             onChangeText={(txt) => setUserName(txt)}
@@ -94,7 +94,7 @@ const EditProfileScreen = ({navigation}) => {
         <View style={styles.action}>
           <FontAwesome name="envelope" color="#333333" size={20} />
           <TextInput
-            placeholder={userEmail}
+            value={userEmail}
             placeholderTextColor="#666666"
             autoCorrect={false}
             onChangeText={(txt) => setUserEmail(txt)}
@@ -104,7 +104,7 @@ const EditProfileScreen = ({navigation}) => {
         <View style={styles.action}>
           <FontAwesome name="address-card" color="#333333" size={20} />
           <TextInput
-            placeholder={userAddress}
+            value={userAddress}
             placeholderTextColor="#666666"
             autoCorrect={false}
             onChangeText={(txt) => setUserAddress(txt)}
@@ -114,18 +114,18 @@ const EditProfileScreen = ({navigation}) => {
         <View style={styles.action}>
           <FontAwesome name="phone" color="#333333" size={20} />
           <TextInput
-            placeholder={userPhone}
+            value={userPhone}
             placeholderTextColor="#666666"
             keyboardType="number-pad"
             autoCorrect={false}
-            onChangeText={(txt) => setUserPhone({txt})}
+            onChangeText={(txt) => setUserPhone(txt)}
             style={styles.textInput}
           />
         </View>
         <View style={styles.action}>
           <FontAwesome name="birthday-cake" color="#333333" size={20} />
           <TextInput
-            placeholder={userDOB}
+            value={userDOB}
             placeholderTextColor="#666666"
             autoCorrect={false}
             onChangeText={(txt) => setUserDOB(txt)}
@@ -135,7 +135,7 @@ const EditProfileScreen = ({navigation}) => {
         <View style={styles.action}>
           <FontAwesome name="user-o" color="#333333" size={20} />
           <TextInput
-            placeholder={userEmergContact}
+            value={userEmergContact}
             placeholderTextColor="#666666"
             autoCorrect={false}
             onChangeText={(txt) => setUserEmergContact(txt)}
@@ -145,7 +145,7 @@ const EditProfileScreen = ({navigation}) => {
         <View style={styles.action}>
           <FontAwesome name="phone" color="#333333" size={20} />
           <TextInput
-            placeholder={userEmergContactNum}
+            value={userEmergContactNum}
             placeholderTextColor="#666666"
             keyboardType="number-pad"
             autoCorrect={false}
@@ -164,6 +164,8 @@ const EditProfileScreen = ({navigation}) => {
               {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
               {label: 'Both', value: 'Both'},
             ]}
+            placeholder={{}}
+            value={userOccupation}
           />
         </View>
         <View style={styles.buttonView}>
