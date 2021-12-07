@@ -41,7 +41,7 @@ const ScheduleScreen = () => {
             //console.log(newItems[postID]);
         }
 
-        console.log(newItems);
+        //console.log(newItems);
 
         for (const key of Object.keys(newItems)) {
             markedItems[key] = newItems[key][0];

@@ -3,6 +3,7 @@ import styles from './styles';
 import {Image, View, ScrollView, Text, TextInput, Pressable, Alert} from 'react-native';
 import StyledButton from '../StyledButton';
 import {auth} from '../../../db/firestore';
+import getIsAdmin from "../../Admin/getIsAdmin";
 
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = React.useState('');
@@ -10,11 +11,19 @@ const LoginScreen = ({navigation}) => {
 
     function userLogin() {
         auth.signInWithEmailAndPassword(email, password)
-            .then((res) => {
-                console.log(res);
+            .then(async () => {
                 console.log('User signed in successfully!');
+
+                const isAdmin = await getIsAdmin();
+
                 navigation.goBack();
-                navigation.navigate('SM Dashboard');
+
+                if (!isAdmin)
+                    navigation.navigate('Volunteer Dashboard');
+                else
+                    navigation.navigate('SM Dashboard');
+
+
             })
             .catch(error => {
                 if (error.code === 'auth/invalid-email') {
