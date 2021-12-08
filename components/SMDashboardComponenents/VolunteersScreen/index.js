@@ -1,12 +1,7 @@
 import React, {useEffect, useState} from "react";
 // import styles from './styles';
-import {ScrollView, View, Text, StyleSheet, FlatList, Pressable, Touchable, TouchableOpacity} from "react-native";
+import {View, ScrollView, Text, StyleSheet, FlatList, TouchableOpacity} from "react-native";
 import {db} from "../../../db/firestore";
-import firebase from "firebase";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Modal } from "react-native-paper";
-import StyledButton from "../../TitleComponents/StyledButton";
-import { isTemplateExpression } from "typescript";
 
 const VolunteersScreen = () => {
     const [userList, setUserList] = useState([]);
@@ -20,7 +15,6 @@ const VolunteersScreen = () => {
             return;        
         }
         snapshot.forEach(doc => {
-            // console.log(doc.id, '=>', doc.data().name);
             setUserList(userList => [...userList, doc.data()])
             console.log(userList)
         });
@@ -30,23 +24,8 @@ const VolunteersScreen = () => {
         // });
     }
 
-    // const Item = ({name}) => (
-    //     <View style={styles.item}>
-    //       <TouchableOpacity
-    //       onPress={() => {setShow(true) }}>
-    //         <Text style={styles.title}>{name}</Text>
-    //       </TouchableOpacity>
-    //   </View>
-    // );
-
-    // console.log(show)
-      
-    // const renderItem = ({ item }) => (
-    //     <Item name={item.name} />
-    // );
-
-    const pressHandler = (item) => {
-      console.log(item.name)
+    const pressHandler = (name) => {
+      console.log(name)
     }
 
     useEffect(() => {
@@ -61,9 +40,11 @@ const VolunteersScreen = () => {
         <FlatList
             data={userList}
             renderItem={({item}) => (
-              <TouchableOpacity onPress={() => pressHandler(item.name)}>
-                <Text style={styles.title}>{item.name}</Text>
-              </TouchableOpacity>
+              <View style={styles.item}>
+                <TouchableOpacity onPress={() => pressHandler(item.name)}>
+                  <Text style={styles.title}>{item.name}</Text>
+                </TouchableOpacity>
+              </View>
             )}  
         />    
         </ScrollView>
