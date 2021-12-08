@@ -3,8 +3,11 @@ import {Pressable, View, Text, Button} from "react-native";
 import {Agenda} from 'react-native-calendars';
 import styles from "./style";
 import {db} from "../../db/firestore";
+import getIsAdmin from "../Admin/getIsAdmin";
 
 let postsCollection = {};
+let isAdmin;
+
 
 //TODO: Add view map above accept/reject buttons
 const ScheduleScreen = () => {
@@ -23,7 +26,10 @@ const ScheduleScreen = () => {
                 }
             })
         })
+
+        isAdmin = await getIsAdmin();
         console.log('GETTING POSTS');
+        console.log(isAdmin);
         generatePosts();
     }
 
@@ -73,7 +79,7 @@ const ScheduleScreen = () => {
                     <Text style={styles.positionStyle}>{item.position}</Text>
                     <View style={styles.buttonView}>
                         {futureDate && <Button title={'Accept'} color={'#018704'}/>}
-                        {futureDate && <Button title={'Reject'} color={'#a22629'}/>}
+                        {futureDate && <Button title={'Dismiss'} color={'#a22629'}/>}
                         <Button title={'More Info'} color={'#302f90'}/>
                     </View>
                 </View>

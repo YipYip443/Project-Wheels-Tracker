@@ -1,11 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
         //backgroundColor: 'lightgreen',
         width: '100%',
         height: '100%',
-        padding: '5%',
+        paddingHorizontal: '5%',
     },
     containerStyle: {
         flexGrow: 1,
@@ -13,42 +13,54 @@ const styles = StyleSheet.create({
     },
     title: {
         textAlign: 'center',
-        fontSize: 24,
+        fontSize: 22,
         color: '#a81d20',
         fontWeight: 'bold',
         fontStyle: 'italic',
-        paddingTop: '5%',
+        paddingVertical: '5%',
     },
     textInput: {
         height: 50,
-        borderWidth: 2,
-        borderColor: '#302f90',
         padding: 5,
+        borderWidth: 2,
+        borderRadius: 10,
+        borderColor: '#302f90',
         color: '#a81d20',
         backgroundColor: '#ffffff',
-        margin: '2.5%',
-        marginBottom: '5%',
+        marginVertical: '2.5%',
     },
     textInputView: {
         //backgroundColor: 'green',
         justifyContent: 'center',
-        padding: 5,
-        flex: 2.5,
+        padding: '2.5%',
+        //flex: 1,
+        borderWidth: 4,
+        borderRadius: 10,
+        borderColor: '#302f90',
     },
     image: {
         width: '100%',
-        height: '100%',
+        height: Dimensions.get('window').height / 3,
         resizeMode: 'contain',
-        flex: 10,
-        marginTop: '5%',
+        //flex: 10,
     },
-    buttonView: {
+    imageView: {
+        paddingTop: '5%',
+    },
+    footerView: {
         //backgroundColor: 'pink',
         flex: 1,
         justifyContent: 'flex-end',
-    },
-    footer: {
+
         textAlign: 'center',
+        alignItems: 'center',
+        paddingBottom: '2.5%'
+
+    },
+    forgotPassword: {
+        textAlign: 'center',
+        alignItems: 'center',
+        paddingTop: '2.5%'
     },
 });
 

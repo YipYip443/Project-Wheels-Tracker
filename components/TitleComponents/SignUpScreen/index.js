@@ -3,6 +3,7 @@ import styles from './styles';
 import {Image, View, ScrollView, Text, TextInput, Pressable, Alert} from 'react-native';
 import StyledButton from '../StyledButton';
 import {auth} from '../../../db/firestore';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 //TODO: Dropdown menu for occupation: friendly visitor, driver, both
 
@@ -73,15 +74,17 @@ const SignUpScreen = ({navigation}) => {
     }
 
     return (
-        <ScrollView
+        <KeyboardAwareScrollView
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
-            <Image
-                source={require('../../../assets/images/mowBanner.png')}
-                style={styles.image}
-            />
-            <Text style={styles.title}>Create your MOW Account</Text>
+            <View style={styles.imageView}>
+                <Image
+                    source={require('../../../assets/images/mowBanner.png')}
+                    style={styles.image}
+                />
+            </View>
+            <Text style={styles.title}>Create your MOWLB account</Text>
 
             <View style={styles.textInputView}>
                 <Text style={styles.header}>Email Address</Text>
@@ -114,17 +117,18 @@ const SignUpScreen = ({navigation}) => {
                 <Text style={styles.errorText}>{verifyConfirmPassword()}</Text>
             </View>
 
-            <View style={styles.buttonView}>
+            <View style={styles.footerView}>
                 <StyledButton
                     style={styles.button}
                     text={'Continue'}
                     onPress={registerUser}
+                    //onPress={() => navigation.replace('Create Profile')}
                 />
                 <Pressable onPress={() => navigation.replace('Login')}>
-                    <Text style={styles.footer}>Already have an account? Login here</Text>
+                    <Text>Already have an account? Login here</Text>
                 </Pressable>
             </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
     );
 }
 
