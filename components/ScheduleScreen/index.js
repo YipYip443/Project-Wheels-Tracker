@@ -1,13 +1,15 @@
 import React from "react";
 import {Pressable, View, Text, Button} from "react-native";
 import {Agenda} from 'react-native-calendars';
-import styles from "./style";
-import {db} from "../../db/firestore";
+import styles from "../ScheduleScreen/styles";
+import {auth, db} from "../../db/firestore";
 import getIsAdmin from "../Admin/getIsAdmin";
+import firebase from "firebase/app";
 
-let postsCollection = {};
 let isAdmin;
-
+let userID, userName, userRole;
+let routesCollection = {};
+let postsCollection = {};
 
 //TODO: Add view map above accept/reject buttons
 const ScheduleScreen = () => {
@@ -15,10 +17,36 @@ const ScheduleScreen = () => {
     const [markedItems, setMarkedItems] = React.useState({});
     const [selectedButton, setSelectedButton] = React.useState('All Shifts');
 
-
     let today = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString().slice(0, 10);
 
+    async function getData() {
+        console.log('INITIALIZING SCHEDULE SCREEN')
+        isAdmin = await getIsAdmin();
+        await getUserData();
+        await getRoutes();
+        await getPosts();
+    }
+
+    async function getUserData() {
+        userID = auth.currentUser.uid;
+        const userData = await db.collection('users').doc(userID).get();
+        userName = userData.data().name;
+        userRole = userData.data().role;
+    }
+
+    async function getRoutes() {
+        routesCollection = {};
+        await db.collection('routes').get().then((snapshot) => {
+            snapshot.docs.map(doc => {
+                if (doc !== undefined) {
+                    routesCollection[doc.id] = doc.data();
+                }
+            })
+        })
+    }
+
     async function getPosts() {
+        postsCollection = {};
         await db.collection('posts').get().then((snapshot) => {
             snapshot.docs.map(doc => {
                 if (doc !== undefined) {
@@ -26,80 +54,175 @@ const ScheduleScreen = () => {
                 }
             })
         })
-
-        isAdmin = await getIsAdmin();
         console.log('GETTING POSTS');
-        console.log(isAdmin);
-        generatePosts();
+        generatePosts(selectedButton);
     }
 
-    function generatePosts() {
-        let postIDs = [];
-        for (const key of Object.keys(postsCollection)) {
-            postIDs.push(key);
+    function generatePosts(shiftButton) {
+        // key = postID, value = post
+        let postItems = {};
+        for (const [key, value] of Object.entries(postsCollection)) {
+            if (postItems[value['date']] === undefined)
+                postItems[value['date']] = [];
+
+            let postObject = Object.assign(postsCollection[key], {marked: true, id: key});
+
+            if (shiftButton === 'My Shifts') {
+                if (userID === value.driverID || userID === value.friendlyVisitorID) {
+                    postItems[value['date']].push(postObject);
+                }
+            } else if (shiftButton === 'All Shifts') {
+                postItems[value['date']].push(postObject);
+            } else if (shiftButton === 'Open Shifts') {
+                if (((value.position === 'Driver' || value.position === 'Both') && (userRole === 'Driver' || userRole === 'Both')) ||
+                    ((value.position === 'Friendly Visitor' || value.position === 'Both') && (userRole === 'Friendly Visitor' || userRole === 'Both'))) {
+                        if (userID !== value.driverID && userID !== value.friendlyVisitorID) {
+                            postItems[value['date']].push(postObject);
+                    }
+                }
+            }
         }
 
-        let newItems = {};
-        for (const postID of postIDs) {
-            if (newItems[postsCollection[postID]['date']] === undefined)
-                newItems[postsCollection[postID]['date']] = [];
-            newItems[postsCollection[postID]['date']].push({time: postsCollection[postID]['time'], route: postsCollection[postID]['route'], position: postsCollection[postID]['position'], marked: true});
-            //console.log(newItems[postID]);
+        for (const key of Object.keys(postItems)) {
+            markedItems[key] = postItems[key][0];
         }
 
-        //console.log(newItems);
-
-        for (const key of Object.keys(newItems)) {
-            markedItems[key] = newItems[key][0];
-        }
-
-        setItems(newItems);
+        setItems(postItems);
     }
 
-    function renderItem(item) {
+    function acceptRoute(post, assignedRole) {
+        console.log('Accepting Route!');
+        db.collection('posts').doc(post.id).update({[assignedRole]: userName});
+        db.collection('posts').doc(post.id).update({[assignedRole + 'ID']: userID});
+        getData();
+    }
+
+    async function declineRoute(post, assignedRole) {
+        console.log('Declining Route!');
+        await db.collection('posts').doc(post.id).update({[assignedRole]: firebase.firestore.FieldValue.delete()});
+        await db.collection('posts').doc(post.id).update({[assignedRole + 'ID']: firebase.firestore.FieldValue.delete()});
+        getData();
+    }
+
+    async function deleteRoute(post) {
+        console.log('Deleting Route!');
+        await db.collection('posts').doc(post.id).delete();
+        getData();
+    }
+
+    function renderItem(post) {
+        //console.log(post.route);
+
+        if (Object.keys(routesCollection).length === 0)
+            return;
+
         let futureDate = true;
-        if (new Date(item.time).getTime() < new Date(today).getTime()) {
-            console.log('PAST');
+        if (new Date(post.time).getTime() < new Date(today).getTime()) {
             futureDate = false;
         }
-        return (
+
+        let acceptView = false;
+        let potentialRole;
+        if (post.position === 'Driver' || post.position === 'Both') {
+            if (userRole === 'Driver' || userRole === 'Both') {
+                if (post.driver === undefined) {
+                    acceptView = true;
+                    potentialRole = 'driver';
+                }
+            }
+        }
+
+        if (post.position === 'Friendly Visitor' || post.position === 'Both') {
+            if (userRole === 'Friendly Visitor' || userRole === 'Both') {
+                if (post.friendlyVisitor === undefined) {
+                    if (potentialRole === undefined) {
+                        acceptView = true;
+                        potentialRole = 'friendlyVisitor';
+                    }
+                }
+            }
+        }
+
+        let assignedRole;
+        let declineView = false;
+        if (userID === post.driverID) {
+            assignedRole = 'driver';
+            acceptView = false;
+            declineView = true;
+        } else if (userID === post.friendlyVisitorID) {
+            assignedRole = 'friendlyVisitor';
+            acceptView = false;
+            declineView = true;
+        }
+
+        let routeInfo = routesCollection[post.route];
+
+            return (
             <View style={{
                 marginRight: '5%',
                 marginVertical: '2.5%',
                 backgroundColor: 'white',
                 flex: 1,
-                //borderRadius: 5,
-                //borderWidth: 2,
+                borderRadius: 5,
+                //borderWidth: 1,
+                borderColor: '#302f90',
                 padding: '5%'
             }}>
                 {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>*/}
-                <View>
-                    <Text style={styles.route}>Route {item.route}</Text>
-                    <Text style={styles.time}>{item.time}</Text>
-                    <Text style={styles.positionStyle}>{item.position}</Text>
-                    <View style={styles.buttonView}>
-                        {futureDate && <Button title={'Accept'} color={'#018704'}/>}
-                        {futureDate && <Button title={'Dismiss'} color={'#a22629'}/>}
-                        <Button title={'More Info'} color={'#302f90'}/>
-                    </View>
+                <View style={styles.postTextView}>
+                    <Text style={styles.firstLine}>Route {post.route}</Text>
+                    <Text style={styles.firstLine}>{routeInfo.time}</Text>
                 </View>
+                <View style={styles.postTextView}>
+                    <Text style={styles.secondLine}>Info: {routeInfo.desc}</Text>
+                    <Text style={styles.secondLine}>Stops: {routeInfo.approxStops}</Text>
+                </View>
+                <View style={styles.postTextView}>
+                    <Text style={styles.thirdLine}>Positions: {post.position === 'Both' ? 'Driver & Friendly Visitor' : post.position}</Text>
+                </View>
+                <View style={styles.postTextView}>
+                    {(post.position === 'Driver' || post.position === 'Both') && <Text style={styles.secondLine}>Driver: {post.driver}</Text>}
+                    {(post.position === 'Friendly Visitor' || post.position === 'Both') && <Text style={styles.secondLine}>Friendly Visitor: {post.friendlyVisitor}</Text>}
+                </View>
+                {futureDate && <View style={styles.buttonView}>
+                    {acceptView && <Button title={'Accept'} color={'#018704'} onPress={function () {
+                        acceptRoute(post, potentialRole);
+                    }}/>}
+                    {declineView && <Button title={'Decline'} color={'#a22629'} onPress={function () {
+                        declineRoute(post, assignedRole);
+                    }}/>}
+                    <Button title={'More Info'} color={'#302f90'}/>
+                    {isAdmin && <Button title={'Delete'} color={'#a22629'} onPress={function () {
+                        deleteRoute(post);
+                    }}/>}
+                </View>}
             </View>
         );
     }
 
-    if (Object.keys(postsCollection).length === 0)
-        getPosts();
+    //if (Object.keys(routesCollection).length === 0)
+    if (isAdmin === undefined)
+        getData();
 
     return (
         <View style={{flex: 1}}>
-            <View style={styles.buttonView2}>
-                <Pressable style={(selectedButton === 'My Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={() => setSelectedButton('My Shifts')}>
+            <View style={styles.shiftButtonView}>
+                <Pressable style={(selectedButton === 'My Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
+                    setSelectedButton('My Shifts');
+                    generatePosts('My Shifts');
+                }}>
                     <Text style={(selectedButton === 'My Shifts' ? styles.selectedText : styles.text)}>My Shifts</Text>
                 </Pressable>
-                <Pressable style={(selectedButton === 'All Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={() => setSelectedButton('All Shifts')}>
+                <Pressable style={(selectedButton === 'All Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
+                    setSelectedButton('All Shifts');
+                    generatePosts('All Shifts');
+                }}>
                     <Text style={(selectedButton === 'All Shifts' ? styles.selectedText : styles.text)}>All Shifts</Text>
                 </Pressable>
-                <Pressable style={(selectedButton === 'Open Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={() => setSelectedButton('Open Shifts')}>
+                <Pressable style={(selectedButton === 'Open Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
+                    setSelectedButton('Open Shifts');
+                    generatePosts('Open Shifts');
+                }}>
                     <Text style={(selectedButton === 'Open Shifts' ? styles.selectedText : styles.text)}>Open Shifts</Text>
                 </Pressable>
             </View>
@@ -109,7 +232,7 @@ const ScheduleScreen = () => {
                 selected={today}
                 showClosingKnob={true}
                 markedDates={markedItems}
-                onRefresh={getPosts}
+                onRefresh={getData}
                 onCalendarToggled={getPosts}
                 style={styles}
                 theme={{

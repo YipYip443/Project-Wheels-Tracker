@@ -23,9 +23,10 @@ const DeliveryRoutesScreen = ({navigation}) => {
 
     const [show, setShow] = React.useState(false);
 
-    const [routeDescription, setRouteDescription] = React.useState();
-    const [routeTime, setRouteTime] = React.useState();
     const [routePhotoURL, setRoutePhotoURL] = React.useState();
+    const [routeDescription, setRouteDescription] = React.useState();
+    const [routeStops, setRouteStops] = React.useState();
+    const [routeTime, setRouteTime] = React.useState();
 
     async function getRoutes() {
         await db.collection('routes').get().then((snapshot) => {
@@ -64,14 +65,10 @@ const DeliveryRoutesScreen = ({navigation}) => {
 
     function setRouteProperties(route) {
         if (routesCollection[route] !== undefined) {
-            console.log(routesCollection[route]['photoURL']);
             setRoutePhotoURL(routesCollection[route]['photoURL']);
             setRouteDescription(routesCollection[route]['desc']);
+            setRouteStops(routesCollection[route]['approxStops']);
             setRouteTime(routesCollection[route]['time']);
-            console.log("ROUTE TIME:");
-            console.log(routeTime);
-            console.log("ROUTE DESCRIPTION:")
-            console.log(routeDescription);
         }
     }
 
@@ -85,11 +82,11 @@ const DeliveryRoutesScreen = ({navigation}) => {
         console.log(selectedRoute);
         console.log(date);
         console.log(selectedPosition);
-        if (selectedRoute === undefined && selectedPosition === undefined) {
+        if (selectedRoute === undefined || selectedPosition === undefined) {
             Alert.alert('Missing information!');
         } else {
             let dateFormat = date.toISOString().slice(0, 10);
-            db.collection('posts').add({date: dateFormat, position: selectedPosition, route: selectedRoute, time: routeTime});
+            db.collection('posts').add({date: dateFormat, position: selectedPosition, route: selectedRoute});
             Alert.alert('Post created!');
         }
     }
@@ -98,89 +95,97 @@ const DeliveryRoutesScreen = ({navigation}) => {
         getRoutes();
 
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.unit}>
-                <Text>Route Number:</Text>
-                <RNPickerSelect
-                    style={styles}
-                    onValueChange={function (route) {
-                        setSelectedRoute(route);
-                        console.log(route);
-                        if (route !== undefined) {
-                            setDisabled(false);
-                            setRouteProperties(route);
-                        } else {
-                            setDisabled(true);
-                        }
-                    }}
-                    selectedValue={selectedRoute}
-                    items={routeItems}
-                    placeholder={{label: 'Select a route...'}}
-                />
-            </View>
+        <ScrollView style={styles.container} contentContainerStyle={styles.containerStyle}>
+            <View style={styles.inputView}>
+                <View style={styles.miniView}>
+                    <Text>Route Number:</Text>
+                    <RNPickerSelect
+                        style={styles}
+                        onValueChange={function (route) {
+                            setSelectedRoute(route);
+                            console.log(route);
+                            if (route !== undefined) {
+                                setDisabled(false);
+                                setRouteProperties(route);
+                            } else {
+                                setDisabled(true);
+                            }
+                        }}
+                        selectedValue={selectedRoute}
+                        items={routeItems}
+                        placeholder={{label: 'Select a route...'}}
+                    />
+                </View>
 
-            {/* View Map Button */}
-            <View style={styles.unit}>
-                <Text>Route Map:</Text>
-                <StyledButton
-                    onPress={() => {
-                        setShow(true)
-                    }}
-                    text="View Map"
-                    disabled={disabled}/>
-                <Modal
-                    transparent={true}
-                    visible={show}>
-                    <View style={styles.modal}>
-                        <View style={{height: '90%'}}>
-                            <Gallery
-                                images={[{source: {uri: routePhotoURL}}]}/>
+                {/* View Map Button */}
+                <View style={styles.miniView}>
+                    <Text>Route Map:</Text>
+                    <StyledButton
+                        onPress={() => {
+                            setShow(true)
+                        }}
+                        text="View Map"
+                        disabled={disabled}/>
+                    <Modal
+                        transparent={true}
+                        visible={show}>
+                        <View style={styles.modal}>
+                            <View style={{height: '90%'}}>
+                                <Gallery
+                                    images={[{source: {uri: routePhotoURL}}]}/>
+                            </View>
+                            <StyledButton
+                                text="Close Map"
+                                onPress={() => {
+                                    setShow(false)
+                                }}/>
                         </View>
-                        <StyledButton
-                            text="Close Map"
-                            onPress={() => {
-                                setShow(false)
-                            }}/>
-                    </View>
-                </Modal>
-            </View>
+                    </Modal>
+                </View>
 
-            <View style={styles.unit}>
-                <Text>Route Description:</Text>
-                <Text>{routeDescription}</Text>
-            </View>
+                <View style={styles.miniView}>
+                    <Text>Route Description:</Text>
+                    <Text>{routeDescription}</Text>
+                </View>
 
-            <View style={styles.unit}>
-                <Text>Route Time:</Text>
-                <Text>{routeTime}</Text>
-            </View>
+                <View style={styles.miniView}>
+                    <Text>Route Stops:</Text>
+                    <Text>{routeStops}</Text>
+                </View>
 
-                <View style={styles.unit}>
-                <Text>Day Open:</Text>
-                <StyledButton
-                    onPress={() => setDatePickerVisibility(true)}
-                    text={date.toDateString()}>
-                </StyledButton>
-                <DateTimePickerModal
-                    mode="date"
-                    isVisible={isDatePickerVisible}
-                    onConfirm={handleConfirm}
-                    onCancel={() => setDatePickerVisibility(false)}
-                />
-            </View>
+                <View style={styles.miniView}>
+                    <Text>Route Time:</Text>
+                    <Text>{routeTime}</Text>
+                </View>
 
-            <View style={styles.unit}>
-                <Text>Positions Open:</Text>
-                <RNPickerSelect
-                    style={styles}
-                    onValueChange={(value) => setSelectedPosition(value)}
-                    selectedValue={selectedPosition}
-                    items={[
-                        {label: 'Driver', value: 'driver'},
-                        {label: 'Friendly Visitor', value: 'friendlyVisitor'},
-                        {label: 'Driver & Friendly Visitor', value: 'both'},
-                    ]}
-                />
+                <View style={styles.miniView}>
+                    <Text>Day Open:</Text>
+                    <StyledButton
+                        onPress={() => setDatePickerVisibility(true)}
+                        text={date.toDateString()}>
+                    </StyledButton>
+                    <DateTimePickerModal
+                        mode="date"
+                        isVisible={isDatePickerVisible}
+                        onConfirm={handleConfirm}
+                        onCancel={() => setDatePickerVisibility(false)}
+                    />
+                </View>
+
+                <View style={styles.miniView}>
+                    <Text>Positions Open:</Text>
+                    <RNPickerSelect
+                        style={styles}
+                        onValueChange={(value) => setSelectedPosition(value)}
+                        selectedValue={selectedPosition}
+                        placeholder={{label: 'Select a position...'}}
+                        items={[
+                            {label: 'Driver', value: 'Driver'},
+                            {label: 'Friendly Visitor', value: 'Friendly Visitor'},
+                            {label: 'Driver & Friendly Visitor', value: 'Both'},
+                        ]}
+                    />
+                </View>
             </View>
 
             <View style={styles.buttonView}>

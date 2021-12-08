@@ -177,7 +177,7 @@ const CreateProfileScreen = ({navigation}) => {
                         onValueChange={setRole}
                         items={[
                             {label: 'Driver', value: 'Driver'},
-                            {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
+                            {label: 'Friendly Visitor', value: 'Friendly Visitor'},
                             {label: 'Driver & Friendly Visitor', value: 'Both'},
                         ]}
                         selectedValue={role}

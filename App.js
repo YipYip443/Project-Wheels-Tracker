@@ -1,7 +1,7 @@
 //@refresh state
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, Text, View, Platform } from 'react-native';
+import {ImageBackground, StyleSheet, Text, View, Platform, LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
@@ -23,13 +23,13 @@ const Tab = createBottomTabNavigator();
 
 function SMDashboardTabs() {
     return (
-        <Tab.Navigator tabBarOptions={{activeTintColor: '#302f90', labelStyle: {fontSize: 11, fontWeight: 'bold'}}}>
+        <Tab.Navigator screenOptions={{tabBarActiveTintColor: "#302f90", tabBarLabelStyle: {fontSize: 11, fontWeight: "bold"}}}>
             <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
+            <Tab.Screen name="Delivery Routes" component={DeliveryRoutesScreen} options={{ tabBarIcon: () => (
+                    <FontAwesome name="truck" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Volunteers" component={VolunteersScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="users" color="#333333" size={25}/>),}}/>
-            <Tab.Screen name="Delivery Routes" component={DeliveryRoutesScreen} options={{ tabBarIcon: () => (
-                <FontAwesome name="truck" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Profile" component={ProfileStack} options={{headerShown: false, tabBarIcon: () => (
                 <FontAwesome name="user" color="#333333" size={25}/>),}}/>
         </Tab.Navigator>
@@ -60,7 +60,7 @@ function ProfileStack() {
 
 
 function App() {
-    console.disableYellowBox = true;
+    LogBox.ignoreAllLogs();
     return (
         <NavigationContainer style={styles.container}>
             <Stack.Navigator initialRouteName={'Title'}>

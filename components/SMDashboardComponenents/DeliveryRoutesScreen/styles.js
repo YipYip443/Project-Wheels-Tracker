@@ -4,14 +4,23 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
-        padding: '5%',
-        //borderRadius: 10,
-        //borderWidth: 2,
+        //backgroundColor: 'lightgreen',
+        paddingHorizontal: '5%',
         //backgroundColor: '#fafafa',
     },
-    unit: {
-        paddingBottom: '5%',
-        //backgroundColor: 'green'
+    containerStyle: {
+        flexGrow: 1,
+        justifyContent: 'space-between',
+    },
+    inputView: {
+        marginTop: '5%',
+        borderWidth: 4,
+        borderRadius: 10,
+        borderColor: '#302f90',
+        padding: '2.5%',
+    },
+    miniView: {
+        paddingBottom: '2.5%'
     },
     textInput: {
         height: 40,
@@ -21,13 +30,12 @@ const styles = StyleSheet.create({
     },
     viewContainer: {
         borderWidth: 2,
-        borderColor: '#302f90' ,
+        borderColor: '#302f90',
+        borderRadius: 10,
         height: 40,
-        top: 5,
         justifyContent: 'center',
         backgroundColor: '#ffffff',
-        margin: '2.5%',
-        marginBottom: '5%',
+        marginTop: '2.5%',
     },
     inputIOS: {
         color: 'black',
@@ -36,9 +44,12 @@ const styles = StyleSheet.create({
     inputAndroid: {
         color: 'black',
     },
-
     buttonView: {
-        paddingBottom: '5%',
+        flex: 1,
+        justifyContent: 'flex-end',
+        textAlign: 'center',
+        alignItems: 'center',
+        paddingBottom: '2.5%'
     },
     image: {
         resizeMode: 'center',

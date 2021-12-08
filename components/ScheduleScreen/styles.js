@@ -1,26 +1,13 @@
-
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-    time: {
-        fontSize: 16,
-        paddingBottom: '5%',
-    },
-    route: {
-        fontSize: 18,
-        paddingBottom: '5%',
-    },
-    positionStyle: {
-        color: 'grey'
-    },
     buttonView: {
-        width: '100%',
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingTop: '5%',
+        justifyContent: 'space-evenly',
+        paddingTop: '2.5%',
     },
-    buttonView2: {
+    shiftButtonView: {
         height: '5%',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -50,10 +37,24 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         color: 'white',
     },
-    container: {
-        padding: '10%'
-    }
+    postTextView: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+    },
+    firstLine: {
+        fontSize: 18,
+        paddingBottom: '5%',
+    },
+    secondLine: {
+        fontSize: 16,
+        color: 'grey',
+        paddingBottom: '5%',
+    },
+    thirdLine: {
+        fontSize: 16,
+        paddingBottom: '5%',
+    },
 });
 
 export default styles;
-

@@ -11,7 +11,6 @@ const TitleScreen = ({navigation}) => {
         return auth.onAuthStateChanged(async user => {
             if (user) {
                 const isAdmin = await getIsAdmin();
-                navigation.goBack();
                 if (!isAdmin)
                     navigation.replace('Volunteer Dashboard');
                 else
@@ -20,24 +19,20 @@ const TitleScreen = ({navigation}) => {
         })
     })
 
-
-
-
     return (
         <View style={styles.titleContainer}>
-
             <ImageBackground
                 source={require('../../../assets/images/PackersHotFood.jpg')}
                 style={styles.image}
             />
 
-
             {/*Title message*/}
             <View style={styles.titleView}>
-                <Text style={styles.title}> MOW LB Route Wrangler </Text>
-                <Text style={styles.subtitle}> Login or Sign Up </Text>
+                <Text style={styles.title}>MOWLB Route Wrangler</Text>
             </View>
-
+            <View style={styles.subtitleView}>
+                <Text style={styles.subtitle}>Login or Sign Up</Text>
+            </View>
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
