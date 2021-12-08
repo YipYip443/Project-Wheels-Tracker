@@ -58,7 +58,6 @@ function ProfileStack() {
     );
 }
 
-//TODO: Add reset password navigation to the stack
 
 function App() {
     console.disableYellowBox = true;

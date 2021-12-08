@@ -36,7 +36,7 @@ const ProfileScreen = ({navigation}) => {
                 console.log(error)
             });
 
-        navigation.navigate('Title')
+        navigation.replace('Title')
     }
 
     return (
