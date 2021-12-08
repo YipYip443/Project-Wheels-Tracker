@@ -161,7 +161,7 @@ const EditProfileScreen = ({navigation}) => {
                 />
             </View>
             <View style={styles.action}>
-                <Text style={styles.title5}>Prefered Role</Text>
+                <Text style={styles.title5}>Preferred Role</Text>
                 <FontAwesome name="briefcase" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <RNPickerSelect
                     style={styles}
