@@ -2,13 +2,14 @@ import React from 'react';
 import {Image, View, Text, TextInput, Alert, ScrollView} from 'react-native';
 import styles from './styles';
 import StyledButton from "../StyledButton";
-import { auth } from '../../../db/firestore';
+import {auth} from '../../../db/firestore';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 const ForgotPasswordScreen = ({navigation}) => {
     const [email, setEmail] = React.useState('');
-    
 
-    function resetPassword(){
+
+    function resetPassword() {
         auth.sendPasswordResetEmail(email)
             .then((res) => {
                 console.log(res);
@@ -26,15 +27,17 @@ const ForgotPasswordScreen = ({navigation}) => {
 
     }
 
-    return(
-        <ScrollView
-            style = {styles.container}
-            contentContainerStyle = {styles.containerStyle}
-            keyboardShouldPersistTaps = {'always'}>
-            <Image
-                source={require('../../../assets/images/50years.png')}
-                style = {styles.image}
-            />
+    return (
+        <KeyboardAwareScrollView
+            style={styles.container}
+            contentContainerStyle={styles.containerStyle}
+            keyboardShouldPersistTaps={'always'}>
+            <View style={styles.imageView}>
+                <Image
+                    source={require('../../../assets/images/50years.png')}
+                    style={styles.image}
+                />
+            </View>
             <Text style={styles.title}>Reset your Route Wrangler Account</Text>
 
             <View style={styles.textInputView}>
@@ -51,12 +54,10 @@ const ForgotPasswordScreen = ({navigation}) => {
                 <StyledButton
                     style={styles.button}
                     text={'Reset Password'}
-                    onPress={() => resetPassword()
-                    
-                }
+                    onPress={resetPassword}
                 />
             </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
     );
 };
 
