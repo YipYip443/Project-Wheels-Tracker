@@ -8,6 +8,7 @@ import {auth} from '../../../db/firestore';
 
 import {View, TextInput, Alert, ScrollView} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 const EditProfileScreen = ({navigation}) => {
     const userID = auth.currentUser.uid;
@@ -77,7 +78,7 @@ const EditProfileScreen = ({navigation}) => {
     }
 
     return (
-        <ScrollView
+        <KeyboardAwareScrollView
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
@@ -163,19 +164,20 @@ const EditProfileScreen = ({navigation}) => {
             <View style={styles.action}>
                 <Text style={styles.title5}>Preferred Role</Text>
                 <FontAwesome name="briefcase" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
-                <RNPickerSelect
-                    style={styles}
-                    onValueChange={setUserRole}
-                    selectedValue={userRole}
-                    items={[
-                        {label: 'Driver', value: 'Driver'},
-                        {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
-                        {label: 'Driver & Friendly Visitor', value: 'Both'},
-                    ]}
-                    placeholder={{}}
-                    value={userRole}
-                />
+                {/*Android Bug*/}
             </View>
+            <RNPickerSelect
+                style={styles}
+                onValueChange={setUserRole}
+                selectedValue={userRole}
+                items={[
+                    {label: 'Driver', value: 'Driver'},
+                    {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
+                    {label: 'Driver & Friendly Visitor', value: 'Both'},
+                ]}
+                placeholder={{}}
+                value={userRole}
+            />
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
@@ -183,7 +185,7 @@ const EditProfileScreen = ({navigation}) => {
                     onPress={handleUpdate}
                 />
             </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
     );
 }
 

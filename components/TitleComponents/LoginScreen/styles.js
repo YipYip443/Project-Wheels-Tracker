@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 
         textAlign: 'center',
         alignItems: 'center',
-        paddingBottom: '2.5%'
+        paddingBottom: '5%'
 
     },
     forgotPassword: {
