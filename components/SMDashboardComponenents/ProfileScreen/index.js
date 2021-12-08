@@ -1,6 +1,6 @@
 import React, {useEffect, useContext, useState} from 'react';
 import styles from "../../SMDashboardComponenents/EditProfileScreen/styles";
-import {View, ScrollView, Pressable, Text, Title} from "react-native";
+import {ImageBackground, View, ScrollView, Pressable, Text, Title} from "react-native";
 import StyledButton from "../../TitleComponents/StyledButton";
 import { auth } from "../../../db/firestore";
 import { db } from '../../../db/firestore';
@@ -45,8 +45,13 @@ const ProfileScreen = ({navigation}) => {
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
             <View>
+            <ImageBackground
+                source={require('../../../assets/images/profile3.png')}
+                style={styles.image}
+            />
                 <Text style={styles.title}>{userName}</Text>
-                <Text>{userEmail}</Text>
+                <Text style={styles.title2}>{userEmail}</Text>
+                <Text style={styles.title3}>Prefered Role:{userOccupation}</Text>
             </View>
             <View style={styles.buttonView}>
                 <StyledButton
