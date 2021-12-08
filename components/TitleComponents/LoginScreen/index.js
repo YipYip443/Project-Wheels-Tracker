@@ -75,9 +75,7 @@ const LoginScreen = ({navigation}) => {
                 <StyledButton
                     style={styles.button}
                     text={'Login'}
-                    onPress={() => userLogin()
-                        //onPress={() => navigation.navigate('SM Dashboard')
-                    }
+                    onPress={() => userLogin()}
                 />
 
                 <Pressable onPress={() => navigation.replace('Sign Up')}>
