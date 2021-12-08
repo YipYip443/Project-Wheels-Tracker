@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 // import styles from './styles';
-import {ScrollView, View, Text, StyleSheet, FlatList, Pressable} from "react-native";
+import {ScrollView, View, Text, StyleSheet, FlatList, Pressable, Touchable, TouchableOpacity} from "react-native";
 import {db} from "../../../db/firestore";
 import firebase from "firebase";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Modal } from "react-native-paper";
 import StyledButton from "../../TitleComponents/StyledButton";
+import { isTemplateExpression } from "typescript";
 
 const VolunteersScreen = () => {
     const [userList, setUserList] = useState([]);
@@ -29,48 +30,43 @@ const VolunteersScreen = () => {
         // });
     }
 
-    const Item = ({name}) => (
-        <View style={styles.item}>
-          <Pressable
-          onPress={() => {setShow(true) }}>
-            <Text style={styles.title}>{name}</Text>
-          </Pressable>
-          <Modal
-            transparent={true}
-            visible={show}>
-            <View style={styles.modal}>
-              <View style={{height: '90%'}}>
-                <Text>information goes here</Text>
-              </View>
-            <StyledButton
-              text="Close Profile"
-              onPress={() => {
-                  setShow(false)
-              }}/>
-            </View>
-          </Modal>
-      </View>
-    );
+    // const Item = ({name}) => (
+    //     <View style={styles.item}>
+    //       <TouchableOpacity
+    //       onPress={() => {setShow(true) }}>
+    //         <Text style={styles.title}>{name}</Text>
+    //       </TouchableOpacity>
+    //   </View>
+    // );
+
+    // console.log(show)
       
-    const renderItem = ({ item }) => (
-        <Item name={item.name} />
-    );
-      
+    // const renderItem = ({ item }) => (
+    //     <Item name={item.name} />
+    // );
+
+    const pressHandler = (item) => {
+      console.log(item.name)
+    }
 
     useEffect(() => {
         getUser();
     }, []);
 
     return (  
-        <SafeAreaView
+        <ScrollView
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
         <FlatList
             data={userList}
-            renderItem={renderItem}  
+            renderItem={({item}) => (
+              <TouchableOpacity onPress={() => pressHandler(item.name)}>
+                <Text style={styles.title}>{item.name}</Text>
+              </TouchableOpacity>
+            )}  
         />    
-        </SafeAreaView>
+        </ScrollView>
     );
 }
 
