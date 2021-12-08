@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
-        padding: '5%',
+        paddingHorizontal: '5%',
         //borderWidth: 2,
         //borderRadius: 10,
     },
@@ -95,13 +95,13 @@ const styles = StyleSheet.create({
         //marginBottom: 5,
         top: -25,
     },
+    imageView: {
+        flex: 5,
+    },
     image: {
-        width: '78%',
-        height: '62%',
-        top: 15,
-        left: '20%',
-        resizeMode: 'center',
-        position: 'relative',
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain',
     },
     footer: {
         textAlign: 'center',

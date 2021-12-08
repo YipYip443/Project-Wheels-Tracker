@@ -10,12 +10,13 @@ const LoginScreen = ({navigation}) => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
-    function userLogin() {
-        auth.signInWithEmailAndPassword(email, password)
-            .then(async () => {
-                console.log('User signed in successfully!');
+    async function userLogin() {
+        //const login = await auth.signInWithEmailAndPassword(email, password);
+        await auth.signInWithEmailAndPassword(email, password)
+            .then(() => {
+                new Promise();
 
-                const isAdmin = await getIsAdmin();
+                const isAdmin = getIsAdmin();
 
                 navigation.goBack();
 
@@ -24,7 +25,7 @@ const LoginScreen = ({navigation}) => {
                 else
                     navigation.navigate('SM Dashboard');
 
-
+                console.log('User signed in successfully!');
             })
             .catch(error => {
                 if (error.code === 'auth/invalid-email') {
