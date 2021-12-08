@@ -5,8 +5,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         padding: '5%',
-        borderWidth: 2,
-        borderRadius: 10,
+        //borderWidth: 2,
+        //borderRadius: 10,
     },
     containerStyle: {
         flexGrow: 1,

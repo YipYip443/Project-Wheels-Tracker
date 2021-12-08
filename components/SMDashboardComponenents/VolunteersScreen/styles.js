@@ -6,8 +6,8 @@ const styles = StyleSheet.create({
         //#302f90 (Blue) -- #a81d20 (Red)
         width: '100%',
         height: '100%',
-        borderRadius: 10,
-        borderWidth: 2,
+        //borderRadius: 10,
+        //borderWidth: 2,
         padding: '5%',
         //flexDirection: 'column',
     },
