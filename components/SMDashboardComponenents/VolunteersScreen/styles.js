@@ -29,6 +29,18 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         paddingTop: '5%',
     },
+    modal: {
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: 'white',
+        ...Platform.select({
+            ios: {
+                paddingTop: '5%'
+            }
+        })
+    },
 });
 
 export default styles;

@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react";
 // import styles from './styles';
-import {ScrollView, View, Text, StyleSheet, FlatList} from "react-native";
+import {View, ScrollView, Text, StyleSheet, FlatList, TouchableOpacity} from "react-native";
 import {db} from "../../../db/firestore";
-import firebase from "firebase";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const VolunteersScreen = () => {
     const [userList, setUserList] = useState([]);
+    const [show, setShow] = useState(false);
 
     async function getUser() {
         const docRef = db.collection('users')
@@ -16,8 +15,7 @@ const VolunteersScreen = () => {
             return;        
         }
         snapshot.forEach(doc => {
-            // console.log(doc.id, '=>', doc.data().name);
-            setUserList(usersList => [...usersList, doc.data()])
+            setUserList(userList => [...userList, doc.data()])
             console.log(userList)
         });
         // })
@@ -25,48 +23,31 @@ const VolunteersScreen = () => {
         //   console.log('Error getting documents', err);
         // });
     }
-    
-    const showUserInformation = () => {
-        let usersInformation = userList.map((user) => (
-          <View>
-            <VirtualizedList>
-                <Text>{user.name}</Text>
-                <Text>{user.phone}</Text>
-            </VirtualizedList>
-          </View>
-        ));
-        // console.log(usersInformation);
-        console.log("Stop Here")
-        return usersInformation;
-    };
 
-    const Item = ({ name, email }) => (
-        <View style={styles.item}>
-          <Text style={styles.title}>{name}</Text>
-          <Text>{email}</Text>
-        </View>
-    );
-      
-    const renderItem = ({ item }) => (
-        <Item name={item.name} />
-    );
-      
+    const pressHandler = (name) => {
+      console.log(name)
+    }
 
     useEffect(() => {
         getUser();
     }, []);
 
     return (  
-        <SafeAreaView
+        <ScrollView
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
         <FlatList
             data={userList}
-            renderItem={renderItem}  
+            renderItem={({item}) => (
+              <View style={styles.item}>
+                <TouchableOpacity onPress={() => pressHandler(item.name)}>
+                  <Text style={styles.title}>{item.name}</Text>
+                </TouchableOpacity>
+              </View>
+            )}  
         />    
-        {/* <Text> {showUserInformation()} </Text> */}
-        </SafeAreaView>
+        </ScrollView>
     );
 }
 
