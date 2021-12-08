@@ -1,10 +1,10 @@
 import React, {useEffect, useContext, useState} from 'react';
 import styles from './styles';
-import { Text } from 'react-native';
+import {Text} from 'react-native';
 import StyledButton from '../../TitleComponents/StyledButton';
 import RNPickerSelect from "react-native-picker-select";
 import {db} from "../../../db/firestore";
-import { auth } from '../../../db/firestore';
+import {auth} from '../../../db/firestore';
 
 import {View, TextInput, Alert, ScrollView} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -51,7 +51,7 @@ const EditProfileScreen = ({navigation}) => {
     const [uploading, setUploading] = useState(false);
     const [transferred, setTransferred] = useState(0);
 
-    const handleUpdate = async() => {
+    const handleUpdate = async () => {
         // let imgUrl = await uploadImage();
 
         // if( imgUrl == null && userData.userImg ) {
@@ -80,182 +80,92 @@ const EditProfileScreen = ({navigation}) => {
         <ScrollView
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
-            keyboardShouldPersistTaps={'always'}>      
-        <View style={styles.action}>
-          <Text style={styles.title4}> Full Name</Text>
-          <FontAwesome name="user-o" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}} />
-          <TextInput
-            value={userName}
-            placeholderTextColor="#666666"
-            autoCorrect={false}
-            onChangeText={(txt) => setUserName(txt)}
-            style={styles.textInput}
-          />
-        </View>
-        <View style={styles.action}>
-          <Text style={styles.title5}> Email Address</Text>
-          <FontAwesome name="envelope" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}} />
-          <TextInput
-            value={userEmail}
-            placeholderTextColor="#666666"
-            autoCorrect={false}
-            onChangeText={(txt) => setUserEmail(txt)}
-            style={styles.textInput}
-          />
-        </View>
-        <View style={styles.action}>
-          <Text style={styles.title5}>Address</Text>
-          <FontAwesome name="address-card" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}} />
-          <TextInput
-            value={userAddress}
-            placeholderTextColor="#666666"
-            autoCorrect={false}
-            onChangeText={(txt) => setUserAddress(txt)}
-            style={styles.textInput}
-          />
-        </View>
-        <View style={styles.action}>
-        <Text style={styles.title5}>Phone Number</Text>
-          <FontAwesome name="phone" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}} />
-          <TextInput
-            value={userPhone}
-            placeholderTextColor="#666666"
-            keyboardType="number-pad"
-            autoCorrect={false}
-            onChangeText={(txt) => setUserPhone(txt)}
-            style={styles.textInput}
-          />
-        </View>
-        <View style={styles.action}>
-          <Text style={styles.title5}>Birthday</Text>
-          <FontAwesome name="birthday-cake" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}  />
-          <TextInput
-            value={userDOB}
-            placeholderTextColor="#666666"
-            autoCorrect={false}
-            onChangeText={(txt) => setUserDOB(txt)}
-            style={styles.textInput}
-          />
-        </View>
-        <View style={styles.action}>
-          <Text style={styles.title5}>Emergency Contact</Text>
-          <FontAwesome name="user-o" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}} />
-          <TextInput
-            value={userEmergContact}
-            placeholderTextColor="#666666"
-            autoCorrect={false}
-            onChangeText={(txt) => setUserEmergContact(txt)}
-            style={styles.textInput}
-          />
-        </View>
-        <View style={styles.action}>
-        <Text style={styles.title5}>Emergency Phone #</Text>
-          <FontAwesome name="phone" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
-          <TextInput
-            value={userEmergContactNum}
-            placeholderTextColor="#666666"
-            keyboardType="number-pad"
-            autoCorrect={false}
-            onChangeText={(txt) => setUserEmergContactPhone(txt)}
-            style={styles.textInput}
-          />
-        </View>
-        <View style={styles.action}>
-        <Text style={styles.title5}>Prefered Role</Text>
-          <FontAwesome name="briefcase" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
-          <RNPickerSelect
-              style={styles}
-              onValueChange={(value) => setUserRole(value)}
-              selectedValue={userRole}
-              items={[
-                  {label: 'Driver', value: 'Driver'},
-                  {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
-                  {label: 'Driver & Friendly Visitor', value: 'Both'},
-              ]}
-              placeholder={{}}
-              value={userRole}
-          />
-        </View>
-        <View style={styles.buttonView}>
             keyboardShouldPersistTaps={'always'}>
-
             <View style={styles.action}>
-                <FontAwesome name="user-o" color="#333333" size={20} />
+                <Text style={styles.title4}> Full Name</Text>
+                <FontAwesome name="user-o" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userName}
                     placeholderTextColor="#666666"
                     autoCorrect={false}
-                    onChangeText={(txt) => setUserName(txt)}
+                    onChangeText={setUserName}
                     style={styles.textInput}
                 />
             </View>
             <View style={styles.action}>
-                <FontAwesome name="envelope" color="#333333" size={20} />
+                <Text style={styles.title5}> Email Address</Text>
+                <FontAwesome name="envelope" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userEmail}
                     placeholderTextColor="#666666"
                     autoCorrect={false}
-                    onChangeText={(txt) => setUserEmail(txt)}
+                    onChangeText={setUserEmail}
                     style={styles.textInput}
                 />
             </View>
             <View style={styles.action}>
-                <FontAwesome name="address-card" color="#333333" size={20} />
+                <Text style={styles.title5}>Address</Text>
+                <FontAwesome name="address-card" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userAddress}
                     placeholderTextColor="#666666"
                     autoCorrect={false}
-                    onChangeText={(txt) => setUserAddress(txt)}
+                    onChangeText={setUserAddress}
                     style={styles.textInput}
                 />
             </View>
             <View style={styles.action}>
-                <FontAwesome name="phone" color="#333333" size={20} />
+                <Text style={styles.title5}>Phone Number</Text>
+                <FontAwesome name="phone" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userPhone}
                     placeholderTextColor="#666666"
                     keyboardType="number-pad"
                     autoCorrect={false}
-                    onChangeText={(txt) => setUserPhone(txt)}
+                    onChangeText={setUserPhone}
                     style={styles.textInput}
                 />
             </View>
             <View style={styles.action}>
-                <FontAwesome name="birthday-cake" color="#333333" size={20} />
+                <Text style={styles.title5}>Birthday</Text>
+                <FontAwesome name="birthday-cake" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userDOB}
                     placeholderTextColor="#666666"
                     autoCorrect={false}
-                    onChangeText={(txt) => setUserDOB(txt)}
+                    onChangeText={setUserDOB}
                     style={styles.textInput}
                 />
             </View>
             <View style={styles.action}>
-                <FontAwesome name="user-o" color="#333333" size={20} />
+                <Text style={styles.title5}>Emergency Contact</Text>
+                <FontAwesome name="user-o" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userEmergContact}
                     placeholderTextColor="#666666"
                     autoCorrect={false}
-                    onChangeText={(txt) => setUserEmergContact(txt)}
+                    onChangeText={setUserEmergContact}
                     style={styles.textInput}
                 />
             </View>
             <View style={styles.action}>
-                <FontAwesome name="phone" color="#333333" size={20} />
+                <Text style={styles.title5}>Emergency Phone #</Text>
+                <FontAwesome name="phone" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userEmergContactPhone}
                     placeholderTextColor="#666666"
                     keyboardType="number-pad"
                     autoCorrect={false}
-                    onChangeText={(txt) => setUserEmergContactPhone(txt)}
+                    onChangeText={setUserEmergContactPhone}
                     style={styles.textInput}
                 />
             </View>
             <View style={styles.action}>
-                <FontAwesome name="briefcase" color="#333333" size={20} />
+                <Text style={styles.title5}>Prefered Role</Text>
+                <FontAwesome name="briefcase" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <RNPickerSelect
                     style={styles}
-                    onValueChange={(value) => setUserRole(value)}
+                    onValueChange={setUserRole}
                     selectedValue={userRole}
                     items={[
                         {label: 'Driver', value: 'Driver'},
