@@ -111,6 +111,13 @@ const styles = StyleSheet.create({
         paddingBottom: '5%',
         paddingLeft: 20,
     },
+    inputIOS: {
+        color: 'black',
+        paddingHorizontal: 10
+    },
+    inputAndroid: {
+        color: 'black',
+    },
 });
 
 export default styles;

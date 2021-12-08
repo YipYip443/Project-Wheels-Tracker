@@ -1,43 +1,44 @@
-import {StyleSheet} from 'react-native'
+import {StyleSheet, Dimensions} from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
-        padding: '5%',
+        paddingHorizontal: '5%',
         //backgroundColor: 'lightgreen',
     },
     containerStyle: {
+        //height: '100%',
+        //flexBasis: Dimensions.get('window').height,
         flexGrow: 1,
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
+        //backgroundColor: 'green',
     },
     input: {
         height: 40,
-        margin: '2.5%',
         borderWidth: 2,
-        borderRadius: 20,
+        borderRadius: 10,
         borderColor: '#302f90',
         backgroundColor: '#ffffff',
         color: '#a81d20',
         padding: 10,
-        flex: .5
+        marginVertical: '2%',
+        //marginBottom: '5%',
     },
     textInputView: {
-        justifyContent: 'flex-end',
-        margin: '2.5%',
         borderWidth: 4,
-        borderRadius: 20,
+        borderRadius: 10,
         borderColor: '#302f90',
-        top: 25,
-        height: 40, 
-        padding: 10,
-        //marginBottom: '-10%',
-        flex: 5.5
+        padding: '2.5%',
+        marginTop: '10%',
+        //marginBottom: '15%',
+        justifyContent: 'space-evenly',
     },
-    buttonView: {
+    footerView: {
         //backgroundColor: 'pink',
         flex: 1,
-        height: 25,
+        //height: 25,
+        //paddingTop: '35%',
         justifyContent: 'flex-end',
     },
     title: {
@@ -46,20 +47,24 @@ const styles = StyleSheet.create({
         color: '#a81d20',
         fontWeight: 'bold',
         fontStyle: 'italic',
-        paddingTop: '15%',
-        flex: 1,
-        bottom: 15,
+        paddingVertical: '2.5%',
     },
-    unit: {
-        paddingBottom: '5%'
+    inputIOS: {
+        color: 'black',
+        paddingHorizontal: 10
     },
-    signUpText: {
-        height: 20,
-        top: 20,
-        textAlign: 'center'
-        
-        
-    }
+    inputAndroid: {
+        color: 'black',
+    },
+    viewContainer: {
+        borderWidth: 2,
+        borderColor: '#302f90',
+        borderRadius: 10,
+        height: 40,
+        justifyContent: 'center',
+        backgroundColor: '#ffffff',
+        marginVertical: '2%',
+    },
 });
 
 export default styles;

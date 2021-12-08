@@ -17,64 +17,64 @@ const EditProfileScreen = ({navigation}) => {
     const [userAddress, setUserAddress] = useState();
     const [userEmail, setUserEmail] = useState();
     const [userEmergContact, setUserEmergContact] = useState();
-    const [userEmergContactNum, setUserEmergContactNum] = useState();
-    const [userOccupation, setUserOccupation] = useState();
+    const [userEmergContactPhone, setUserEmergContactPhone] = useState();
+    const [userRole, setUserRole] = useState();
 
-    
+
     async function getUserData() {
-      const docRef = db.collection('users').doc(userID)
-      const userData = await docRef.get();
-      let userName = userData.data().name;
-      setUserName(userName);
-      let userPhone = userData.data().phone;
-      setUserPhone(userPhone);
-      let userDOB = userData.data().dob;
-      setUserDOB(userDOB);
-      let userAddress = userData.data().address;
-      setUserAddress(userAddress);
-      let userEmail = userData.data().email;
-      setUserEmail(userEmail);
-      let userEmergContact = userData.data().emergContact;
-      setUserEmergContact(userEmergContact);
-      let userEmergContactNum = userData.data().emergContactNum;
-      setUserEmergContactNum(userEmergContactNum);
-      let userOccupation = userData.data().occupation;
-      setUserOccupation(userOccupation);
-  }
+        const docRef = db.collection('users').doc(userID)
+        const userData = await docRef.get();
+        let userName = userData.data().name;
+        setUserName(userName);
+        let userPhone = userData.data().phone;
+        setUserPhone(userPhone);
+        let userDOB = userData.data().dob;
+        setUserDOB(userDOB);
+        let userAddress = userData.data().address;
+        setUserAddress(userAddress);
+        let userEmail = userData.data().email;
+        setUserEmail(userEmail);
+        let userEmergContact = userData.data().emergContact;
+        setUserEmergContact(userEmergContact);
+        let userEmergContactPhone = userData.data().emergContactPhone;
+        setUserEmergContactPhone(userEmergContactPhone);
+        let userRole = userData.data().role;
+        setUserRole(userRole);
+    }
 
-  useEffect(() => {
-    getUserData();
-  }, []);
+    useEffect(() => {
+        getUserData();
+    }, []);
 
-    
+
     const [image, setImage] = useState(null);
     const [uploading, setUploading] = useState(false);
     const [transferred, setTransferred] = useState(0);
-    
+
     const handleUpdate = async() => {
         // let imgUrl = await uploadImage();
-    
+
         // if( imgUrl == null && userData.userImg ) {
         //   imgUrl = userData.userImg;
         // }
         db.collection('users').doc(userID).update({
-          'name': userName,
-          'email': userEmail,
-          'dob': userDOB,
-          'address': userAddress,
-          'phone': userPhone,
-          'emergContact': userEmergContact,
-          'emergContactNum': userEmergContactNum,
-          'occupation': userOccupation,
+            'name': userName,
+            'email': userEmail,
+            'dob': userDOB,
+            'address': userAddress,
+            'phone': userPhone,
+            'emergContact': userEmergContact,
+            'emergContactPhone': userEmergContactPhone,
+            'role': userRole,
         })
-        .then(() => {
-          console.log('User Updated!');
-          Alert.alert(
-            'Profile Updated!',
-            'Your profile has been updated successfully.'
-          );
-        })
-      }
+            .then(() => {
+                console.log('User Updated!');
+                Alert.alert(
+                    'Profile Updated!',
+                    'Your profile has been updated successfully.'
+                );
+            })
+    }
 
     return (
         <ScrollView
@@ -156,33 +156,123 @@ const EditProfileScreen = ({navigation}) => {
             placeholderTextColor="#666666"
             keyboardType="number-pad"
             autoCorrect={false}
-            onChangeText={(txt) => setUserEmergContactNum(txt)}
+            onChangeText={(txt) => setUserEmergContactPhone(txt)}
             style={styles.textInput}
           />
         </View>
         <View style={styles.action}>
         <Text style={styles.title5}>Prefered Role</Text>
           <FontAwesome name="briefcase" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
-          <RNPickerSelect 
-            style={styles}
-            onValueChange={(value) => setUserOccupation(value)}
-            selectedValue={userOccupation}
-            items={[
-              {label: 'Driver', value: 'Driver'},
-              {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
-              {label: 'Both', value: 'Both'},
-            ]}
-            placeholder={{}}
-            value={userOccupation}
+          <RNPickerSelect
+              style={styles}
+              onValueChange={(value) => setUserRole(value)}
+              selectedValue={userRole}
+              items={[
+                  {label: 'Driver', value: 'Driver'},
+                  {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
+                  {label: 'Driver & Friendly Visitor', value: 'Both'},
+              ]}
+              placeholder={{}}
+              value={userRole}
           />
         </View>
         <View style={styles.buttonView}>
+            keyboardShouldPersistTaps={'always'}>
+
+            <View style={styles.action}>
+                <FontAwesome name="user-o" color="#333333" size={20} />
+                <TextInput
+                    value={userName}
+                    placeholderTextColor="#666666"
+                    autoCorrect={false}
+                    onChangeText={(txt) => setUserName(txt)}
+                    style={styles.textInput}
+                />
+            </View>
+            <View style={styles.action}>
+                <FontAwesome name="envelope" color="#333333" size={20} />
+                <TextInput
+                    value={userEmail}
+                    placeholderTextColor="#666666"
+                    autoCorrect={false}
+                    onChangeText={(txt) => setUserEmail(txt)}
+                    style={styles.textInput}
+                />
+            </View>
+            <View style={styles.action}>
+                <FontAwesome name="address-card" color="#333333" size={20} />
+                <TextInput
+                    value={userAddress}
+                    placeholderTextColor="#666666"
+                    autoCorrect={false}
+                    onChangeText={(txt) => setUserAddress(txt)}
+                    style={styles.textInput}
+                />
+            </View>
+            <View style={styles.action}>
+                <FontAwesome name="phone" color="#333333" size={20} />
+                <TextInput
+                    value={userPhone}
+                    placeholderTextColor="#666666"
+                    keyboardType="number-pad"
+                    autoCorrect={false}
+                    onChangeText={(txt) => setUserPhone(txt)}
+                    style={styles.textInput}
+                />
+            </View>
+            <View style={styles.action}>
+                <FontAwesome name="birthday-cake" color="#333333" size={20} />
+                <TextInput
+                    value={userDOB}
+                    placeholderTextColor="#666666"
+                    autoCorrect={false}
+                    onChangeText={(txt) => setUserDOB(txt)}
+                    style={styles.textInput}
+                />
+            </View>
+            <View style={styles.action}>
+                <FontAwesome name="user-o" color="#333333" size={20} />
+                <TextInput
+                    value={userEmergContact}
+                    placeholderTextColor="#666666"
+                    autoCorrect={false}
+                    onChangeText={(txt) => setUserEmergContact(txt)}
+                    style={styles.textInput}
+                />
+            </View>
+            <View style={styles.action}>
+                <FontAwesome name="phone" color="#333333" size={20} />
+                <TextInput
+                    value={userEmergContactPhone}
+                    placeholderTextColor="#666666"
+                    keyboardType="number-pad"
+                    autoCorrect={false}
+                    onChangeText={(txt) => setUserEmergContactPhone(txt)}
+                    style={styles.textInput}
+                />
+            </View>
+            <View style={styles.action}>
+                <FontAwesome name="briefcase" color="#333333" size={20} />
+                <RNPickerSelect
+                    style={styles}
+                    onValueChange={(value) => setUserRole(value)}
+                    selectedValue={userRole}
+                    items={[
+                        {label: 'Driver', value: 'Driver'},
+                        {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
+                        {label: 'Driver & Friendly Visitor', value: 'Both'},
+                    ]}
+                    placeholder={{}}
+                    value={userRole}
+                />
+            </View>
+            <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
                     text={'Update'}
                     onPress={handleUpdate}
                 />
-        </View>
+            </View>
         </ScrollView>
     );
 }
