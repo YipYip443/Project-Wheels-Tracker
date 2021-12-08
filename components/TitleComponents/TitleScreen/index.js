@@ -1,16 +1,15 @@
-import React from 'react';
-import {ImageBackground, View, Text} from 'react-native';
+import React, {useEffect} from 'react';
+import {ImageBackground, Text, View} from 'react-native';
 import StyledButton from '../StyledButton';
 import styles from './styles';
-import { auth } from '../../../db/firestore';
+import {auth} from '../../../db/firestore';
 import getIsAdmin from '../../Admin/getIsAdmin';
-
 
 const TitleScreen = ({navigation}) => {
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(async user => {
-            if(user){
+        return auth.onAuthStateChanged(async user => {
+            if (user) {
                 const isAdmin = await getIsAdmin();
                 navigation.goBack();
                 if (!isAdmin)
@@ -19,8 +18,7 @@ const TitleScreen = ({navigation}) => {
                     navigation.replace('SM Dashboard');
             }
         })
-        return unsubscribe
-    }, [])
+    })
 
 
 
