@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
-// import styles from './styles';
-import {View, ScrollView, Text, StyleSheet, FlatList, TouchableOpacity} from "react-native";
+import styles from './styles';
+import {View, ScrollView, Text, FlatList, TouchableOpacity} from "react-native";
+import { Modal } from "react-native-paper";
+import StyledButton from "../../TitleComponents/StyledButton";
 import {db} from "../../../db/firestore";
 
 const VolunteersScreen = () => {
@@ -16,16 +18,16 @@ const VolunteersScreen = () => {
         }
         snapshot.forEach(doc => {
             setUserList(userList => [...userList, doc.data()])
-            console.log(userList)
         });
-        // })
-        // .catch(err => {
-        //   console.log('Error getting documents', err);
-        // });
     }
 
-    const pressHandler = (name) => {
-      console.log(name)
+    function displayModal(show, item) {
+      setShow(show);
+      displayInfo(item)
+    }
+
+    function displayInfo(item) {
+      console.log(item);
     }
 
     useEffect(() => {
@@ -41,29 +43,26 @@ const VolunteersScreen = () => {
             data={userList}
             renderItem={({item}) => (
               <View style={styles.item}>
-                <TouchableOpacity onPress={() => pressHandler(item.name)}>
+                <TouchableOpacity onPress={() => displayModal(true, item)}>
                   <Text style={styles.title}>{item.name}</Text>
                 </TouchableOpacity>
               </View>
             )}  
         />    
+        <Modal
+          transparent={true}
+          visible={show}>
+          <View style={styles.modal}>
+              <View style={{height: '90%'}}>
+                <View>{displayInfo()}</View>
+              </View>
+              <StyledButton
+                text="Close Profile Info"
+                  onPress={() => {setShow(false)}}/>
+          </View>
+        </Modal>
         </ScrollView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-    item: {
-      backgroundColor: '#FFFF',
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
-    },
-    title: {
-      fontSize: 32,
-    },
-  });
 
 export default VolunteersScreen;

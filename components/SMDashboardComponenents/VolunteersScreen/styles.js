@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
         //borderRadius: 10,
         //borderWidth: 2,
         padding: '5%',
+        flex: 1,
         //flexDirection: 'column',
     },
     containerStyle: {
@@ -20,8 +21,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         textAlign: 'justify',
         textAlignVertical: 'top',
-        //backgroundColor: 'white',
-
     },
     volunteerInfo: {
         textAlign: 'justify',
@@ -40,6 +39,15 @@ const styles = StyleSheet.create({
                 paddingTop: '5%'
             }
         })
+    },
+    item: {
+        backgroundColor: '#FFFF',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+    },
+    title: {
+        fontSize: 32,
     },
 });
 
