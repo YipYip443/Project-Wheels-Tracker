@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from "react";
 // import styles from './styles';
-import {ScrollView, View, Text, StyleSheet, FlatList} from "react-native";
+import {ScrollView, View, Text, StyleSheet, FlatList, Pressable} from "react-native";
 import {db} from "../../../db/firestore";
 import firebase from "firebase";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Modal } from "react-native-paper";
+import StyledButton from "../../TitleComponents/StyledButton";
 
 const VolunteersScreen = () => {
     const [userList, setUserList] = useState([]);
+    const [show, setShow] = useState(false);
 
     async function getUser() {
         const docRef = db.collection('users')
@@ -17,7 +20,7 @@ const VolunteersScreen = () => {
         }
         snapshot.forEach(doc => {
             // console.log(doc.id, '=>', doc.data().name);
-            setUserList(usersList => [...usersList, doc.data()])
+            setUserList(userList => [...userList, doc.data()])
             console.log(userList)
         });
         // })
@@ -25,26 +28,28 @@ const VolunteersScreen = () => {
         //   console.log('Error getting documents', err);
         // });
     }
-    
-    const showUserInformation = () => {
-        let usersInformation = userList.map((user) => (
-          <View>
-            <VirtualizedList>
-                <Text>{user.name}</Text>
-                <Text>{user.phone}</Text>
-            </VirtualizedList>
-          </View>
-        ));
-        // console.log(usersInformation);
-        console.log("Stop Here")
-        return usersInformation;
-    };
 
-    const Item = ({ name, email }) => (
+    const Item = ({name}) => (
         <View style={styles.item}>
-          <Text style={styles.title}>{name}</Text>
-          <Text>{email}</Text>
-        </View>
+          <Pressable
+          onPress={() => {setShow(true) }}>
+            <Text style={styles.title}>{name}</Text>
+          </Pressable>
+          <Modal
+            transparent={true}
+            visible={show}>
+            <View style={styles.modal}>
+              <View style={{height: '90%'}}>
+                <Text>information goes here</Text>
+              </View>
+            <StyledButton
+              text="Close Profile"
+              onPress={() => {
+                  setShow(false)
+              }}/>
+            </View>
+          </Modal>
+      </View>
     );
       
     const renderItem = ({ item }) => (
@@ -65,7 +70,6 @@ const VolunteersScreen = () => {
             data={userList}
             renderItem={renderItem}  
         />    
-        {/* <Text> {showUserInformation()} </Text> */}
         </SafeAreaView>
     );
 }
