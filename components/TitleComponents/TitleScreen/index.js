@@ -9,7 +9,7 @@ const TitleScreen = ({navigation}) => {
 
     useEffect(() => {
         return auth.onAuthStateChanged(async user => {
-            if (user) {
+            if (user && (user.createdAt === undefined || user.createdAt !== user.lastLoginAt)) {
                 const isAdmin = await getIsAdmin();
                 if (!isAdmin)
                     navigation.replace('Volunteer Dashboard');

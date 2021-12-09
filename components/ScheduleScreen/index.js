@@ -20,7 +20,6 @@ const ScheduleScreen = () => {
     let today = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString().slice(0, 10);
 
     async function getData() {
-        console.log('INITIALIZING SCHEDULE SCREEN')
         isAdmin = await getIsAdmin();
         await getUserData();
         await getRoutes();
@@ -54,7 +53,6 @@ const ScheduleScreen = () => {
                 }
             })
         })
-        console.log('GETTING POSTS');
         generatePosts(selectedButton);
     }
 
@@ -91,28 +89,23 @@ const ScheduleScreen = () => {
     }
 
     function acceptRoute(post, assignedRole) {
-        console.log('Accepting Route!');
         db.collection('posts').doc(post.id).update({[assignedRole]: userName});
         db.collection('posts').doc(post.id).update({[assignedRole + 'ID']: userID});
         getData();
     }
 
-    async function declineRoute(post, assignedRole) {
-        console.log('Declining Route!');
+    async function dropRoute(post, assignedRole) {
         await db.collection('posts').doc(post.id).update({[assignedRole]: firebase.firestore.FieldValue.delete()});
         await db.collection('posts').doc(post.id).update({[assignedRole + 'ID']: firebase.firestore.FieldValue.delete()});
         getData();
     }
 
     async function deleteRoute(post) {
-        console.log('Deleting Route!');
         await db.collection('posts').doc(post.id).delete();
         getData();
     }
 
     function renderItem(post) {
-        //console.log(post.route);
-
         if (Object.keys(routesCollection).length === 0)
             return;
 
@@ -132,6 +125,7 @@ const ScheduleScreen = () => {
             }
         }
 
+ 
         if (post.position === 'Friendly Visitor' || post.position === 'Both') {
             if (userRole === 'Friendly Visitor' || userRole === 'Both') {
                 if (post.friendlyVisitor === undefined) {
@@ -144,15 +138,15 @@ const ScheduleScreen = () => {
         }
 
         let assignedRole;
-        let declineView = false;
+        let dropView = false;
         if (userID === post.driverID) {
             assignedRole = 'driver';
             acceptView = false;
-            declineView = true;
+            dropView = true;
         } else if (userID === post.friendlyVisitorID) {
             assignedRole = 'friendlyVisitor';
             acceptView = false;
-            declineView = true;
+            dropView = true;
         }
 
         let routeInfo = routesCollection[post.route];
@@ -164,11 +158,9 @@ const ScheduleScreen = () => {
                 backgroundColor: 'white',
                 flex: 1,
                 borderRadius: 5,
-                //borderWidth: 1,
                 borderColor: '#302f90',
                 padding: '5%'
             }}>
-                {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>*/}
                 <View style={styles.postTextView}>
                     <Text style={styles.firstLine}>Route {post.route}</Text>
                     <Text style={styles.firstLine}>{routeInfo.time}</Text>
@@ -188,8 +180,8 @@ const ScheduleScreen = () => {
                     {acceptView && <Button title={'Accept'} color={'#018704'} onPress={function () {
                         acceptRoute(post, potentialRole);
                     }}/>}
-                    {declineView && <Button title={'Decline'} color={'#a22629'} onPress={function () {
-                        declineRoute(post, assignedRole);
+                    {dropView && <Button title={'Drop'} color={'#a22629'} onPress={function () {
+                        dropRoute(post, assignedRole);
                     }}/>}
                     <Button title={'More Info'} color={'#302f90'}/>
                     {isAdmin && <Button title={'Delete'} color={'#a22629'} onPress={function () {
@@ -200,7 +192,6 @@ const ScheduleScreen = () => {
         );
     }
 
-    //if (Object.keys(routesCollection).length === 0)
     if (isAdmin === undefined)
         getData();
 
