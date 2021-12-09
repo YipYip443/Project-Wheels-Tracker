@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Modal, Pressable, ScrollView, Text, Alert, View} from "react-native";
+import styles from "./styles";
 import RNPickerSelect from "react-native-picker-select";
-import styles from "../DeliveryRoutesScreen/styles";
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import StyledButton from "../../TitleComponents/StyledButton";
@@ -10,7 +10,7 @@ import Gallery from "react-native-image-gallery";
 
 let routesCollection = {};
 
-const DeliveryRoutesScreen = ({navigation}) => {
+const CreateShiftScreen = ({navigation}) => {
     const [routeItems, setRouteItems] = React.useState([]);
 
     const [selectedRoute, setSelectedRoute] = React.useState();
@@ -18,7 +18,7 @@ const DeliveryRoutesScreen = ({navigation}) => {
 
     const [disabled, setDisabled] = React.useState(true);
 
-    const [date, setDate] = React.useState(new Date());
+    const [selectedDate, setSelectedDate] = React.useState(new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)));
     const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
 
     const [show, setShow] = React.useState(false);
@@ -73,21 +73,21 @@ const DeliveryRoutesScreen = ({navigation}) => {
     }
 
     function handleConfirm(date) {
-        console.log(date.toDateString());
+        setSelectedDate(new Date(date.getTime() - (date.getTimezoneOffset() * 60000)));
         setDatePickerVisibility(false);
-        return setDate(date);
     }
 
     function post() {
         console.log(selectedRoute);
-        console.log(date);
+        console.log('SELECTED DATE')
+        console.log(selectedDate);
         console.log(selectedPosition);
         if (selectedRoute === undefined || selectedPosition === undefined) {
             Alert.alert('Missing information!');
         } else {
-            let dateFormat = date.toISOString().slice(0, 10);
-            db.collection('posts').add({date: dateFormat, position: selectedPosition, route: selectedRoute});
-            Alert.alert('Post created!');
+            let dateFormat = selectedDate.toISOString().slice(0, 10);
+            db.collection('shifts').add({date: dateFormat, position: selectedPosition, route: selectedRoute});
+            Alert.alert('Shift posted!');
         }
     }
 
@@ -162,7 +162,7 @@ const DeliveryRoutesScreen = ({navigation}) => {
                     <Text>Day Open:</Text>
                     <StyledButton
                         onPress={() => setDatePickerVisibility(true)}
-                        text={date.toDateString()}>
+                        text={selectedDate.toDateString()}>
                     </StyledButton>
                     <DateTimePickerModal
                         mode="date"
@@ -191,7 +191,7 @@ const DeliveryRoutesScreen = ({navigation}) => {
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}
-                    text={'Post'}
+                    text={'Post Shift'}
                     onPress={post}
                 />
             </View>
@@ -199,4 +199,4 @@ const DeliveryRoutesScreen = ({navigation}) => {
     );
 }
 
-export default DeliveryRoutesScreen;
+export default CreateShiftScreen;
