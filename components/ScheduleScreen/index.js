@@ -53,7 +53,7 @@ const ScheduleScreen = () => {
                 }
             })
         })
-
+      
         generateItems(selectedButton);
     }
 
@@ -71,9 +71,9 @@ const ScheduleScreen = () => {
             } else if (shiftButton === 'Open Shifts') {
                 if (((value.position === 'Driver' || value.position === 'Both') && (userRole === 'Driver' || userRole === 'Both')) ||
                     ((value.position === 'Friendly Visitor' || value.position === 'Both') && (userRole === 'Friendly Visitor' || userRole === 'Both'))) {
-                        if (userID !== value.driverID && userID !== value.friendlyVisitorID) {
-                            addItem = true;
-                        }
+                    if (userID !== value.driverID && userID !== value.friendlyVisitorID) {
+                        addItem = true;
+                    }
                 }
             }
             if (addItem) {
@@ -161,11 +161,9 @@ const ScheduleScreen = () => {
                 backgroundColor: 'white',
                 flex: 1,
                 borderRadius: 5,
-                //borderWidth: 1,
                 borderColor: '#302f90',
                 padding: '5%'
             }}>
-                {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>*/}
                 <View style={styles.postTextView}>
                     <Text style={styles.firstLine}>Route {shift.route}</Text>
                     <Text style={styles.firstLine}>{routeInfo.time}</Text>
@@ -197,7 +195,6 @@ const ScheduleScreen = () => {
         );
     }
 
-    //if (Object.keys(routesCollection).length === 0)
     if (isAdmin === undefined)
         getData();
 
