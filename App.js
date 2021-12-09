@@ -14,9 +14,9 @@ import CreateProfileScreen from "./components/TitleComponents/CreateProfileScree
 import ForgotPasswordScreen from './components/TitleComponents/ForgotPasswordScreen'
 import ScheduleScreen from "./components/ScheduleScreen";
 import VolunteersScreen from "./components/SMDashboardComponenents/VolunteersScreen";
-import DeliveryRoutesScreen from "./components/SMDashboardComponenents/DeliveryRoutesScreen";
+import CreateShiftScreen from "./components/SMDashboardComponenents/CreateShiftScreen";
 import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";
-import EditProfileScreen from './components/SMDashboardComponenents/EditProfileScreen'; 
+import EditProfileScreen from './components/SMDashboardComponenents/EditProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,7 +26,7 @@ function SMDashboardTabs() {
         <Tab.Navigator screenOptions={{tabBarActiveTintColor: "#302f90", tabBarLabelStyle: {fontSize: 11, fontWeight: "bold"}}}>
             <Tab.Screen name="Schedule" component={ScheduleScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="calendar" color="#333333" size={25}/>),}}/>
-            <Tab.Screen name="Delivery Routes" component={DeliveryRoutesScreen} options={{ tabBarIcon: () => (
+            <Tab.Screen name="Create Shift" component={CreateShiftScreen} options={{ tabBarIcon: () => (
                     <FontAwesome name="truck" color="#333333" size={25}/>),}}/>
             <Tab.Screen name="Volunteers" component={VolunteersScreen} options={{ tabBarIcon: () => (
                 <FontAwesome name="users" color="#333333" size={25}/>),}}/>
