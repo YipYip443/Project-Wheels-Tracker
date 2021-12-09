@@ -172,7 +172,7 @@ const EditProfileScreen = ({navigation}) => {
                 selectedValue={userRole}
                 items={[
                     {label: 'Driver', value: 'Driver'},
-                    {label: 'Friendly Visitor', value: 'FriendlyVisitor'},
+                    {label: 'Friendly Visitor', value: 'Friendly Visitor'},
                     {label: 'Driver & Friendly Visitor', value: 'Both'},
                 ]}
                 placeholder={{}}

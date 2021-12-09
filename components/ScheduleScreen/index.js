@@ -97,8 +97,8 @@ const ScheduleScreen = () => {
         getData();
     }
 
-    async function declineRoute(post, assignedRole) {
-        console.log('Declining Route!');
+    async function dropRoute(post, assignedRole) {
+        console.log('Dropping Route!');
         await db.collection('posts').doc(post.id).update({[assignedRole]: firebase.firestore.FieldValue.delete()});
         await db.collection('posts').doc(post.id).update({[assignedRole + 'ID']: firebase.firestore.FieldValue.delete()});
         getData();
@@ -132,8 +132,11 @@ const ScheduleScreen = () => {
             }
         }
 
+        console.log(post.position)
+        console.log(userRole)
         if (post.position === 'Friendly Visitor' || post.position === 'Both') {
             if (userRole === 'Friendly Visitor' || userRole === 'Both') {
+                console.log(userName + 'is a friendly visitor')
                 if (post.friendlyVisitor === undefined) {
                     if (potentialRole === undefined) {
                         acceptView = true;
@@ -144,15 +147,15 @@ const ScheduleScreen = () => {
         }
 
         let assignedRole;
-        let declineView = false;
+        let dropView = false;
         if (userID === post.driverID) {
             assignedRole = 'driver';
             acceptView = false;
-            declineView = true;
+            dropView = true;
         } else if (userID === post.friendlyVisitorID) {
             assignedRole = 'friendlyVisitor';
             acceptView = false;
-            declineView = true;
+            dropView = true;
         }
 
         let routeInfo = routesCollection[post.route];
@@ -188,8 +191,8 @@ const ScheduleScreen = () => {
                     {acceptView && <Button title={'Accept'} color={'#018704'} onPress={function () {
                         acceptRoute(post, potentialRole);
                     }}/>}
-                    {declineView && <Button title={'Decline'} color={'#a22629'} onPress={function () {
-                        declineRoute(post, assignedRole);
+                    {dropView && <Button title={'Drop'} color={'#a22629'} onPress={function () {
+                        dropRoute(post, assignedRole);
                     }}/>}
                     <Button title={'More Info'} color={'#302f90'}/>
                     {isAdmin && <Button title={'Delete'} color={'#a22629'} onPress={function () {
