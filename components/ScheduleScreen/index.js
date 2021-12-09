@@ -20,7 +20,6 @@ const ScheduleScreen = () => {
     let today = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString().slice(0, 10);
 
     async function getData() {
-        console.log('INITIALIZING SCHEDULE SCREEN')
         isAdmin = await getIsAdmin();
         await getUserData();
         await getRoutes();
@@ -54,7 +53,6 @@ const ScheduleScreen = () => {
                 }
             })
         })
-        console.log('GETTING POSTS');
         generatePosts(selectedButton);
     }
 
@@ -91,28 +89,23 @@ const ScheduleScreen = () => {
     }
 
     function acceptRoute(post, assignedRole) {
-        console.log('Accepting Route!');
         db.collection('posts').doc(post.id).update({[assignedRole]: userName});
         db.collection('posts').doc(post.id).update({[assignedRole + 'ID']: userID});
         getData();
     }
 
     async function dropRoute(post, assignedRole) {
-        console.log('Dropping Route!');
         await db.collection('posts').doc(post.id).update({[assignedRole]: firebase.firestore.FieldValue.delete()});
         await db.collection('posts').doc(post.id).update({[assignedRole + 'ID']: firebase.firestore.FieldValue.delete()});
         getData();
     }
 
     async function deleteRoute(post) {
-        console.log('Deleting Route!');
         await db.collection('posts').doc(post.id).delete();
         getData();
     }
 
     function renderItem(post) {
-        //console.log(post.route);
-
         if (Object.keys(routesCollection).length === 0)
             return;
 
@@ -132,11 +125,9 @@ const ScheduleScreen = () => {
             }
         }
 
-        console.log(post.position)
-        console.log(userRole)
+ 
         if (post.position === 'Friendly Visitor' || post.position === 'Both') {
             if (userRole === 'Friendly Visitor' || userRole === 'Both') {
-                console.log(userName + 'is a friendly visitor')
                 if (post.friendlyVisitor === undefined) {
                     if (potentialRole === undefined) {
                         acceptView = true;
@@ -167,11 +158,9 @@ const ScheduleScreen = () => {
                 backgroundColor: 'white',
                 flex: 1,
                 borderRadius: 5,
-                //borderWidth: 1,
                 borderColor: '#302f90',
                 padding: '5%'
             }}>
-                {/*<View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>*/}
                 <View style={styles.postTextView}>
                     <Text style={styles.firstLine}>Route {post.route}</Text>
                     <Text style={styles.firstLine}>{routeInfo.time}</Text>
@@ -203,7 +192,6 @@ const ScheduleScreen = () => {
         );
     }
 
-    //if (Object.keys(routesCollection).length === 0)
     if (isAdmin === undefined)
         getData();
 
