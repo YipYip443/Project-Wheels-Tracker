@@ -63,16 +63,20 @@ const ScheduleScreen = () => {
         for (const [key, value] of Object.entries(shiftsCollection)) {
             let addItem = false;
             if (shiftButton === 'My Shifts') {
-                if (userID === value.driverID || userID === value.friendlyVisitorID) {
-                    addItem = true;
+                if (new Date(value.date).getTime() > new Date(today).getTime()) {
+                    if (userID === value.driverID || userID === value.friendlyVisitorID) {
+                        addItem = true;
+                    }
                 }
             } else if (shiftButton === 'All Shifts') {
                 addItem = true;
             } else if (shiftButton === 'Open Shifts') {
-                if (((value.position === 'Driver' || value.position === 'Both') && (userRole === 'Driver' || userRole === 'Both')) ||
-                    ((value.position === 'Friendly Visitor' || value.position === 'Both') && (userRole === 'Friendly Visitor' || userRole === 'Both'))) {
-                    if (userID !== value.driverID && userID !== value.friendlyVisitorID) {
-                        addItem = true;
+                if (((value.position === 'Driver' || value.position === 'Both') && (userRole === 'Driver' || userRole === 'Both') && value.driver === undefined) ||
+                    ((value.position === 'Friendly Visitor' || value.position === 'Both') && (userRole === 'Friendly Visitor' || userRole === 'Both') && value.friendlyVisitor === undefined)) {
+                    if (new Date(value.date).getTime() > new Date(today).getTime()) {
+                        if (userID !== value.driverID && userID !== value.friendlyVisitorID) {
+                            addItem = true;
+                        }
                     }
                 }
             }
@@ -114,7 +118,7 @@ const ScheduleScreen = () => {
             return;
 
         let futureDate = true;
-        if (new Date(shift.time).getTime() < new Date(today).getTime()) {
+        if (new Date(shift.date).getTime() < new Date(today).getTime()) {
             futureDate = false;
         }
 

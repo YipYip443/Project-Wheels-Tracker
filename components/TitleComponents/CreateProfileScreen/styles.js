@@ -50,11 +50,11 @@ const styles = StyleSheet.create({
         paddingVertical: '2.5%',
     },
     inputIOS: {
-        color: 'black',
+        color: '#a81d20',
         paddingHorizontal: 10
     },
     inputAndroid: {
-        color: 'black',
+        color: '#a81d20',
     },
     viewContainer: {
         borderWidth: 2,

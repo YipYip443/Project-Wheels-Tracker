@@ -2,8 +2,8 @@ import {auth, db} from "../../db/firestore";
 
 let checkAdmin;
 async function getIsAdmin() {
-    if (checkAdmin !== undefined)
-        return checkAdmin;
+    //if (checkAdmin !== undefined)
+        //return checkAdmin;
     const userID = auth.currentUser.uid;
 
     const currentUser = db.collection('users').doc(userID);

@@ -82,8 +82,9 @@ const EditProfileScreen = ({navigation}) => {
             style={styles.container}
             contentContainerStyle={styles.containerStyle}
             keyboardShouldPersistTaps={'always'}>
+            <Text style={styles.title4}> Full Name</Text>
+
             <View style={styles.action}>
-                <Text style={styles.title4}> Full Name</Text>
                 <FontAwesome name="user-o" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userName}
@@ -93,8 +94,9 @@ const EditProfileScreen = ({navigation}) => {
                     style={styles.textInput}
                 />
             </View>
+
+            <Text style={styles.title5}> Email Address</Text>
             <View style={styles.action}>
-                <Text style={styles.title5}> Email Address</Text>
                 <FontAwesome name="envelope" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userEmail}
@@ -104,8 +106,9 @@ const EditProfileScreen = ({navigation}) => {
                     style={styles.textInput}
                 />
             </View>
+
+            <Text style={styles.title5}>Address</Text>
             <View style={styles.action}>
-                <Text style={styles.title5}>Address</Text>
                 <FontAwesome name="address-card" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userAddress}
@@ -115,8 +118,9 @@ const EditProfileScreen = ({navigation}) => {
                     style={styles.textInput}
                 />
             </View>
+
+            <Text style={styles.title5}>Phone Number</Text>
             <View style={styles.action}>
-                <Text style={styles.title5}>Phone Number</Text>
                 <FontAwesome name="phone" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userPhone}
@@ -127,8 +131,9 @@ const EditProfileScreen = ({navigation}) => {
                     style={styles.textInput}
                 />
             </View>
+
+            <Text style={styles.title5}>Birthday</Text>
             <View style={styles.action}>
-                <Text style={styles.title5}>Birthday</Text>
                 <FontAwesome name="birthday-cake" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userDOB}
@@ -138,8 +143,9 @@ const EditProfileScreen = ({navigation}) => {
                     style={styles.textInput}
                 />
             </View>
+
+            <Text style={styles.title5}>Emergency Contact</Text>
             <View style={styles.action}>
-                <Text style={styles.title5}>Emergency Contact</Text>
                 <FontAwesome name="user-o" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userEmergContact}
@@ -149,8 +155,8 @@ const EditProfileScreen = ({navigation}) => {
                     style={styles.textInput}
                 />
             </View>
+            <Text style={styles.title5}>Emergency Phone #</Text>
             <View style={styles.action}>
-                <Text style={styles.title5}>Emergency Phone #</Text>
                 <FontAwesome name="phone" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 <TextInput
                     value={userEmergContactPhone}
@@ -161,11 +167,11 @@ const EditProfileScreen = ({navigation}) => {
                     style={styles.textInput}
                 />
             </View>
+            <Text style={styles.title5}>Preferred Role</Text>
+
             <View style={styles.action}>
-                <Text style={styles.title5}>Preferred Role</Text>
                 <FontAwesome name="briefcase" color="#333333" size={20} style={{position: 'absolute', zIndex: 99}}/>
                 {/*Android Bug*/}
-            </View>
             <RNPickerSelect
                 style={styles}
                 onValueChange={setUserRole}
@@ -178,6 +184,8 @@ const EditProfileScreen = ({navigation}) => {
                 placeholder={{}}
                 value={userRole}
             />
+            </View>
+
             <View style={styles.buttonView}>
                 <StyledButton
                     style={styles.button}

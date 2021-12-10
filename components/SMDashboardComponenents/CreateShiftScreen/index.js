@@ -18,7 +18,7 @@ const CreateShiftScreen = ({navigation}) => {
 
     const [disabled, setDisabled] = React.useState(true);
 
-    const [selectedDate, setSelectedDate] = React.useState(new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)));
+    const [selectedDate, setSelectedDate] = React.useState(new Date());
     const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
 
     const [show, setShow] = React.useState(false);
@@ -73,7 +73,7 @@ const CreateShiftScreen = ({navigation}) => {
     }
 
     function handleConfirm(date) {
-        setSelectedDate(new Date(date.getTime() - (date.getTimezoneOffset() * 60000)));
+        setSelectedDate(date);
         setDatePickerVisibility(false);
     }
 
@@ -85,7 +85,8 @@ const CreateShiftScreen = ({navigation}) => {
         if (selectedRoute === undefined || selectedPosition === undefined) {
             Alert.alert('Missing information!');
         } else {
-            let dateFormat = selectedDate.toISOString().slice(0, 10);
+            let correctDate = new Date(selectedDate.getTime() - (selectedDate.getTimezoneOffset() * 60000));
+            let dateFormat = correctDate.toISOString().slice(0, 10);
             db.collection('shifts').add({date: dateFormat, position: selectedPosition, route: selectedRoute});
             Alert.alert('Shift posted!');
         }

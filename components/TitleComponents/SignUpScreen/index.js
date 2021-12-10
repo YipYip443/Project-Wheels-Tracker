@@ -27,27 +27,30 @@ const SignUpScreen = ({navigation}) => {
 
     function verifyEmail() {
         if (email === '' || email === undefined) {
-            return;
+            return ' ';
         } else if (!email.includes('@') || !email.includes('.')) {
             return 'Please input a valid email address.';
         }
+        return ' ';
     }
 
     function verifyPassword() {
         if (password === '' || password === undefined) {
-            return;
+            return ' ';
         } else if (password.length < 6) {
             return 'Password must be at least 6 characters.';
         }
+        return ' ';
     }
 
     function verifyConfirmPassword() {
         if (confirmPassword === '' || confirmPassword === undefined) {
-            return;
+            return ' ';
         }
         if (password !== confirmPassword) {
             return 'Passwords must match.';
         }
+        return ' ';
     }
 
     function registerUser() {

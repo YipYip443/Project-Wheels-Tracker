@@ -154,7 +154,7 @@ const CreateProfileScreen = ({navigation}) => {
                     <TextInput
                         style={styles.input}
                         onChangeText={setEName}
-                        placeholder='Parent/Guardian, Friend, Boss, etc.'
+                        placeholder='John Doe'
                         textContentType={'none'}
                     />
 
