@@ -136,7 +136,7 @@ const CreateShiftScreen = ({navigation}) => {
                                     images={[{source: {uri: routePhotoURL}}]}/>
                             </View>
                             <StyledButton
-                                text="Close Map"
+                                text="Close"
                                 onPress={() => {
                                     setShow(false)
                                 }}/>

@@ -12,7 +12,7 @@ import LoginScreen from "./components/TitleComponents/LoginScreen";
 import SignUpScreen from "./components/TitleComponents/SignUpScreen";
 import CreateProfileScreen from "./components/TitleComponents/CreateProfileScreen";
 import ForgotPasswordScreen from './components/TitleComponents/ForgotPasswordScreen'
-import ScheduleScreen from "./components/ScheduleScreen";
+import ScheduleScreen from "./components/SMDashboardComponenents/ScheduleScreen";
 import VolunteersScreen from "./components/SMDashboardComponenents/VolunteersScreen";
 import CreateShiftScreen from "./components/SMDashboardComponenents/CreateShiftScreen";
 import ProfileScreen from "./components/SMDashboardComponenents/ProfileScreen";

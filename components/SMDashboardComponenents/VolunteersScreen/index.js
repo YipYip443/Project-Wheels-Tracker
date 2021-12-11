@@ -57,7 +57,7 @@ const VolunteersScreen = () => {
                 <View>{displayInfo()}</View>
               </View>
               <StyledButton
-                text="Close Profile Info"
+                text="Close"
                   onPress={() => {setShow(false)}}/>
           </View>
         </Modal>

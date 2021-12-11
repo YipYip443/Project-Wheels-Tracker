@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "Project-Wheels-Tracker",
-    "slug": "Project-Wheels-Tracker",
+    "name": "MOWLB Route Wrangler",
+    "slug": "MOWLB-Route-Wrangler",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/images/PackersHotFood.jpg",
+      "image": "./assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "org.mowlb.routewrangler"
     },
     "web": {
       "favicon": "./assets/favicon.png"

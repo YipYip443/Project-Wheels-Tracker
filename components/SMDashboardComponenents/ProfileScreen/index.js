@@ -64,7 +64,7 @@ const ProfileScreen = ({navigation}) => {
                     onPress={() => navigation.navigate('Edit Profile')}
                 />
                 <Pressable onPress={logout}>
-                    <Text style={styles.footer}>Log off</Text>
+                    <Text style={styles.footer}>Log out</Text>
                 </Pressable>
             </View>
         </ScrollView>
