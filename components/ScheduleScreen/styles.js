@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     buttonView: {
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     firstLine: {
+        fontWeight: 'bold',
         fontSize: 18,
         paddingBottom: '5%',
     },
@@ -54,6 +55,21 @@ const styles = StyleSheet.create({
     thirdLine: {
         fontSize: 16,
         paddingBottom: '5%',
+    },
+    modalView: {
+        width: '100%',
+        height: '100%',
+        paddingHorizontal: '5%',
+        paddingTop: '2.5%',
+
+        //alignItems: 'center',
+        //justifyContent: 'center',
+        backgroundColor: 'white',
+        ...Platform.select({
+            ios: {
+                paddingTop: '5%'
+            }
+        })
     },
 });
 

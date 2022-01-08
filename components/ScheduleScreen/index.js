@@ -1,10 +1,12 @@
-import React from "react";
-import {Pressable, View, Text, Button} from "react-native";
+import React from 'react';
+import {Pressable, View, Text, Button, Modal} from 'react-native';
 import {Agenda} from 'react-native-calendars';
-import styles from "../ScheduleScreen/styles";
-import {auth, db} from "../../db/firestore";
-import getIsAdmin from "../Admin/getIsAdmin";
-import firebase from "firebase/app";
+import styles from '../ScheduleScreen/styles';
+import {auth, db} from '../../db/firestore';
+import getIsAdmin from '../Admin/getIsAdmin';
+import firebase from 'firebase/app';
+import Gallery from 'react-native-image-gallery';
+import StyledButton from '../TitleComponents/StyledButton';
 
 let isAdmin;
 let userID, userName, userRole;
@@ -16,6 +18,10 @@ let markedItems = {};
 const ScheduleScreen = () => {
     const [items, setItems] = React.useState({});
     const [selectedButton, setSelectedButton] = React.useState('All Shifts');
+
+    const [showModal, setShowModal] = React.useState(false);
+
+    const [routeInfo, setRouteInfo] = React.useState();
 
     let today = new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)).toISOString().slice(0, 10);
 
@@ -40,8 +46,8 @@ const ScheduleScreen = () => {
                 if (doc !== undefined) {
                     routesCollection[doc.id] = doc.data();
                 }
-            })
-        })
+            });
+        });
     }
 
     async function getShifts() {
@@ -51,9 +57,9 @@ const ScheduleScreen = () => {
                 if (doc !== undefined) {
                     shiftsCollection[doc.id] = doc.data();
                 }
-            })
-        })
-      
+            });
+        });
+
         generateItems(selectedButton);
     }
 
@@ -83,6 +89,12 @@ const ScheduleScreen = () => {
                 shiftItem[value['date']].push(shiftObject);
             }
         }
+
+        shiftItem['2021-12-15'] = [];
+        shiftItem['2021-12-12'] = [];
+        shiftItem['2021-12-11'] = [];
+        shiftItem['2021-12-10'] = [];
+        shiftItem['2021-12-07'] = [];
 
         markedItems = {};
         for (const key of Object.keys(shiftItem)) {
@@ -154,7 +166,7 @@ const ScheduleScreen = () => {
 
         let routeInfo = routesCollection[shift.route];
 
-            return (
+        return (
             <View style={{
                 marginRight: '5%',
                 marginVertical: '2.5%',
@@ -162,7 +174,7 @@ const ScheduleScreen = () => {
                 flex: 1,
                 borderRadius: 5,
                 borderColor: '#302f90',
-                padding: '5%'
+                padding: '5%',
             }}>
                 <View style={styles.postTextView}>
                     <Text style={styles.firstLine}>Route {shift.route}</Text>
@@ -173,11 +185,14 @@ const ScheduleScreen = () => {
                     <Text style={styles.secondLine}>Stops: {routeInfo.approxStops}</Text>
                 </View>
                 <View style={styles.postTextView}>
-                    <Text style={styles.thirdLine}>Positions: {shift.position === 'Both' ? 'Driver & Friendly Visitor' : shift.position}</Text>
+                    <Text
+                        style={styles.thirdLine}>Positions: {shift.position === 'Both' ? 'Driver & Friendly Visitor' : shift.position}</Text>
                 </View>
                 <View style={styles.postTextView}>
-                    {(shift.position === 'Driver' || shift.position === 'Both') && <Text style={styles.secondLine}>Driver: {shift.driver}</Text>}
-                    {(shift.position === 'Friendly Visitor' || shift.position === 'Both') && <Text style={styles.secondLine}>Friendly Visitor: {shift.friendlyVisitor}</Text>}
+                    {(shift.position === 'Driver' || shift.position === 'Both') &&
+                        <Text style={styles.secondLine}>Driver: {shift.driver}</Text>}
+                    {(shift.position === 'Friendly Visitor' || shift.position === 'Both') &&
+                        <Text style={styles.secondLine}>Friendly Visitor: {shift.friendlyVisitor}</Text>}
                 </View>
                 {futureDate && <View style={styles.buttonView}>
                     {acceptView && <Button title={'Accept'} color={'#018704'} onPress={function () {
@@ -186,7 +201,10 @@ const ScheduleScreen = () => {
                     {dropView && <Button title={'Drop'} color={'#a22629'} onPress={function () {
                         dropShift(shift, assignedRole);
                     }}/>}
-                    <Button title={'More Info'} color={'#302f90'}/>
+                    <Button title={'More Info'} color={'#302f90'} onPress={function () {
+                        setShowModal(true);
+                        setRouteInfo(routeInfo);
+                    }}/>
                     {isAdmin && <Button title={'Delete'} color={'#a22629'} onPress={function () {
                         deleteShift(shift);
                     }}/>}
@@ -201,25 +219,58 @@ const ScheduleScreen = () => {
     return (
         <View style={{flex: 1}}>
             <View style={styles.shiftButtonView}>
-                <Pressable style={(selectedButton === 'My Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
-                    setSelectedButton('My Shifts');
-                    generateItems('My Shifts');
-                }}>
+                <Pressable style={(selectedButton === 'My Shifts' ? styles.selectedShiftButton : styles.shiftButton)}
+                           onPress={function () {
+                               setSelectedButton('My Shifts');
+                               generateItems('My Shifts');
+                           }}>
                     <Text style={(selectedButton === 'My Shifts' ? styles.selectedText : styles.text)}>My Shifts</Text>
                 </Pressable>
-                <Pressable style={(selectedButton === 'All Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
-                    setSelectedButton('All Shifts');
-                    generateItems('All Shifts');
-                }}>
-                    <Text style={(selectedButton === 'All Shifts' ? styles.selectedText : styles.text)}>All Shifts</Text>
+                <Pressable style={(selectedButton === 'All Shifts' ? styles.selectedShiftButton : styles.shiftButton)}
+                           onPress={function () {
+                               setSelectedButton('All Shifts');
+                               generateItems('All Shifts');
+                           }}>
+                    <Text style={(selectedButton === 'All Shifts' ? styles.selectedText : styles.text)}>All
+                        Shifts</Text>
                 </Pressable>
-                <Pressable style={(selectedButton === 'Open Shifts' ? styles.selectedShiftButton : styles.shiftButton)} onPress={function() {
-                    setSelectedButton('Open Shifts');
-                    generateItems('Open Shifts');
-                }}>
-                    <Text style={(selectedButton === 'Open Shifts' ? styles.selectedText : styles.text)}>Open Shifts</Text>
+                <Pressable style={(selectedButton === 'Open Shifts' ? styles.selectedShiftButton : styles.shiftButton)}
+                           onPress={function () {
+                               setSelectedButton('Open Shifts');
+                               generateItems('Open Shifts');
+                           }}>
+                    <Text style={(selectedButton === 'Open Shifts' ? styles.selectedText : styles.text)}>Open
+                        Shifts</Text>
                 </Pressable>
             </View>
+
+            {showModal && <Modal
+                transparent={true}
+                visible={showModal}>
+                <View style={styles.modalView}>
+                    <View style={{paddingBottom: '2.5%'}}>
+                    {/*<View style={{flex: 1}}>*/}
+                        <Text style={{fontWeight: 'bold'}}>Route Description:</Text>
+                        <Text>{routeInfo.desc}</Text>
+
+                        <Text>Route Stops:</Text>
+                        <Text>{routeInfo.approxStops}</Text>
+
+                        <Text>Route Time:</Text>
+                        <Text>{routeInfo.time}</Text>
+                    </View>
+                    <View style={{flex: 1}}>
+                        <Gallery
+                            images={[{source: {uri: routeInfo.photoURL}}]}/>
+                    </View>
+                    <StyledButton
+                        text="Close Map"
+                        onPress={() => {
+                            setShowModal(false);
+                        }}/>
+                </View>
+            </Modal>}
+
             <Agenda
                 items={items}
                 renderItem={renderItem}
