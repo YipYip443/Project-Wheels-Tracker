@@ -21,7 +21,7 @@ const CreateShiftScreen = ({navigation}) => {
     const [selectedDate, setSelectedDate] = React.useState(new Date(new Date().getTime() - (new Date().getTimezoneOffset() * 60000)));
     const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
 
-    const [show, setShow] = React.useState(false);
+    const [showModal, setShowModal] = React.useState(false);
 
     const [routePhotoURL, setRoutePhotoURL] = React.useState();
     const [routeDescription, setRouteDescription] = React.useState();
@@ -122,22 +122,22 @@ const CreateShiftScreen = ({navigation}) => {
                     <Text>Route Map:</Text>
                     <StyledButton
                         onPress={() => {
-                            setShow(true)
+                            setShowModal(true)
                         }}
                         text="View Map"
                         disabled={disabled}/>
                     <Modal
                         transparent={true}
-                        visible={show}>
-                        <View style={styles.modal}>
-                            <View style={{height: '90%'}}>
-                                <Gallery
+                        visible={showModal}>
+                        <View style={styles.modalView}>
+                            <View style={{flex: 1}}>
+                            <Gallery
                                     images={[{source: {uri: routePhotoURL}}]}/>
                             </View>
                             <StyledButton
                                 text="Close Map"
                                 onPress={() => {
-                                    setShow(false)
+                                    setShowModal(false)
                                 }}/>
                         </View>
                     </Modal>

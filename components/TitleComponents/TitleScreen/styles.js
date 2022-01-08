@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
     },
     buttonView: {
+        paddingHorizontal: '5%',
         paddingBottom: '5%',
     }
 });

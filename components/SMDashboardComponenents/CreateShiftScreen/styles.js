@@ -51,16 +51,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingBottom: '2.5%'
     },
-    image: {
-        resizeMode: 'center',
-        flex: 1 / 2,
-    },
-    modal: {
-        width: "100%",
-        height: "100%",
-        alignItems: "center",
-        justifyContent: "center",
+    modalView: {
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: 'white',
+        paddingHorizontal: '2.5%',
+        paddingTop: '2.5%',
         ...Platform.select({
             ios: {
                 paddingTop: '5%'
