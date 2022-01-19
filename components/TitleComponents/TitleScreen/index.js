@@ -9,15 +9,15 @@ const TitleScreen = ({navigation}) => {
 
     useEffect(() => {
         return auth.onAuthStateChanged(async user => {
-            if (user && (user.createdAt === undefined || user.createdAt !== user.lastLoginAt)) {
+            if (user && navigation.getState().index === 0) {
                 const isAdmin = await getIsAdmin();
                 if (!isAdmin)
                     navigation.replace('Volunteer Dashboard');
                 else
                     navigation.replace('SM Dashboard');
             }
-        })
-    })
+        });
+    });
 
     return (
         <View style={styles.titleContainer}>

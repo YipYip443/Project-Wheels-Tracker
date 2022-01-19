@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ImageBackground, View, Text, TextInput, ScrollView} from 'react-native';
+import {ImageBackground, View, Text, TextInput, ScrollView, Alert} from 'react-native';
 import styles from './styles';
 import StyledButton from "../StyledButton";
 import {db, auth} from '../../../db/firestore';
@@ -17,7 +17,7 @@ const CreateProfileScreen = ({navigation}) => {
     const [phone, setPhone] = React.useState('');
     const [isAdmin, setIsAdmin] = React.useState(false);
 
-    const pushUserToDatabase = () => {
+    function pushUserToDatabase() {
         let userID = auth.currentUser.uid;
         let email = auth.currentUser.email;
 
@@ -47,6 +47,14 @@ const CreateProfileScreen = ({navigation}) => {
         //     });
         navigation.goBack();
         navigation.replace("Volunteer Dashboard");
+    }
+
+    function checkInfo() {
+        if (name && address && phone && dob && eName && ePhone && role) {
+            pushUserToDatabase();
+        } else {
+            Alert.alert('Missing Info!', 'Please complete all fields!');
+        }
     }
 
     function onChangePhone(newPhone) {
@@ -189,7 +197,7 @@ const CreateProfileScreen = ({navigation}) => {
                     <StyledButton
                         style={styles.button}
                         text={'Submit'}
-                        onPress={pushUserToDatabase}
+                        onPress={checkInfo}
                     />
                 </View>
             </KeyboardAwareScrollView>

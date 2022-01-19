@@ -14,12 +14,9 @@ const LoginScreen = ({navigation}) => {
         //const login = await auth.signInWithEmailAndPassword(email, password);
         await auth.signInWithEmailAndPassword(email, password)
             .then(() => {
-                new Promise();
-
-                const isAdmin = getIsAdmin();
-
                 navigation.goBack();
 
+                const isAdmin = getIsAdmin();
                 if (!isAdmin)
                     navigation.navigate('Volunteer Dashboard');
                 else
