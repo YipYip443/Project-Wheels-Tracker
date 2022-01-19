@@ -1,7 +1,7 @@
 //@refresh state
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {ImageBackground, StyleSheet, Text, View, Platform, LogBox} from 'react-native';
+import {StyleSheet, LogBox} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
@@ -61,6 +61,7 @@ function ProfileStack() {
 
 function App() {
     LogBox.ignoreAllLogs();
+    LogBox.ignoreLogs(['Setting a timer']);
     return (
         <NavigationContainer style={styles.container}>
             <Stack.Navigator initialRouteName={'Title'}>
